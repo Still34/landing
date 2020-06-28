@@ -5,7 +5,7 @@ categories: writeup
 header:
   overlay_color: "#000"
   overlay_filter: "0.75"
-  overlay_image: https://i.imgur.com/PJkN2i1.png
+  overlay_image: /assets/images/posts/capture-the-nitro/nitro.png
 toc: true
 excerpt: "Free Nitro!"
 ---
@@ -38,7 +38,7 @@ My initial guesses when I saw the hint:
   - Database not injectable?
 - "This challenge is designed specifically for you."
   - `👤🕊⚕`/`🔑↩`
-  - It turns out this was supposed to be Mercy from Overwatch 🤔, so I the credentials were just `mercy` and the username reversed.
+  - It turns out this was supposed to be Mercy from Overwatch 🤔, so the credentials were just `mercy` and the username reversed.
 
 ## Login Page
 
@@ -49,6 +49,7 @@ My initial guesses when I saw the hint:
   - ...yet the hints suggest otherwise?
 - Login via POST
   - Invalid credential causes `400 Bad Request`
+  - ![](/assets/images/posts/capture-the-nitro/400-bad-req.png)
 - CSRF validation
   - `<input type="hidden" name="xsrf" value=$token />`
   - `Set-Cookie: xsrf_tkv=$token; Path=/`
@@ -280,6 +281,6 @@ def exploit(command):
 
 Reverse shell'd into the server, listed all the environment variables, found `/run/secrets`, got `ctn-fl4g`, sent the link over, captured the Nitro!
 
-![](https://i.imgur.com/2MI5D8v.png)
+![](/assets/images/posts/capture-the-nitro/reverse-shell.png)
 
-![](https://i.imgur.com/PJkN2i1.png)
+![](/assets/images/posts/capture-the-nitro/nitro.png)
