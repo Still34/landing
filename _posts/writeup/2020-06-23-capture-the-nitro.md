@@ -10,7 +10,7 @@ toc: true
 excerpt: "Free Nitro!"
 ---
 
-So the story goes like this: few weeks ago my friend took notice that I was playing CTF. He got curious and decided to make a little CTF challenge specifically for me. The prize? One month [Nitro Classic](https://discord.com/nitro) on Discord. I was like sure, sounds like fun. For the heck of it, I had decided to document my discoveries I made along the way.
+So the story goes like this: a few weeks ago my friend took notice that I was playing CTF. He got curious and decided to make a little CTF challenge specifically for me. The prize? One month [Nitro Classic](https://discord.com/nitro) on Discord. I was like sure, sounds like fun. For the heck of it, I had decided to document my discoveries I made along the way.
 
 ## Official Hints
 
@@ -199,9 +199,9 @@ Disassembled payload:
 
 ### Attempt 3 - Packing our own payload along with CRC32 hash
 
-At this point I've figured out the hash at the end of the pickled data is a CRC32 one, as hinted by the ever-changing footer and its 4-byte nature. Now it is just the matter of figuring out how the hash was generated.
+At this point, I've figured out the hash at the end of the pickled data is a CRC32 one, as hinted by the ever-changing footer and its 4-byte nature. Now it is just a matter of figuring out how the hash was generated.
 
-After analyzing for a while, it looks like the last 4-byte was indeed the pickled data CRC32 packed in little endian.
+After analyzing for a while, it looks like the last 4-byte was indeed the pickled data CRC32 packed in little-endian.
 
 ```python
 session_data = session.cookies['session_data']
@@ -215,7 +215,7 @@ assert pwn.pack(crc32(pickled_session[:-4]), endianness="little") == pickled_ses
 I spent an hour or two trying to figure out why my payloads weren't working. It turns out I missed 2 important factors:
 
 1. The system was an Alpine Linux image; in a limited environment, this means `/bin/sh` or `/bin/bash` may or may not be available, especially the latter. The default shell that is shipped with Alpine is `ash`.
-2. `python` wasn't working, as by default it should be `python3` these days.
+2. `python` wasn't working, as it should be `python3` these days.
 
 {% endcapture %}
 
