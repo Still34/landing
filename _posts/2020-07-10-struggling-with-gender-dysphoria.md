@@ -15,7 +15,7 @@ header:
   overlay_image: /assets/images/posts/struggles-with-gender-dysphoria/65A0477DBF9713A0AB4DEC07A8C086441058C9AC36779542214536EF0C8EEA14.jpg
 ---
 
-Junior high was the darkest time of my life. I was bullied heavily at school because of my personal hygiene (or lack thereof) and various family-related issues. My family had always fought over one thing or another. I had an abusive pedo girlfriend who much older than I was. That was why I enjoyed every little moment that I shared with others who weren't actively trying to hurt me in one way or another.
+Junior high was the darkest time of my life. I was bullied heavily at school because of my personal hygiene (or lack thereof) and various family-related issues. My family had always fought over one thing or another. I had an abusive pedo girlfriend who was much older than I was. That was why I enjoyed every little moment that I shared with others who weren't actively trying to hurt me in one way or another.
 
 I've always enjoyed talking to girls compared to talking to guys - and I don't just mean because I want to get laid or anything weird like that - I just felt like I clicked with them better. Most girls at the time, of course, weren't willing to talk to me because I'm just not an interesting guy and was super awkward. All that that was going through my mind was, "What if I were a girl? Would that make me blend in easier?"
 
