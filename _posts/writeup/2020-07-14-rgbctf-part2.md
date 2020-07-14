@@ -20,6 +20,7 @@ author:
 ---
 
 ## Prologue
+
 This is second part of [the rgbCTF writeup]({% post_url /writeup/2020-07-14-rgbctf-part1 %}), and contains information about challenges solved by me, Emzi. I strongly suggest starting with the first part of this writeup.
 
 This was my first CTF event, however not the first set of challenges I solved. As I'm new, the methods outlined here might seem somewhat unsophisticated, since I am not used to working on this side of the barricade.
@@ -29,9 +30,11 @@ I took part thanks to Still, who asked me to co-participate in this event at the
 Since categories and structure were outlined in the previous post, I will only focus on the challenges I solved, as well as the methods used to reach the solution.
 
 ## Beginner
+
 ### A Basic Challenge (50 points)
+
 > Challenge description
-> 
+>
 > `This is a nice and basic challenge.`
 
 Attached was a file called `basic_chall.txt` with the following contents:
@@ -134,14 +137,15 @@ And indeed, after stripping the 4th layer of encoding, we get our flag as the ou
 'rgbCTF{c0ngr4ts_0n_b3ing_B4SIC}'
 ```
 
-The irony in this is that octal is an encoding a lot of UNIX people use frequently without realizing it (`chmod` permission flags are octal, for instance), yet it never occured to me that it could be something as simple and trivial as this.
+The irony in this is that octal is an encoding a lot of UNIX people use frequently without realizing it (`chmod` permission flags are octal, for instance), yet it never occurred to me that it could be something as simple and trivial as this.
 
-#### Flag
-**rgbCTF{c0ngr4ts_0n_b3ing_B4SIC}**
+Flag:
+`rgbCTF{c0ngr4ts_0n_b3ing_B4SIC}`
 
 ### r/ciphers (50 points)
+
 > Challenge description
-> 
+>
 > ```plaintext
 > RGBsec does not endorse (or really even know at this point) what the content is on that sub reddit.
 > (It's just the title of the challenge)
@@ -154,16 +158,16 @@ Nfwp wp z hkakzudfzoinwj plopnwnlnwka jwdfix, yfwjf jza oi znnzjgit ywnf mxiclia
 Zupk, Zuij oiuwivip wn'p vixs whdkxnzan nfzn skl pii nfwp: fnndp://w.xitt.wn/1d7y8g0272851.bdq
 ```
 
-The challenge looked like a simple substitution cipher challenge, so my first thought was to find patterns, perform some frequency analysis, then get cracking. 
+The challenge looked like a simple substitution cipher challenge, so my first thought was to find patterns, perform some frequency analysis, then get cracking.
 
-One thing I noticed right off the bat is that only letters were substituted, digits and other characters were left alone. Since the title of the challenge is reddit-related, so the first thing that stood out to me, was this: `fnndp://w.xitt.wn/1d7y8g0272851.bdq`. It's obviously an `i.redd.it` link, which makes `.bdq` its extension. It's an image, so it's either .gif, .png, or .jpg. Another part of the URL, `fnndp://` was clearly `https://`, meaning that combined with knowing the domain, we now have some letters for the alphabet:
+One thing I noticed right off the bat is that only letters were substituted, digits and other characters were left alone. Since the title of the challenge is reddit-related, so the first thing that stood out to me, was this: `fnndp://w.xitt.wn/1d7y8g0272851.bdq`. It's obviously an `i.redd.it` link, which makes `.bdq` its extension. It's an image, so it's either `.gif`, `.png`, or `.jpg`. Another part of the URL, `fnndp://` was clearly `https://`, meaning that combined with knowing the domain, we now have some letters for the alphabet:
 
 ```plaintext
 abcdefghijklmnopqrstuvwxyz    original
    ti  fw      d xpn          substituted
 ```
 
-Looking at this, we notide that `d` maps to `p`, so `bdq` is `_p_`. Of the 3 suspect extensions, jpg is the only match, so we now add 2 more letters:
+Looking at this, we notice that `d` maps to `p`, so `bdq` is `_p_`. Of the 3 suspect extensions, jpg is the only match, so we now add 2 more letters:
 
 ```plaintext
 abcdefghijklmnopqrstuvwxyz    original
@@ -207,7 +211,7 @@ abcdefghijklmnopqrstuvwxyz    original
 
 At this stage, we have the flag, `rgbCTF{just_4sk_th3_int3rn3t_t0_d3crypt_it}`, but I decided to finish decoding the first domain: `gub ll .de/substitution-solver`. A quick google search led me right to the rest of the result, `guballa.de`:
 
-![A Google search revelaing guballa.de was the domain](/assets/images/posts/rgbctf-2020-07-14/ciphers-00.png)
+![A Google search revealing guballa.de was the domain](/assets/images/posts/rgbctf-2020-07-14/ciphers-00.png)
 
 At this stage, our alphabet looks like this:
 
@@ -218,22 +222,24 @@ zojtimqfwbguhakd xpnlv  s     substituted
 
 Just to confirm my work, I punched the entire text into the solver, and the result matched:
 
-![A Google search revelaing guballa.de was the domain](/assets/images/posts/rgbctf-2020-07-14/ciphers-01.png)
+![A Google search revealing guballa.de was the domain](/assets/images/posts/rgbctf-2020-07-14/ciphers-01.png)
 
 As a bonus, the i.redd.it link in the text led to this image:
 
 ![A doggo looking at himself in a mirror](https://i.redd.it/1p7w8k0272851.jpg)
 
-#### Flag
-**rgbCTF{just_4sk_th3_int3rn3t_t0_d3crypt_it}**
+Flag:
+`rgbCTF{just_4sk_th3_int3rn3t_t0_d3crypt_it}`
 
 ## Cryptography
+
 ### Occasionally Tested Protocol (219 points)
+
 > Challenge description
 >
 > `But clearly not tested enough... can you get the flag?`
 
-We were also given an address to connect to using netcat, and attached was a python script, called `otp.py`, with the following contents:
+We were also given an address to connect to using `netcat`, and attached was a python script, called `otp.py`, with the following contents:
 
 ```py
 from random import seed, randint as w
@@ -280,11 +286,11 @@ if __name__ == "__main__":
     print("Here's another number I found: ", n)
 ```
 
-The script turned out to be abridged version of the code running at the specified endpoint. The variables (with the exception of `g`) looked rather unimportant, so for local testing, one could've simply removed them all. Cursory analysis of the algorithm also reveals the challenge type - PRNG state reversing, with `seed(int(time))` being the key to the whole thing. 
+The script turned out to be abridged version of the code running at the specified endpoint. The variables (with the exception of `g`) looked rather unimportant, so for local testing, one could've simply removed them all. Cursory analysis of the algorithm also reveals the challenge type - PRNG state reversing, with `seed(int(time))` being the key to the whole thing.
 
 A little bit of background - Python's `time.time()` function returns the current UNIX timestamp as fractional seconds, e.g. `1594735323.0495105`. Had the RNG been seeded using the entire number, this would've been a very tedious challenge indeed, as it would require going through a large number of fractions to find the proper seed. Lucky for us, the seed was converted into an integer using `int()`. When the input to `int()` is a floating-point number, it works much like casting in C - the number is truncated to whole part (as an example, `int(1594735323.0495105)` results in `1594735323`; note that no rounding is performed - `int(1.9)` results in `1`).
 
-Armed with that knowledge, I performed a timestamped netcat connection via `date +%s; nc endpoint port`, then disconnected once I got my numbers. Worth noting: most values below are examples rather than exact values used, as the writeup was made after the challenge deadline closed.
+Armed with that knowledge, I performed a timestamped `netcat` connection via `date +%s; nc endpoint port`, then disconnected once I got my numbers. Worth noting: most values below are examples rather than exact values used, as the writeup was made after the challenge deadline closed.
 
 ![Output from the remote server](/assets/images/posts/rgbctf-2020-07-14/otp-00.png)
 
@@ -313,7 +319,7 @@ while True:
         print("Seed found:", cseed)
         print("Sequence:", t)
         break
-    
+
     cseed += 1
 ```
 
@@ -353,15 +359,16 @@ print(a)
 
 That script produced the flag string, which means the challenge is completed.
 
-#### Flag
-**rgbCTF{random_is_not_secure}**
+Flag:
+`rgbCTF{random_is_not_secure}`
 
 ### N-AES (473 points)
+
 > Challenge description
-> 
+>
 > `What if I encrypt something with AES multiple times?`
 
-We were also given an address to connect to using netcat, and attached was a python script, called `n_aes.py`, with the following contents:
+We were also given an address to connect to using `netcat`, and attached was a python script, called `n_aes.py`, with the following contents:
 
 ```py
 import binascii
@@ -456,9 +463,9 @@ Much like with the previous challenge, attached script is the abridged source of
 
 Upon connecting, the program greeted me with a base64 challenge string. I was a little confused as to where to start at first, so I decided to analyze the source again. Tracing the challenge string generation code revealed interesting things, however, and something I overlooked at first.
 
-The final challenge solve text is also a base64 string, which has been encrypted. My job was to decrypt it, that is, to find the key used to encrypt it. Scanning the imports revealed the encryption to be AES, with PCKS#7 padding. 
+The final challenge solve text is also a base64 string, which has been encrypted. My job was to decrypt it, that is, to find the key used to encrypt it. Scanning the imports revealed the encryption to be AES, with PCKS#7 padding.
 
-The padding bit is important, as it lets you determine whether your process was successful. This padding algorithm works by filling the last block of the input, such that its output size is aligned to desired block size. The filler bytes double as a padding size counter, meaning that if the block is missing e.g. 3 bytes, it will be filled with 3 `'\x03'` bytes. If the input is already at block size, PKCS#7 appends a new empty block, then fills it with padding. 
+The padding bit is important, as it lets you determine whether your process was successful. This padding algorithm works by filling the last block of the input, such that its output size is aligned to desired block size. The filler bytes double as a padding size counter, meaning that if the block is missing e.g. 3 bytes, it will be filled with 3 `'\x03'` bytes. If the input is already at block size, PKCS#7 appends a new empty block, then fills it with padding.
 
 Further analysis of the program reveals that the AES variant used here is 128-bit, so it uses 16-byte (128-bit) blocks. Looking at the challenge generation code, it generates 64 random bytes, which are then encoded with base64. Base64 emits a character (byte) for every 6 bits of input, meaning the output string is around 133% the size of input. In this case, the base64 string was 88 characters long. As 88 is not divisible by the block size (16), I had to find block-aligned input size that AES would accept. For 88 bytes, that 96 bytes, meaning PKCS#7 would append 8 bytes of padding - `b'\x08' * 8`. That's my sentinel value, of sorts.
 
@@ -525,6 +532,7 @@ elif command == '3':
 Decrypted challenge is decoded from base64, then compared to challenge string.
 
 To summarize the story so far, my job was to:
+
 1. Generate 256 128-byte strings, each consisting of one byte
 2. Get the challenge string from the remote server
 3. Brute force it using generated keys
@@ -550,7 +558,7 @@ def decrypt(input: bytes, key: bytes):
     text = input
     for _ in range(128):
         text = AES.new(key, AES.MODE_ECB).decrypt(text)
-    
+
     return text, unpad(text, BLOCK_SIZE), b64encode(unpad(text, BLOCK_SIZE)).decode()
 
 
@@ -570,7 +578,7 @@ if __name__ == "__main__":
             print("Key:        ", b64encode(key).decode())
             print("Seed string:", b64encode(bytes([seed] * 128)).decode())
             print("-" * 32)
-        
+
         except:
             continue
 ```
@@ -583,30 +591,32 @@ My challenge string in this instance is `5v8Qcgb+LQK8jjiELETTc5Eb22kqpiVshV3q6pZ
 
 ![Solver results, with padding result highlighted](/assets/images/posts/rgbctf-2020-07-14/naes-01.png)
 
-I punched the encoded result into netcat, and the server echoed me a flag.
+I punched the encoded result into `netcat`, and the server echoed me a flag.
 
 ![Flag obtained](/assets/images/posts/rgbctf-2020-07-14/naes-02.png)
 
-#### Flag
-**rgbCTF{i_d0nt_7hink_7his_d03s_wh47_y0u_7hink_i7_d03s}**
+Flag:
+`rgbCTF{i_d0nt_7hink_7his_d03s_wh47_y0u_7hink_i7_d03s}`
 
 ## Forensics/OSINT
+
 ### PI 1: Magic in the air (470 points)
+
 > Challenge description
-> 
+>
 > ```plaintext
 > We are investigating an individual we believe is connected to a group smuggling drugs into the country and selling them on social media. You have been posted on a stake out in the apartment above theirs and with the help of space-age eavesdropping technology have managed to extract some data from their computer. What is the phone number of the suspect's criminal contact?
-> 
+>
 > flag format includes country code so it should be in the format: rgbCTF{+00000000000}
 > ```
 
-Attached was a Bluetooth HCI log in btsnoop format. I was initially unsure what to do with it, but with Still's advice, I loaded it into Wireshark. 
+Attached was a Bluetooth HCI log in btsnoop format. I was initially unsure what to do with it, but with Still's advice, I loaded it into Wireshark.
 
-![View of the log in wireshark](/assets/images/posts/rgbctf-2020-07-14/pi1-00.png)
+![View of the log in Wireshark](/assets/images/posts/rgbctf-2020-07-14/pi1-00.png)
 
-Inspecting the log revealed it was taken by snooping on nearby bluetooth traffic, using `Linux version 5.5.0-kali2-amd64 (x86_64)`, and `Bluetooth subsystem version 2.22`. Device was attached via `hci0`, the supporting daemon was `bluetoothd`, and the snooper was `btmon`. The target device identified itself as G613. A quick conversation with Still and some Google let me identify it as a Logitech™ G613 Wireless Mechanical Keyboard. Fancy stuff. 
+Inspecting the log revealed it was taken by snooping on nearby Bluetooth traffic, using `Linux version 5.5.0-kali2-amd64 (x86_64)`, and `Bluetooth subsystem version 2.22`. Device was attached via `hci0`, the supporting daemon was `bluetoothd`, and the snooper was `btmon`. The target device identified itself as G613. A quick conversation with Still and some Google let me identify it as a Logitech™ G613 Wireless Mechanical Keyboard. Fancy stuff.
 
-All this tells me is that I'm looking for information on how do bluetooth keyboards talk to the target computers. The answer? HID over Bluetooth. Reading the HID specification, I find out that one of the first things a device has to do after it's initialized is presenting itself, and describing its payloads. Googling around led me to a [StackOverflow thread](https://stackoverflow.com/questions/45478259/decoding-captured-hid-over-gatt-traffic-with-usbpcap-wireshark), where a similar problem is described. From this thread I found some important pieces of information, HID descriptors, also called Report Maps in HID terminology, tend to begin with `0x05 0x01 0x09` and tend to end with `0xc0`. I searched for a relevant byte sequence in Wireshark.
+All this tells me is that I'm looking for information on how do Bluetooth keyboards talk to the target computers. The answer? HID over Bluetooth. Reading the HID specification, I find out that one of the first things a device has to do after it's initialized is presenting itself, and describing its payloads. Googling around led me to a [StackOverflow thread](https://stackoverflow.com/questions/45478259/decoding-captured-hid-over-gatt-traffic-with-usbpcap-Wireshark), where a similar problem is described. From this thread I found some important pieces of information, HID descriptors, also called Report Maps in HID terminology, tend to begin with `0x05 0x01 0x09` and tend to end with `0xc0`. I searched for a relevant byte sequence in Wireshark.
 
 ![Quick search reveals all](/assets/images/posts/rgbctf-2020-07-14/pi1-01.png)
 
@@ -614,7 +624,7 @@ The descriptor was fragmented due to Bluetooth Low Emission MTUs, so I had to re
 
 ![Descriptor decode result](/assets/images/posts/rgbctf-2020-07-14/pi1-02.png)
 
-The descriptors found in the log are for system control and vendor-specific applications, neither of which is keyboard. I decided to scroll a little in wireshark, and reached a block of HID Reports. 
+The descriptors found in the log are for system control and vendor-specific applications, neither of which is keyboard. I decided to scroll a little in Wireshark, and reached a block of HID Reports.
 
 ![A block of reports](/assets/images/posts/rgbctf-2020-07-14/pi1-03.png)
 
@@ -626,7 +636,7 @@ Notice how the second byte of each payload changes. I noted down consecutive non
 
 ![Copy as filter](/assets/images/posts/rgbctf-2020-07-14/pi1-05.png)
 
-By using the Copy As Filter function in wireshark, I created the following filter: `bthci_acl.src.bd_addr == f6:3c:91:42:32:28 and btatt.handle == 0x002c and btatt.opcode == 0x1b`.
+By using the Copy As Filter function in Wireshark, I created the following filter: `bthci_acl.src.bd_addr == f6:3c:91:42:32:28 and btatt.handle == 0x002c and btatt.opcode == 0x1b`.
 
 ![Filtered packets](/assets/images/posts/rgbctf-2020-07-14/pi1-06.png)
 
@@ -983,28 +993,30 @@ peace
 x
 ```
 
-The 2 pieces of information pertaining to the flag are the phone number from the transcript, `0736727859`, as well as the information that it's a Swedish number, which means the dialling code is +46. By stripping the leading 0, and prepending the dialling code, I obtained the flag.
+The 2 pieces of information pertaining to the flag are the phone number from the transcript, `0736727859`, as well as the information that it's a Swedish number, which means the dialing code is +46. By stripping the leading 0, and prepending the dialing code, I obtained the flag.
 
-![Sweden dialling code](/assets/images/posts/rgbctf-2020-07-14/pi1-10.png)
+![Sweden dialing code](/assets/images/posts/rgbctf-2020-07-14/pi1-10.png)
 
-#### Flag
-**rgbCTF{+46736727859}**
+Flag:
+`rgbCTF{+46736727859}`
 
 ## Misc
+
 ### Laser 1 - Factoring (480 points)
+
 > Challenge description
-> 
+>
 > ```plaintext
 > https://github.com/Quintec/LaserLang
 >
 > Do you like lasers? I like lasers! Here's a warmup: create a program that factors the one number given as input. Output factors on one line in ascending order (or just leave them on the stack, as Laser has implicit output)
-> 
+>
 > Example
 > Input: 42
 > Output: 1 2 3 6 7 14 21 42
 > ```
 
-We were also given an address to connect to using netcat. When connected, we'd input our code, which would then get tested against several cases. If all tests passed, the flag would be revealed. The [GitHub link](https://github.com/Quintec/LaserLang) leads to a git repository, which hosts an interpreter for an esoteric language called Laser. An excerpt from the README paints it as an interesting challenge.
+We were also given an address to connect to using `netcat`. When connected, we'd input our code, which would then get tested against several cases. If all tests passed, the flag would be revealed. The [GitHub link](https://github.com/Quintec/LaserLang) leads to a git repository, which hosts an interpreter for an esoteric language called Laser. An excerpt from the README paints it as an interesting challenge.
 
 > Like many 2-D langauges, Laser has an instruction pointer that executes the one character instructions it encounters. The instruction pointer starts at the top left and initially points right. The pointer can wrap around the program and termination only occurs on error or the termination character #. The memory structure is a list of stacks. There are only two types in Laser: String and Number. Numbers are java Longs.
 
@@ -1019,7 +1031,7 @@ int main(void)
     for (int j = i; j > 0; --j)
         if (i % j == 0)
             printf("%d ", i);
-    
+
     return 0;
 }
 ```
@@ -1031,51 +1043,52 @@ UirrrrsUrD>⌜%uruu⌜\
            U     pp
            P     UU
            P     wp
-                 D 
-           #     w 
-                 U 
+                 D
+           #     w
+                 U
                  v/
                  (
                  r
                  r
                  w
                  D
-          \      < 
+          \      <
 ```
 
 The program uses the initial (bottom) stack as the result stack. It's implicitly printed out when the program finishes its execution. The whole code works as follows:
-1.  Create a new stack and set it as active (move from stack 0 to stack 1)
-2.  Take first input arguments and push it on top of current stack (in the C implementation that's `i`)
-3.  Make 4 additional copies of that value
-4.  Shift one copy to a new stack above the current one
-5.  Set the new stack as active (move from stack 1 to stack 2)
-6.  Make a copy of its only value (the input number)
-7.  Set the stack below as active (move from stack 2 to stack 1)
-8.  Set the execution direction to right.
-9.  If the top value on the current stack (in the C implementation, that's `j`) is equal to 0, change the direction of the instruction pointer to start moving down, otherwise keep it moving left
+
+1. Create a new stack and set it as active (move from stack 0 to stack 1)
+2. Take first input arguments and push it on top of current stack (in the C implementation that's `i`)
+3. Make 4 additional copies of that value
+4. Shift one copy to a new stack above the current one
+5. Set the new stack as active (move from stack 1 to stack 2)
+6. Make a copy of its only value (the input number)
+7. Set the stack below as active (move from stack 2 to stack 1)
+8. Set the execution direction to right.
+9. If the top value on the current stack (in the C implementation, that's `j`) is equal to 0, change the direction of the instruction pointer to start moving down, otherwise keep it moving left
    - If the direction was changed, set the stack above the current one as active (move from stack 1 to stack 2)
    - Pop currently-active stack, then the next active stacks (this destroys stacks 2 and 1)
    - Finish execution of the program
 10. If the execution direction was not changed, perform modulo of the 2nd top element by the 1st top element, and store the result on the stack
-10. Rotate the stack "up" (meaning the bottom element becomes the top)
-11. Duplicate the now-top element
-12. Rotate the stack "up" 2 times again
-13. If the now-top element (modulo result) is equal to 0, change direction to down, otherwise keep it as left
-14. The false branch is then also redirected down, such that it runs in parallel to the true branch
-15. Both branches pop the modulo result
-16. Both branches set the stack above as active (move from stack 1 to stack 2)
-17. Operation here depends on the modulo result
-   - False branch pops the top item from the current stack
-   - True branch moves the top item down one stack (from stack 2 to stack 1)
-18. True branch changes active stack to the stack below (from stack 2 to stack 1)
-19. True branch moves top item from the active stack down one stack (from stack 1 to stack 0) - effectively pushing it on top of the result stack
-20. True branch sets the stack above as active (from stack 1 to stack 2)
-21. Both branches are merged at this point
-22. The top value on the stack (`j` from C implementation) is decremented by 1
-23. It's then duplicated twice
-24. Next, the top copy is shifted down one stack (from stack 2 to stack 1)
-25. The stack below is then set as active (from stack 2 to stack 1)
-26. The program then redirects the execution so that it returns to point 9
+11. Rotate the stack "up" (meaning the bottom element becomes the top)
+12. Duplicate the now-top element
+13. Rotate the stack "up" 2 times again
+14. If the now-top element (modulo result) is equal to 0, change direction to down, otherwise keep it as left
+15. The false branch is then also redirected down, such that it runs in parallel to the true branch
+16. Both branches pop the modulo result
+17. Both branches set the stack above as active (move from stack 1 to stack 2)
+18. Operation here depends on the modulo result
+    - False branch pops the top item from the current stack
+    - True branch moves the top item down one stack (from stack 2 to stack 1)
+19. True branch changes active stack to the stack below (from stack 2 to stack 1)
+20. True branch moves top item from the active stack down one stack (from stack 1 to stack 0) - effectively pushing it on top of the result stack
+21. True branch sets the stack above as active (from stack 1 to stack 2)
+22. Both branches are merged at this point
+23. The top value on the stack (`j` from C implementation) is decremented by 1
+24. It's then duplicated twice
+25. Next, the top copy is shifted down one stack (from stack 2 to stack 1)
+26. The stack below is then set as active (from stack 2 to stack 1)
+27. The program then redirects the execution so that it returns to point 9
 
 When the program finishes execution, the result stack is typed out, resulting in the factors of given number being typed out in ascending order.
 
@@ -1089,23 +1102,25 @@ After my testing concluded, I sent the program for testing. Test case 8 took a l
 
 ![Testing](/assets/images/posts/rgbctf-2020-07-14/lasers1-01.png)
 
-#### Flag
-**rgbCTF{l4s3rs_4r3_c00l_r1ght}**
+Flag:
+`rgbCTF{l4s3rs_4r3_c00l_r1ght}`
 
 ### Laser 2 - Sorting (491 points)
+
 > Challenge description
-> 
+>
 > ```plaintext
 > https://github.com/Quintec/LaserLang
 > Here's a harder Laser challenge. Given an input stack of numbers, sort them in descending order.
-> 
+>
 > Input: 1 2 7 3 down the rockefeller street
 > Output: 7 3 2 1
 > ```
 
-Like with previous challenge, we were also given an address to connect to using netcat, in order to input our code.
+Like with previous challenge, we were also given an address to connect to using `netcat`, in order to input our code.
 
 This challenge was much more difficult than previous one, as it basically required swapping elements, something Laser lacks built-in facilities for. The algorithm I devised worked more or less like so:
+
 1. Push all inputs onto one stack
 2. Create another stack for sorted output
 3. Pick the smallest value from input stack, push it on the sorted stack, pop it from input stack
@@ -1191,15 +1206,16 @@ sorted [4 3 2 1]
 The sorted stack is set as active at the end of the program, which causes it to be printed out.
 
 In greater detail, the program works as follows:
-1.  Reflect the execution such that it occurs 2 lines down
-2.  Initialize a new stack above the current one (move from 0 to 1)
-3.  Push all input arguments onto current stack
-4.  Set execution direction to right
-5.  Create a new stack above the current one, and push the current top value on the stack (first input) one stack up (from 1 to 2)
-6.  Set the stack above (sorted) as the active one (move from 1 to 2)
-7.  Duplicate the value on top of current stack
-8.  Move down 1 stack (from 2 to 1 - input)
-9.  Count the elements on the current stack and push the count on top
+
+1. Reflect the execution such that it occurs 2 lines down
+2. Initialize a new stack above the current one (move from 0 to 1)
+3. Push all input arguments onto current stack
+4. Set execution direction to right
+5. Create a new stack above the current one, and push the current top value on the stack (first input) one stack up (from 1 to 2)
+6. Set the stack above (sorted) as the active one (move from 1 to 2)
+7. Duplicate the value on top of current stack
+8. Move down 1 stack (from 2 to 1 - input)
+9. Count the elements on the current stack and push the count on top
 10. Increment the top value (so that for n elements the compare-swap cycle is done `n` times, not `n-1` times)
 11. Move the top value (count) down 1 stack (from 1 to 0 - counter)
 12. Set execution direction to right
@@ -1227,7 +1243,7 @@ In greater detail, the program works as follows:
 34. Set the execution direction to down then left
 35. Go to point 12
 36. Set the execution direction to left
-37. Pop the top valu (counter) e from the current stack
+37. Pop the top value (counter) e from the current stack
 38. Set the stack 2 above as the current (from 0 to 2 - sorted)
 39. Pop the top value (duplicate of the just sorted value)
 40. Set the stack below as the active one (from 2 to 1)
@@ -1251,13 +1267,15 @@ After my testing concluded, I sent the program for testing. After ironing out th
 
 ![Testing](/assets/images/posts/rgbctf-2020-07-14/lasers2-01.png)
 
-#### Flag
-**rgbCTF{1_f33l_y0ur_p41n_trust_m3}**
+Flag:
+`rgbCTF{1_f33l_y0ur_p41n_trust_m3}`
 
 ## Web
+
 ### Tic-Tac-Toe (50 points)
+
 > Challenge description
-> 
+>
 > `Hello there, I invite you to one of the largest online global events in history ... the Tic Tac Toe World Championships!`
 
 We were also given a link to the application we were meant to exploit.
@@ -1284,12 +1302,13 @@ Then I placed my mark in the top-left corner. Sure enough, the application spill
 
 After decoding it, I obtained the flag. Judging by its contents, I am pretty sure this was not the intended way of solving this challenge.
 
-#### Flag
-**rgbCTF{h4h4_j4v42cr1p7_ev3n72_AR3_c00L}**
+Flag:
+`rgbCTF{h4h4_j4v42cr1p7_ev3n72_AR3_c00L}`
 
 ### Typeracer (119 points)
+
 > Challenge description
-> 
+>
 > `I AM SPEED! Beat me at TypeRacer and the flag is all yours!`
 
 We were once again given a link to an application we were meant to defeat - a typeracer clone.
@@ -1423,10 +1442,11 @@ I reran the snippet, this time with a much better result. The application spille
 
 Decoding the string yielded the flag. End of story
 
-#### Flag
-**rgbCTF{w40w_j4v42cr1p7_12_4nn0y1ng}**
+Flag:
+`rgbCTF{w40w_j4v42cr1p7_12_4nn0y1ng}`
 
 #### Bonus
+
 I mentioned that one way of beating this challenge is automating Internet Explorer via VBA Macros in Excel (which is a truly wonderful tool). If you read this far, you're probably interested in learning how to do this. As a starting point, I recommend [this article on the subject](https://www.automateexcel.com/vba/automate-internet-explorer-ie-using/).
 
 One prerequisite for this is enabling the developer tab in Excel. One can do this, by going to File > Options > Customize Ribbon, and checking Developer in the right pane.
@@ -1442,7 +1462,7 @@ This will open the Visual Basic editor, with autogenerated method signature. Int
 ![Adding references](/assets/images/posts/rgbctf-2020-07-14/typeracer-05.png)
 ![Adding references](/assets/images/posts/rgbctf-2020-07-14/typeracer-06.png)
 
-Then it's a matter of commiting some crimes against humanity to get the thing working. You can find the incantation to summon dark forces below.
+Then it's a matter of committing some crimes against humanity to get the thing working. You can find the incantation to summon dark forces below.
 
 ```vb
 Public Declare PtrSafe Function SetForegroundWindow Lib "user32" (ByVal HWND As LongPtr) As LongPtr
@@ -1455,12 +1475,12 @@ Sub CommitTerribleSins()
     'Set IE = CreateObject("InternetExplorer.Application")
     IE.Visible = True
     IE.Navigate "http://challenge.rgbsec.xyz:8973/"
-    
+
     ' Set IE as foreground
     Dim HWND
     HWND = IE.HWND
     SetForegroundWindow HWND
-    
+
     ' Wait for the page to load
     ' Navigation may not be instant, so first wait until ready expires, then
     ' wait until it's ready
@@ -1471,24 +1491,24 @@ Sub CommitTerribleSins()
         DoEvents
     Loop
     ' I CBA to do this using events
-    
+
     ' Add observer
     IE.document.parentWindow.execScript code:="var ttext=document.getElementsByClassName('card mt-0')[0].getElementsByClassName('card-body')[0],obs=new MutationObserver(function(){obs.disconnect();var t=[].slice.call(ttext.getElementsByTagName('span')).sort(function(t,e){return t.style.order-e.style.order}).map(function(t){return t.textContent.trim()}).join(' ');console.log(t),document.location.hash=t});obs.observe(ttext,{characterData:!1,attributes:!1,childList:!0});"
-    
+
     ' Trigger
     Dim activator
     Set activator = IE.document.getElementsByClassName("btn-outline-dark")
     activator(0).Click
-    
+
     ' Target
     Dim target
     Set target = IE.document.getElementsByTagName("textarea")(0)
-    
+
     ' Continue doing events
     Do Until InStr(IE.LocationURL, "#")
         DoEvents
     Loop
-    
+
     ' Extract the fragment
     Dim fragment
     Dim words
@@ -1496,16 +1516,16 @@ Sub CommitTerribleSins()
     fragment = Split(fragment, "#")
     fragment = fragment(1)
     words = Split(fragment, " ")
-    
+
     ' Counter
     Dim counter As Integer
     Dim maxcount As Integer
     counter = 0
     maxcount = UBound(words) - LBound(words) ' Yeah, arbitrary indexing; also don't add 1
-    
+
     ' Set the control value
     Cells(10, 3).Value = fragment
-    
+
     ' Type it out
     target.Focus
     For Each word In words
@@ -1516,18 +1536,18 @@ Sub CommitTerribleSins()
         End If
         counter = counter + 1
     Next
-    
+
     ' Wait for flag to appear
     Cells(13, 3).Value = "Please wait..."
     Application.Wait Now + TimeValue("00:00:03")
-    
+
     ' Extract flag
     Dim flag As String
     flag = IE.document.body.textContent
     flag = Split(flag, ":")(1)
     flag = LTrim(flag)
     'Cells(13, 3).Value = flag
-    
+
     ' Decode flag
     ' ...using Microsoft XML
     Dim objXML As New MSXML2.DOMDocument60
@@ -1538,10 +1558,10 @@ Sub CommitTerribleSins()
     flag = StrConv(objNode.nodeTypedValue, vbUnicode)
     Set objNode = Nothing
     Set objXML = Nothing
-    
+
     ' Set flag
     Cells(13, 3).Value = flag
-    
+
     ' Close IE
     IE.Visible = False
     Set IE = Nothing
