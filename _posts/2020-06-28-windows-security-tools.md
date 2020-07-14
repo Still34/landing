@@ -1,14 +1,15 @@
 ---
-title:  "Windows Security Tools"
-date:   2020-06-28 00:00:00 +0800
+title: Windows Security Tools
+date: 2020-07-14T17:49:06.282Z
 categories: infosec
-excerpt: "A collection of useful tools for Windows infosec researchers."
+excerpt: A collection of useful tools for Windows infosec researchers.
 header:
-  overlay_color: "#000"
-  overlay_filter: "0.75"
+  overlay_color: '#000'
+  overlay_filter: '0.75'
   overlay_image: /assets/screenshots/cape.png
-  caption: "Cape Sandbox"
+  caption: Cape Sandbox
 toc: true
+permalink: /windows-security-tools
 ---
 
 ## Reverse Engineering
@@ -153,3 +154,6 @@ Use multiple tools for comparison when decompiling! Every tool creates different
 - Starting from Windows 10 v1803, `curl` is included with the OS.
   - PowerShell users may need to invoke `curl.exe` instead of `curl` to avoid the `Invoke-WebRequest` alias.
   - Alternatively, remove the alias by using `Remove-Alias curl`.
+- [Winbindex](https://m417z.com/winbindex/)
+  - An index of Windows binaries, including download links for executables such as `*.exe`, `*.DLL` and `*.sys` files.
+  - Useful for testing or analyzing specific binaries from various Windows versions
