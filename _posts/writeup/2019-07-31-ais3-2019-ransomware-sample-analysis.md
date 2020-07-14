@@ -11,9 +11,11 @@ excerpt: "A quick analysis of the malicious executable used during the AIS3 2019
 ---
 
 ## Dynamic analysis
+
 Dynamic analysis is used here first because it is already actively running on victim's machine, so we might as well start from there.
- 
+
 ### Discovering malicious executable
+
 - Launch Process Hacker on the victim VM; an anomaly named `5D85C2C17D.exe` can be found in the process list.
 - The process is launched with the system, suggesting a daemon service or autorun registry is keeping the process persistent.
   - WhatsInStartup confirms our suspicion
@@ -21,6 +23,7 @@ Dynamic analysis is used here first because it is already actively running on vi
 - The process clearly has a name with a description of `Microsoft Windows Auto Update`, yet it does not behave like any default Windows applications bundled by Microsoft.
   - The process is not signed by Microsoft, further confirming the previous suspicion.
   - A signed process should contain a signed signature similar to the following,
+
   ```
       CN = Microsoft Windows Production PCA 2011
       O = Microsoft Corporation
@@ -28,15 +31,18 @@ Dynamic analysis is used here first because it is already actively running on vi
       S = Washington
       C = US
   ```
+
   - ![](/assets/images/posts/ais3-2019-malware/9fS3ZYX.png)
-      
+
 ### Determining the type of executable
+
 - From Process Hacker's automatic executable categorization, we can see that this process is a .NET assembly.
   - ![](/assets/images/posts/ais3-2019-malware/JN972gg.png)
 - [trid](http://mark0.net/soft-trid-e.html) (similar to `file` on Linux) further affirms the type of application.
   - ![](/assets/images/posts/ais3-2019-malware/2VqblIb.png)
 
 ### Behavior analysis
+
 - The file is seen constantly probing the victim's storage system.
   - ![](/assets/images/posts/ais3-2019-malware/U4PemZJ.png)
 - Common .NET assemblies can be found in the thread stack.
@@ -49,6 +55,7 @@ Dynamic analysis is used here first because it is already actively running on vi
 Since we know that the malicious executable is a .NET program, the program could typically be easily reversed via ildasm or any third-party decompilers (e.g. RedGate Reflector, JetBrains dotPeek, dnSpy, etc.).
 
 Unfortunately for us, upon opening the file, we discover that the file had been heavily obfuscated by Confuser.
+
 - ![ConfusedBy attribute](/assets/images/posts/ais3-2019-malware/00OKdnq.png)
 - ![Garbage code spat out by decompilers](/assets/images/posts/ais3-2019-malware/3NfcjOp.png)
 
@@ -58,7 +65,7 @@ Fortunately for us, Confuser is a known obfuscation application, and is supporte
 ./de4dot 5D85C2C17D.exe
 ```
 
-The application will pick up the pattern created by Confuser and begin deobfuscation. 
+The application will pick up the pattern created by Confuser and begin deobfuscation.
 
 ### Analysis via pestudio
 
@@ -114,14 +121,17 @@ As we can see, pestudio already picked up some traits that a typical ransomware 
 #### String table
 
 Upon opening the deobfuscated application, we can already see major red flags in the string table.
+
 - ![](/assets/images/posts/ais3-2019-malware/wc5LbyY.png)
 
 Some of these strings indicate that we are dealing with a ransomware:
+
 - `Payments are processed manually, therefore, the expectation of activation may take up to 48 hours.`
 - `This software will be deleted after files decryption, make sure that all important files are decrypted! If software crashes during decryption process, don't panic it will auto restart and your files will be decrypted without making addidional payment, just click Next>>. After all, software will auto remove itself from  your computer!`
 - `Make sure that all important files have been decrypted! If part of the files had not been decrypted - move them to the desktop and click <<Retry>> button.  Otherwise, press <<Cancel>> button - this will delete the software from this computer. Please restart your computer to completely destroy this software!`
 
 Without doing any of the code analysis, we can already find several questionable methods used by the malware thanks to pestudio's automatic flagging:
+
 - ![](/assets/images/posts/ais3-2019-malware/dV5blkm.png)
 
 ### Analysis via Decompilation
