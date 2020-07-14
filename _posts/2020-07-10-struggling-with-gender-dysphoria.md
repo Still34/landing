@@ -2,6 +2,7 @@
 title:  "Struggling with Gender Dysphoria"
 categories: rambling
 excerpt: "Male? Female? I don't know anymore."
+tags: mental-health en-us
 gallery:
   - url: /assets/images/posts/struggles-with-gender-dysphoria/EDFC64478D7DE6DE5C931B8BAE7854B54603231FC59CBBE057AC406A89487A23.jpg
     image_path: /assets/images/posts/struggles-with-gender-dysphoria/EDFC64478D7DE6DE5C931B8BAE7854B54603231FC59CBBE057AC406A89487A23.jpg
