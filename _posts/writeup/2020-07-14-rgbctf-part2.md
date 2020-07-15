@@ -350,7 +350,7 @@ from random import seed, randint
 
 cseed = 1594735575
 flagnum = 7424730967707779449792579718502356899503369464409389298411900681059
-flaglen = (flagnum.bit_length() + 7) // 8  # number of bytes the flag has - in this instace 28
+flaglen = (flagnum.bit_length() + 7) // 8  # number of bytes the flag has - in this instance 28
 
 
 seed(cseed)
@@ -516,7 +516,7 @@ def decrypt(ciphertext, seed_bytes):
     return b64encode(unpad(plaintext, BLOCK_SIZE))
 ```
 
-They aren't conventional encryption and decryption functions, since they take a seed, which a string of bytes, then perform their respective operation on the input byte string as many times, as there are bytes in the seed, using consecutive bytes from the seed to generate keys.
+They aren't conventional encryption and decryption functions, since they take a seed, which is a string of bytes, then perform their respective operation on the input byte string as many times, as there are bytes in the seed, using consecutive bytes from the seed to generate keys.
 
 Looking at the entry point of the program, more specifically, the solve part, also reveals how the challenge is solved.
 
@@ -1022,7 +1022,7 @@ Flag:
 
 We were also given an address to connect to using `netcat`. When connected, we'd input our code, which would then get tested against several cases. If all tests passed, the flag would be revealed. The [GitHub link](https://github.com/Quintec/LaserLang) leads to a git repository, which hosts an interpreter for an esoteric language called Laser. An excerpt from the README paints it as an interesting challenge.
 
-> Like many 2-D langauges, Laser has an instruction pointer that executes the one character instructions it encounters. The instruction pointer starts at the top left and initially points right. The pointer can wrap around the program and termination only occurs on error or the termination character #. The memory structure is a list of stacks. There are only two types in Laser: String and Number. Numbers are java Longs.
+> Like many 2-D languages, Laser has an instruction pointer that executes the one character instructions it encounters. The instruction pointer starts at the top left and initially points right. The pointer can wrap around the program and termination only occurs on error or the termination character #. The memory structure is a list of stacks. There are only two types in Laser: String and Number. Numbers are java Longs.
 
 This means I will have to think differently than in all the other cases, however this is a rather simple problem. My implementation was more or less a translation of a simple C factoring program to this language, adjusted for its constraints.
 
