@@ -17,7 +17,7 @@ permalink: /writeup/rgbctf-2020-part-1
 
 I was not planning on participating any CTF this week, but I figured I'd check the CTFTime schedule few days ago. That was when I saw a CTF named "rgbCTF" was coming up within a few days. I was like "screw it, let's go, why not?" My interest peaked when I saw that the first team gets free Chroma keyboards - even though I knew full well that I wasn't going to get top 5, and of course we didn't.
 
-This time around I figured I'd hit up Emzi, a friend of mine on Discord - the same person that challenged me to {% post_url /writeup/2020-06-23-capture-the-nitro %}. This is his first CTF, and he solved quite a few challenges, which was amazing. He will be writing the Part 2 of the writeup. If some challenges seem to be missing in this post, please refer to Part 2 instead!
+This time around I figured I'd hit up Emzi, a friend of mine on Discord - the same person that challenged me to [Capture the Nitro]({% post_url /writeup/2020-06-23-capture-the-nitro %}). This is his first CTF, and he solved quite a few challenges, which was amazing. He will be writing the Part 2 of the writeup. If some challenges seem to be missing in this post, please refer to Part 2 instead!
 
 Interestingly, the rgbSec team seems to be using something called [mellivora](https://github.com/Nakiami/mellivora) instead of the usual CTFd, which appears to be much more stable and looks far more stylish. This might be an alternative solution to consider in the future when hosting a jeopardy-styled CTF.
 
