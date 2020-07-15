@@ -6,21 +6,12 @@ header:
   overlay_filter: '0.75'
   overlay_image: /assets/images/posts/rgbctf-2020-07-14/pi1-06.webp
   actions:
-    - label: "Part 1 (WIP)"
+    - label: "Part 1"
       url: "/writeup/rgbctf-2020-part-1"
 permalink: /writeup/rgbctf-2020-part-2
 toc: true
-excerpt: 'Everything in 2020''s gotta have RGB, even CTFs!'
-date: 2020-07-14T09:00:00.000Z
-author:
-  name: "Emzi0767"
-  avatar: "https://avatars0.githubusercontent.com/u/784448?s=460&u=62fe7c245e7df584ce3b52d69ad117a0d78209a7&v=4"
-  bio: "Experienced developer and advanced wheel reinventor."
-  location: "Poland"
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/Emzi0767"
+excerpt: 'The journey to RGB continues!'
+author: Emzi
 ---
 
 ## Prologue

@@ -1,0 +1,11 @@
+# /_data/authors.yml
+
+Emzi:
+  name: "Emzi0767"
+  avatar: "https://avatars0.githubusercontent.com/u/784448?s=460&u=62fe7c245e7df584ce3b52d69ad117a0d78209a7&v=4"
+  bio: "Experienced developer and advanced wheel reinventor."
+  location: "Poland"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/Emzi0767"
