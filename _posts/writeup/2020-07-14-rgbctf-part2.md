@@ -4,7 +4,7 @@ categories: writeup
 header:
   overlay_color: '#000'
   overlay_filter: '0.75'
-  overlay_image: /assets/images/posts/rgbctf-2020-07-14/pi1-06.png
+  overlay_image: /assets/images/posts/rgbctf-2020-07-14/pi1-06.webp
   actions:
     - label: "Part 1 (WIP)"
       url: "/writeup/rgbctf-2020-part-1"
@@ -164,7 +164,7 @@ Zupk, Zuij oiuwivip wn'p vixs whdkxnzan nfzn skl pii nfwp: fnndp://w.xitt.wn/1d7
 
 The challenge looked like a simple substitution cipher challenge, so my first thought was to find patterns, perform some frequency analysis, then get cracking.
 
-One thing I noticed right off the bat is that only letters were substituted, digits and other characters were left alone. Since the title of the challenge is reddit-related, so the first thing that stood out to me, was this: `fnndp://w.xitt.wn/1d7y8g0272851.bdq`. It's obviously an `i.redd.it` link, which makes `.bdq` its extension. It's an image, so it's either `.gif`, `.png`, or `.jpg`. Another part of the URL, `fnndp://` was clearly `https://`, meaning that combined with knowing the domain, we now have some letters for the alphabet:
+One thing I noticed right off the bat is that only letters were substituted, digits and other characters were left alone. Since the title of the challenge is reddit-related, so the first thing that stood out to me, was this: `fnndp://w.xitt.wn/1d7y8g0272851.bdq`. It's obviously an `i.redd.it` link, which makes `.bdq` its extension. It's an image, so it's either `.gif`, `.webp`, or `.jpg`. Another part of the URL, `fnndp://` was clearly `https://`, meaning that combined with knowing the domain, we now have some letters for the alphabet:
 
 ```plaintext
 abcdefghijklmnopqrstuvwxyz    original
@@ -215,7 +215,7 @@ abcdefghijklmnopqrstuvwxyz    original
 
 At this stage, we have the flag, `rgbCTF{just_4sk_th3_int3rn3t_t0_d3crypt_it}`, but I decided to finish decoding the first domain: `gub ll .de/substitution-solver`. A quick google search led me right to the rest of the result, `guballa.de`:
 
-![A Google search revealing guballa.de was the domain](/assets/images/posts/rgbctf-2020-07-14/ciphers-00.png)
+![A Google search revealing guballa.de was the domain](/assets/images/posts/rgbctf-2020-07-14/ciphers-00.webp)
 
 At this stage, our alphabet looks like this:
 
@@ -226,7 +226,7 @@ zojtimqfwbguhakd xpnlv  s     substituted
 
 Just to confirm my work, I punched the entire text into the solver, and the result matched:
 
-![A Google search revealing guballa.de was the domain](/assets/images/posts/rgbctf-2020-07-14/ciphers-01.png)
+![A Google search revealing guballa.de was the domain](/assets/images/posts/rgbctf-2020-07-14/ciphers-01.webp)
 
 As a bonus, the i.redd.it link in the text led to this image:
 
@@ -296,7 +296,7 @@ A little bit of background - Python's `time.time()` function returns the current
 
 Armed with that knowledge, I performed a timestamped `netcat` connection via `date +%s; nc endpoint port`, then disconnected once I got my numbers. Worth noting: most values below are examples rather than exact values used, as the writeup was made after the challenge deadline closed.
 
-![Output from the remote server](/assets/images/posts/rgbctf-2020-07-14/otp-00.png)
+![Output from the remote server](/assets/images/posts/rgbctf-2020-07-14/otp-00.webp)
 
 The timestamp is the first line (duh), so the data required to reverse the state was as follows:
 
@@ -589,15 +589,15 @@ if __name__ == "__main__":
 
 All that was left was connecting to the remote server to obtain my challenge string.
 
-![Output from the remote server](/assets/images/posts/rgbctf-2020-07-14/naes-00.png)
+![Output from the remote server](/assets/images/posts/rgbctf-2020-07-14/naes-00.webp)
 
 My challenge string in this instance is `5v8Qcgb+LQK8jjiELETTc5Eb22kqpiVshV3q6pZ2MIrSMEQ247l9wqNLXVTRLLkq04yCGQqI62JkgKc8Y97rCn5ubkT8Cak+gb9hXF2D11LujClAsBrN3D2VALKgHiKp`. I punched it into my solver script, and got a solution. Highlighted in red is the aforementioned padding.
 
-![Solver results, with padding result highlighted](/assets/images/posts/rgbctf-2020-07-14/naes-01.png)
+![Solver results, with padding result highlighted](/assets/images/posts/rgbctf-2020-07-14/naes-01.webp)
 
 I punched the encoded result into `netcat`, and the server echoed me a flag.
 
-![Flag obtained](/assets/images/posts/rgbctf-2020-07-14/naes-02.png)
+![Flag obtained](/assets/images/posts/rgbctf-2020-07-14/naes-02.webp)
 
 Flag:
 `rgbCTF{i_d0nt_7hink_7his_d03s_wh47_y0u_7hink_i7_d03s}`
@@ -616,21 +616,21 @@ Flag:
 
 Attached was a Bluetooth HCI log in btsnoop format. I was initially unsure what to do with it, but with Still's advice, I loaded it into Wireshark.
 
-![View of the log in Wireshark](/assets/images/posts/rgbctf-2020-07-14/pi1-00.png)
+![View of the log in Wireshark](/assets/images/posts/rgbctf-2020-07-14/pi1-00.webp)
 
 Inspecting the log revealed it was taken by snooping on nearby Bluetooth traffic, using `Linux version 5.5.0-kali2-amd64 (x86_64)`, and `Bluetooth subsystem version 2.22`. Device was attached via `hci0`, the supporting daemon was `bluetoothd`, and the snooper was `btmon`. The target device identified itself as G613. A quick conversation with Still and some Google let me identify it as a Logitech™ G613 Wireless Mechanical Keyboard. Fancy stuff.
 
 All this tells me is that I'm looking for information on how do Bluetooth keyboards talk to the target computers. The answer? HID over Bluetooth. Reading the HID specification, I find out that one of the first things a device has to do after it's initialized is presenting itself, and describing its payloads. Googling around led me to a [StackOverflow thread](https://stackoverflow.com/questions/45478259/decoding-captured-hid-over-gatt-traffic-with-usbpcap-Wireshark), where a similar problem is described. From this thread I found some important pieces of information, HID descriptors, also called Report Maps in HID terminology, tend to begin with `0x05 0x01 0x09` and tend to end with `0xc0`. I searched for a relevant byte sequence in Wireshark.
 
-![Quick search reveals all](/assets/images/posts/rgbctf-2020-07-14/pi1-01.png)
+![Quick search reveals all](/assets/images/posts/rgbctf-2020-07-14/pi1-01.webp)
 
 The descriptor was fragmented due to Bluetooth Low Emission MTUs, so I had to reconstruct it. Using Google, I also found a [HID payload decoder](https://eleccelerator.com/usbdescreqparser/). I punched the reconstructed packet into the website, and let it decode it. The result was less than helpful. It looked like the keyboard description was omitted or stripped from the log.
 
-![Descriptor decode result](/assets/images/posts/rgbctf-2020-07-14/pi1-02.png)
+![Descriptor decode result](/assets/images/posts/rgbctf-2020-07-14/pi1-02.webp)
 
 The descriptors found in the log are for system control and vendor-specific applications, neither of which is keyboard. I decided to scroll a little in Wireshark, and reached a block of HID Reports.
 
-![A block of reports](/assets/images/posts/rgbctf-2020-07-14/pi1-03.png)
+![A block of reports](/assets/images/posts/rgbctf-2020-07-14/pi1-03.webp)
 
 Per HID specification, a keystroke is sent as a report, so I decided to check out a couple of them to see which bytes were changing. The changing bytes would then have to be keystrokes. [USB Consortium HID Usage Tables](https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf), specifically pages 53-55, have proven to be an invaluable resource in decoding the data stream. I picked some reports at random, and started taking notes.
 
@@ -638,17 +638,17 @@ Per HID specification, a keystroke is sent as a report, so I decided to check ou
 
 Notice how the second byte of each payload changes. I noted down consecutive non-zero values: `0f 28 28 17 15 1c`. Using the document mentioned earlier, I translated these bytes to `i \n \n try`. That looks like words! I now had a potential solution. All I needed to do was to filter out the noise, and export this to something I could filter with Python.
 
-![Copy as filter](/assets/images/posts/rgbctf-2020-07-14/pi1-05.png)
+![Copy as filter](/assets/images/posts/rgbctf-2020-07-14/pi1-05.webp)
 
 By using the Copy As Filter function in Wireshark, I created the following filter: `bthci_acl.src.bd_addr == f6:3c:91:42:32:28 and btatt.handle == 0x002c and btatt.opcode == 0x1b`.
 
-![Filtered packets](/assets/images/posts/rgbctf-2020-07-14/pi1-06.png)
+![Filtered packets](/assets/images/posts/rgbctf-2020-07-14/pi1-06.webp)
 
 All that's left now is exporting them. Wireshark supports exporting packets as JSON, which I used to export the filtered packets. I checked to export packet bytes as well, just in case.
 
-![Export menu](/assets/images/posts/rgbctf-2020-07-14/pi1-07.png)
+![Export menu](/assets/images/posts/rgbctf-2020-07-14/pi1-07.webp)
 
-![Export window](/assets/images/posts/rgbctf-2020-07-14/pi1-08.png)
+![Export window](/assets/images/posts/rgbctf-2020-07-14/pi1-08.webp)
 
 So now I have a >5MiB JSON file with an array of JSON packets in it. Each packet was a huge JSON object, but I only needed one part of it.
 
@@ -951,7 +951,7 @@ with open("hci_filtered.json", "r") as f:
     print(''.join(keymap[x[0]] if x[1] == "00" else "" for x in load(f)))
 ```
 
-![Translated text](/assets/images/posts/rgbctf-2020-07-14/pi1-09.png)
+![Translated text](/assets/images/posts/rgbctf-2020-07-14/pi1-09.webp)
 
 With that, I obtained the required information to construct the flag.
 
@@ -999,7 +999,7 @@ x
 
 The 2 pieces of information pertaining to the flag are the phone number from the transcript, `0736727859`, as well as the information that it's a Swedish number, which means the dialing code is +46. By stripping the leading 0, and prepending the dialing code, I obtained the flag.
 
-![Sweden dialing code](/assets/images/posts/rgbctf-2020-07-14/pi1-10.png)
+![Sweden dialing code](/assets/images/posts/rgbctf-2020-07-14/pi1-10.webp)
 
 Flag:
 `rgbCTF{+46736727859}`
@@ -1096,7 +1096,7 @@ The program uses the initial (bottom) stack as the result stack. It's implicitly
 
 When the program finishes execution, the result stack is typed out, resulting in the factors of given number being typed out in ascending order.
 
-![Some test cases](/assets/images/posts/rgbctf-2020-07-14/lasers1-00.png)
+![Some test cases](/assets/images/posts/rgbctf-2020-07-14/lasers1-00.webp)
 
 In the program above, you should notice that the program termination is separated by a blank space from popping the 2 stacks. That's because initially there was a "print current stack" instruction in there, but due to a bug, the test cases didn't accept its output. As the language types the current stack out implicitly when execution finishes, it's not necessary anyway. After the code, I also put in 3 newlines, to make the remote server recognize the end of code properly.
 
@@ -1104,7 +1104,7 @@ The testing program, however, had an interesting bug, where using the stack prin
 
 After my testing concluded, I sent the program for testing. Test case 8 took a little while, probably because it was a large number, but once I passed, I got the flag.
 
-![Testing](/assets/images/posts/rgbctf-2020-07-14/lasers1-01.png)
+![Testing](/assets/images/posts/rgbctf-2020-07-14/lasers1-01.webp)
 
 Flag:
 `rgbCTF{l4s3rs_4r3_c00l_r1ght}`
@@ -1263,13 +1263,13 @@ In greater detail, the program works as follows:
 
 The output is sorted in descending order.
 
-![Some test cases](/assets/images/posts/rgbctf-2020-07-14/lasers2-00.png)
+![Some test cases](/assets/images/posts/rgbctf-2020-07-14/lasers2-00.webp)
 
 Using the bug I described above, I used to debug this program, as I had a glitch initially, where for some inputs the program didn't sort properly. It got stuck on case 2, so I made it print the stack out when there was more than 1 input. This was removed for the final version. Again, at the end of the program, there were 3 empty lines.
 
 After my testing concluded, I sent the program for testing. After ironing out the kinks, all tests passed, and I got the flag.
 
-![Testing](/assets/images/posts/rgbctf-2020-07-14/lasers2-01.png)
+![Testing](/assets/images/posts/rgbctf-2020-07-14/lasers2-01.webp)
 
 Flag:
 `rgbCTF{1_f33l_y0ur_p41n_trust_m3}`
@@ -1286,7 +1286,7 @@ We were also given a link to the application we were meant to exploit.
 
 The challenge is a classic - a tic-tac-toe game. In order to obtain the flag, all you had to do was defeat the AI. I should mention that when I solved it, the challenge was broken, and any win counted as a loss, which got fixed after I solved the challenge. It did not, however, stop me.
 
-![The web application](/assets/images/posts/rgbctf-2020-07-14/tictactoe-00.png)
+![The web application](/assets/images/posts/rgbctf-2020-07-14/tictactoe-00.webp)
 
 I decided that the best place to start was the JavaScript code powering the application. Unfortunately, it was heavily obfuscated, so analysis wasn't easy. Using Firefox dev tools' pretty print feature made it somewhat more readable, but it still couldn't be analyzed in a nice manner.
 
@@ -1302,7 +1302,7 @@ for (var i = 0; i < _0x517520.length; i++) for (var j = 0; j < 3; j++) _0x517520
 
 Then I placed my mark in the top-left corner. Sure enough, the application spilled out a base64-encoded string: `cmdiQ1RGe2g0aDRfajR2NDJjcjFwN19ldjNuNzJfQVIzX2MwMEx9`.
 
-![I win!](/assets/images/posts/rgbctf-2020-07-14/tictactoe-01.png)
+![I win!](/assets/images/posts/rgbctf-2020-07-14/tictactoe-01.webp)
 
 After decoding it, I obtained the flag. Judging by its contents, I am pretty sure this was not the intended way of solving this challenge.
 
@@ -1317,7 +1317,7 @@ Flag:
 
 We were once again given a link to an application we were meant to defeat - a typeracer clone.
 
-![The web application](/assets/images/posts/rgbctf-2020-07-14/typeracer-00.png)
+![The web application](/assets/images/posts/rgbctf-2020-07-14/typeracer-00.webp)
 
 The way this application worked was rather simple. You press start, wait 5 seconds, and then a list of words appears in the top box. You are meant to type them in the order you can see them. If your typing speed is above certain (very high) threshold, the flag is revealed.
 
@@ -1420,7 +1420,7 @@ obs.observe(ttext, { characterData: false, attributes: false, childList: true })
 
 I started my typer application, ran the snippet on the typeracer application, pressed start, and waited. When the typing began, it was all wrong.
 
-![The text is all wrong](/assets/images/posts/rgbctf-2020-07-14/typeracer-01.png)
+![The text is all wrong](/assets/images/posts/rgbctf-2020-07-14/typeracer-01.webp)
 
 Cursory analysis revealed the words were not in the correct order. But how could that be? I decided to inspect the upper box again, and found a curiosity. The elements were placed out-of-order, and for display purposes, were reordered using a CSS `order` rule. I had to modify the text retrieval part of my script to account for that.
 
@@ -1442,7 +1442,7 @@ obs.observe(ttext, { characterData: false, attributes: false, childList: true })
 
 I reran the snippet, this time with a much better result. The application spilled out a base64-encoded string: `cmdiQ1RGe3c0MHdfajR2NDJjcjFwN18xMl80bm4weTFuZ30=`.
 
-![Victory!](/assets/images/posts/rgbctf-2020-07-14/typeracer-02.png)
+![Victory!](/assets/images/posts/rgbctf-2020-07-14/typeracer-02.webp)
 
 Decoding the string yielded the flag. End of story
 
@@ -1455,16 +1455,16 @@ I mentioned that one way of beating this challenge is automating Internet Explor
 
 One prerequisite for this is enabling the developer tab in Excel. One can do this, by going to File > Options > Customize Ribbon, and checking Developer in the right pane.
 
-![Enabling Developer tab in Excel](/assets/images/posts/rgbctf-2020-07-14/typeracer-03.png)
+![Enabling Developer tab in Excel](/assets/images/posts/rgbctf-2020-07-14/typeracer-03.webp)
 
 That will enable the tab, and access to Visual Basic editor. Before we do that, however, we have to insert a button that will trigger this chain of unfortunate events using the Insert dropdown. In there, select a Button under Form Controls, draw it on the workbook, and when asked about the assigned macro, press New.
 
-![Enabling Developer tab in Excel](/assets/images/posts/rgbctf-2020-07-14/typeracer-04.png)
+![Enabling Developer tab in Excel](/assets/images/posts/rgbctf-2020-07-14/typeracer-04.webp)
 
 This will open the Visual Basic editor, with autogenerated method signature. Into that method, paste the following code. You need to add a COM reference to `Microsoft Internet Controls`, `Microsoft HTML Object Library`, and `Microsoft XML, v6.0` using Tools > References.
 
-![Adding references](/assets/images/posts/rgbctf-2020-07-14/typeracer-05.png)
-![Adding references](/assets/images/posts/rgbctf-2020-07-14/typeracer-06.png)
+![Adding references](/assets/images/posts/rgbctf-2020-07-14/typeracer-05.webp)
+![Adding references](/assets/images/posts/rgbctf-2020-07-14/typeracer-06.webp)
 
 Then it's a matter of committing some crimes against humanity to get the thing working. You can find the incantation to summon dark forces below.
 
