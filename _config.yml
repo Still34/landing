@@ -109,6 +109,8 @@ author:
 include:
   - .htaccess
   - _pages
+  - .well-known/security.txt
+  - .well-known/pubkey.asc
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
