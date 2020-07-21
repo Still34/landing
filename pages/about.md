@@ -44,6 +44,7 @@ multimedia:
 - Pingtung Hacker CTF Club
   - Teaching Assistant
   - 2018 ~ 2020
+- MOPCON 2019
 - AIS3 2019
 - AIS3 2020
 - HITCON CMT 2018
@@ -59,8 +60,10 @@ multimedia:
 - AIS3 Pre-exam 2019
 - AIS3 Pre-exam 2020
   - 🥉 43rd
+- rgbCTF 2020
+  - 🥉 53/1047
 - AUCTF 2020
-  - 🥉 220th
+  - 🥉 220/1184
 
 ## Media Showcase
 {: #media-showcase }
