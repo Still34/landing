@@ -1,6 +1,5 @@
 ---
 title: Windows Security Tools
-date: 2020-07-14T17:49:06.282Z
 categories: infosec
 excerpt: A collection of useful tools for Windows infosec researchers.
 header:
@@ -10,6 +9,7 @@ header:
   caption: Cape Sandbox
 toc: true
 permalink: /windows-security-tools
+date: 2020-07-20T12:16:13.971Z
 ---
 
 ## Reverse Engineering
@@ -67,10 +67,58 @@ Use multiple tools for comparison when decompiling! Every tool creates different
   - ✅ **Codebase**: Open-source
   - 📝 **Notes**:
     - Useful for a quick dynamic/static analysis
-    - Provides full memory dump
+    - Provides the following
+      - PCAP
+      - Memory dump
+      - Handles used
+      - W32API called
+      - DNS requests
+      - Files dropped
+      - Sandbox screenshots
     - Highly configurable
-    - [Official host](https://capesandbox.com/)
-    - [Backup host](https://sandbox.xor.al/)
+    - Hosts
+      - [Official host](https://capesandbox.com/)
+      - [Backup host](https://sandbox.xor.al/)
+- [any.run](https://app.any.run/)
+  - ⚠ **Pricing**: Freemium
+  - ⚠ **Codebase**: Proprietary
+  - 📝 **Notes**:
+    - [Multiple tiers](https://app.any.run/plans)
+    - Free tier
+      - ⚠ 16 MB Maximum
+      - ⚠ 32-bit Windows 7 only
+      - List important/suspicious processes only
+      - List DNS requests
+      - Highlight MITRE ATT&CK™ matrix
+      - Sandbox screenshots
+      - Files dropped
+      - The following features are registered members only
+        - Sample download
+        - PCAP download
+        - Export process graph (SVG)
+    - "Searcher" tier ($89 USD/mo)
+      - 32 MB Maximum
+      - 64-bit Windows 7
+      - Video record
+      - MITM Proxy for HTTPs requests
+      - Show all processes
+      - Advanced threat analysis
+    - Russia-based service
+      - [Privacy Policy](https://app.any.run/privacy.html) states that any information will only be used by `ANY.RUN` unless required by law
+
+      ```markdown
+      Registrar: Regional Network Information Center, JSC dba RU-CENTER
+      Registrar IANA ID: 463
+      Registrar Abuse Contact Email: tld-ncc@nic.ru
+      Registrar Abuse Contact Phone: +7.4957370601
+      Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+      Registry Registrant ID: df98cdacb0e74fbd8a6ad39efd7cf1b8-DONUTS
+      Registrant Name: Privacy protection service - whoisproxy.ru
+      Registrant Organization: Privacy protection service - whoisproxy.ru
+      Registrant Street: PO box 99, whoisproxy.ru
+      Registrant City: Moscow
+      Registrant State/Province: Moscow
+      ```
 
 ### Network
 
