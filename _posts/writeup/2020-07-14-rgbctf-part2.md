@@ -137,6 +137,62 @@ The irony in this is that octal is an encoding a lot of UNIX people use frequent
 Flag:
 `rgbCTF{c0ngr4ts_0n_b3ing_B4SIC}`
 
+### Pieces (50 points)
+
+> Challenge description
+> 
+> `My flag has been divided into pieces :( Can you recover it for me?`
+
+Attached was a file called `Main.java` with the following contents:
+
+```java
+import java.io.*;
+public class Main {
+	public static void main(String[] args) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		String input = in.readLine();
+		if (divide(input).equals("9|2/9/:|4/7|8|4/2/1/2/9/")) {
+			System.out.println("Congratulations! Flag: rgbCTF{" + input + "}");
+		} else {
+			System.out.println("Incorrect, try again.");
+		}
+	}
+	
+	public static String divide(String text) {
+		String ans = "";
+		for (int i = 0; i < text.length(); i++) {
+			ans += (char)(text.charAt(i) / 2);
+			ans += text.charAt(i) % 2 == 0 ? "|" : "/";
+		}
+		return ans;
+	}
+}
+```
+
+Analysis of the code reveals that the flag contents have been encoded. The process took every character, halved its ASCII value, and wrote the resulting character out, then appdended either `|` or `/`, depending on whether the character's value was divisible by 2 or not. In effect, each character was encoded as a pair of `(div 2, mod 2)`.
+
+Reversing this process was simple, and I decided to use C# to achieve this. My program simply took each character pair, multiplied the ASCII value of the first character of each pair by 2, then added 1 if the other character was equal to `/`. The source code of the entrypoint of the program can be found below.
+
+```cs
+public static void Main(string[] args)
+{
+    var str = "9|2/9/:|4/7|8|4/2/1/2/9/";
+    var sts = str.AsSpan();
+    for (int i = 0; i < str.Length; i += 2)
+    {
+        var addone = sts[i + 1] == '/';
+        var ch = (char)((sts[i] * 2) + (addone ? 1 : 0));
+        Console.Write(ch);
+    }
+    Console.WriteLine();
+}
+```
+
+When ran, the program spit out the string `restinpieces`.
+
+Flag: 
+`rgbCTF{restinpieces}`
+
 ### r/ciphers (50 points)
 
 > Challenge description
