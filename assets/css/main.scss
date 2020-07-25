@@ -21,6 +21,34 @@ $base0c: #6eb958;
 $base0d: #88a4d3;
 $base0e: #bb90e2;
 $base0f: #b49368;
-$sans-serif: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", "Microsoft YaHei", "Noto Sans CJK", Arial, sans-serif;
+$sans-serif: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
+  "Helvetica Neue", "Lucida Grande", "Microsoft YaHei", "Noto Sans CJK", Arial,
+  sans-serif;
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+@mixin notice($notice-color) {
+  color: white;
+  background-color: $notice-color;
+  margin: 1em 0 !important;
+  code {
+    background-color: mix(#000, $notice-color, 50%)
+  }
+}
+.notice--info {
+  @include notice(#03a9f4);
+}
+.notice--warning {
+  @include notice(#e67e22);
+}
+.notice--success {
+  @include notice(#27ae60);
+}
+.notice--danger {
+  @include notice(#c0392b);
+}
+details {
+  margin: 1em 0;
+}
+details > * {
+  margin: 1em 0;
+}
