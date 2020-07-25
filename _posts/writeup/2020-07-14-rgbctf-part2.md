@@ -155,7 +155,7 @@ Zupk, Zuij oiuwivip wn'p vixs whdkxnzan nfzn skl pii nfwp: fnndp://w.xitt.wn/1d7
 
 The challenge looked like a simple substitution cipher challenge, so my first thought was to find patterns, perform some frequency analysis, then get cracking.
 
-One thing I noticed right off the bat is that only letters were substituted, digits and other characters were left alone. Since the title of the challenge is reddit-related, so the first thing that stood out to me, was this: `fnndp://w.xitt.wn/1d7y8g0272851.bdq`. It's obviously an `i.redd.it` link, which makes `.bdq` its extension. It's an image, so it's either `.gif`, `.webp`, or `.jpg`. Another part of the URL, `fnndp://` was clearly `https://`, meaning that combined with knowing the domain, we now have some letters for the alphabet:
+One thing I noticed right off the bat is that only letters were substituted, digits and other characters were left alone. Since the title of the challenge is reddit-related, so the first thing that stood out to me, was this: `fnndp://w.xitt.wn/1d7y8g0272851.bdq`. It's obviously an `i.redd.it` link, which makes `.bdq` its extension. It's an image, so it's either `.gif`, `.png`, or `.jpg`. Another part of the URL, `fnndp://` was clearly `https://`, meaning that combined with knowing the domain, we now have some letters for the alphabet:
 
 ```plaintext
 abcdefghijklmnopqrstuvwxyz    original
