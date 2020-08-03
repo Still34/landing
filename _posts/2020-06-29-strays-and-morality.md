@@ -2,7 +2,7 @@
 title:  "Strays and Morality"
 categories: rambling
 excerpt: "Ethicality, morality, and stray animals."
-tags: mental-health en-us
+tags: philosophy en-us
 header:
   overlay_color: "#000"
   overlay_filter: "0.75"
