@@ -96,7 +96,7 @@ author:
   avatar           : "/assets/images/avatar-512.png"
   bio              : "Developer, photographer, infosec researcher."
   location         : "Taiwan"
-  email            : "mailto:business@stillu.cc"
+  email            : "business@stillu.cc"
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
@@ -104,6 +104,9 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/Still34"
+    - label: "GPG (Email)"
+      icon: "fas fa-user-lock"
+      url: "/.well-known/pubkey.asc"
 
 # Reading Files
 include:
