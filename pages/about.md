@@ -55,6 +55,8 @@ multimedia:
 
 - CyCarrier BlueDojo
   - 🏆 1st
+- Zyxel KoTH Finalist 2020
+  - 🥉 4th
 - MyFirstCTF 2019
 - AIS3 Pre-exam 2019
 - AIS3 Pre-exam 2020
