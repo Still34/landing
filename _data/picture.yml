@@ -1,0 +1,27 @@
+# _data/picture.yml
+
+presets:
+  default:
+    formats: [webp, original]
+    format_quality:
+      jpg: 85
+      webp: 75
+    markup: auto
+    link_source: true
+    dimension_attributes: true
+    noscript: true
+    attributes: 
+      img: class="lazy"
+  nomarkdown:
+    nomarkdown: false
+    formats: [webp, original]
+    format_quality:
+      jpg: 85
+      webp: 75
+    markup: auto
+    link_source: true
+    dimension_attributes: true
+    noscript: true
+    attributes: 
+      img: class="lazy"
+    nomarkdown: false
