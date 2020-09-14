@@ -3,9 +3,8 @@ GEM
   specs:
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    base32 (0.3.2)
     colorator (1.1.0)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -15,7 +14,7 @@ GEM
     ffi (1.13.1)
     forwardable-extended (2.6.0)
     http_parser.rb (0.6.0)
-    i18n (1.8.4)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jekyll (4.1.1)
       addressable (~> 2.4)
@@ -45,9 +44,8 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    jekyll_picture_tag (1.10.2)
+    jekyll_picture_tag (1.12.0)
       addressable (~> 2.6)
-      base32 (~> 0.3)
       jekyll (< 5)
       mime-types (~> 3)
       mini_magick (~> 4)
@@ -65,7 +63,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2020.0512)
     mini_magick (4.10.1)
-    minimal-mistakes-jekyll (4.19.3)
+    minimal-mistakes-jekyll (4.20.2)
       jekyll (>= 3.7, < 5.0)
       jekyll-feed (~> 0.1)
       jekyll-gist (~> 1.5)
@@ -79,12 +77,12 @@ GEM
       sawyer (~> 0.8.0, >= 0.5.3)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
-    public_suffix (4.0.5)
+    public_suffix (4.0.6)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rexml (3.2.4)
-    rouge (3.21.0)
+    rouge (3.23.0)
     safe_yaml (1.0.5)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -100,9 +98,9 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (~> 4.1.1)
-  jekyll-feed (~> 0.12)
-  jekyll_picture_tag
-  minimal-mistakes-jekyll
+  jekyll-feed (~> 0.15)
+  jekyll_picture_tag (~> 1.12.0)
+  minimal-mistakes-jekyll (~> 4.20.2)
 
 BUNDLED WITH
    2.1.4

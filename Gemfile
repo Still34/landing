@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 gem "jekyll", "~> 4.1.1"
-gem "minimal-mistakes-jekyll"
+gem "minimal-mistakes-jekyll", "~> 4.20.2"
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.12"
-  gem 'jekyll_picture_tag'
+  gem "jekyll-feed", "~> 0.15"
+  gem 'jekyll_picture_tag', '~> 1.12.0'
 end
