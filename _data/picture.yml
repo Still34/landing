@@ -12,6 +12,13 @@ presets:
     noscript: true
     attributes: 
       img: class="lazy"
+  figure:
+    base_width: 600
+    pixel_ratios: [1, 1.5, 2]
+    fallback_width: 600
+    link_source: true
+    attributes: 
+      img: class="lazy align-center"
   nomarkdown:
     nomarkdown: false
     formats: [webp, original]
