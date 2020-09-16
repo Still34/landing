@@ -130,9 +130,32 @@ For more details and hands on practices of DLL hijacking, I recommend itm4n's ex
 
 ### .NET
 
-You may have noticed my peculiar language/runtime choice for testing DLL hijacking. There is a reason that I chose dotnet over C/C++ here. Here's the problem - **there is not a single good solution to avoid DLL hijacking when working with dotnet.** At least, not that I can tell. The only method that I can tell is by invoking the `LoadLibrary` call directly, as opposed to calling the DLL exports. With `LoadLibraryEx`, DLL hijacking can be alleviated to some degree (see below).
+~~You may have noticed my peculiar language/runtime choice for testing DLL hijacking. There is a reason that I chose dotnet over C/C++ here. Here's the problem - **there is not a single good solution to avoid DLL hijacking when working with dotnet.** At least, not that I can tell. The only method that I can tell is by invoking the `LoadLibrary` call directly, as opposed to calling the DLL exports. With `LoadLibraryEx`, DLL hijacking can be alleviated to some degree (see below).~~
 
-If you do know a good method of preventing dotnet DLL hijacking, please do let me know in the comments.
+~~If you do know a good method of preventing dotnet DLL hijacking, please do let me know in the comments.~~
+
+For .NET Core 3.0 and above (inc. .NET 5), [the use of `System.Runtime.InteropServices.NativeLibrary` class](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.nativelibrary?view=netcore-3.1) is preferred. So, in our case, we can rewrite the application like this to specify that we only want to search within the assembly directory:
+
+```cs
+public delegate void UnknownMethod();
+static void Main(string[] args)
+{
+    if (NativeLibrary.TryLoad("unknown.dll", typeof(Program).Assembly, DllImportSearchPath.AssemblyDirectory, out var entryPointer))
+    {
+        if (NativeLibrary.TryGetExport(entryPointer, "UnknownMethod", out var methodPointer))
+        {
+            var MyUnknownMethod = Marshal.GetDelegateForFunctionPointer<UnknownMethod>(methodPointer);
+            MyUnknownMethod();
+        }
+    }
+    else
+    {
+        Console.WriteLine("Failed to locate the DLL within the application directory.");
+    }
+}
+```
+
+No more exceptions when dealing with `extern` with missing DLL or fumbling with DLL search order!
 
 ### Win32 `LoadLibraryEx`
 
