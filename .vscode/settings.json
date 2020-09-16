@@ -12,5 +12,12 @@
         "jekyll": {
             "parser": "markdown"
         }
-    }
+    },
+    "cSpell.words": [
+        "Cybersecurity",
+        "Mimikatz",
+        "TSMC",
+        "hitcon",
+        "nomarkdown"
+    ]
 }
