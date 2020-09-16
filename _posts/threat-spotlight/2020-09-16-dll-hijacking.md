@@ -79,8 +79,8 @@ void UnknownMethod()
 When we run the application, it will attempt to look for `unknown.dll` in various directories based on the search order. In this instance, `unknown.dll` is planted at where the current working directory is (where `dotnet myapp.dll` is called). We can observe this behavior using [Process Monitor](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon).
 
 <figure>
-  {% picture nomarkdown "assets/images/posts/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png" %}
-  {% picture nomarkdown "assets/images/posts/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd.png" %}
+  {% picture nomarkdown "assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png" %}
+  {% picture nomarkdown "assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd.png" %}
   <figcaption>
     The dotnet application successfully found the requested DLL at the current working directory.
     Our program executed as expected with "Hello, World!" printed.
@@ -90,8 +90,8 @@ When we run the application, it will attempt to look for `unknown.dll` in variou
 So let's say our threat actor has managed to gain access to the Windows or System directory and dropped in their malicious DLL, what would happen when we execute the application again?
 
 <figure>
-  {% picture nomarkdown "assets/images/posts/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb.png" %}
-  {% picture nomarkdown "assets/images/posts/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png" %}
+  {% picture nomarkdown "assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb.png" %}
+  {% picture nomarkdown "assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png" %}
   <figcaption>
     Suddenly, our program stopped executing with the expected behavior!
   </figcaption>
@@ -101,13 +101,13 @@ Now, this is a very unlikely scenario as the threat actor would first have to el
 
 Here's a more likely scenario - what if we were to delete the DLL from the application folder and find a weak ACL controlled directory that is present within our `%PATH%`? Fortunately for us (and me), [PrivescCheck](https://github.com/itm4n/PrivescCheck) can help us find PATH directories with weak permissions.
 
-{% picture "assets/images/posts/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb.png" %}
+{% picture "assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb.png" %}
 
 With `Invoke-DllHijackingCheck`, we are able to quickly find folders that anyone under `NT AUTHORITY\Authenticated Users` can write to. Let's try moving our malicious DLL there.
 
 <figure>
-  {% picture nomarkdown "assets/images/posts/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab.png" %}
-  {% picture nomarkdown "assets/images/posts/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png" %}
+  {% picture nomarkdown "assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab.png" %}
+  {% picture nomarkdown "assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png" %}
   <figcaption>
     Success! We managed to successfully hijack the unknown.dll.
   </figcaption>
