@@ -5,7 +5,7 @@ category: threat-spotlight
 header:
   overlay_color: '#000'
   overlay_filter: '0.75'
-  overlay_image: /assets/images/posts/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab.png
+  overlay_image: /assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png
 toc: true
 ---
 
