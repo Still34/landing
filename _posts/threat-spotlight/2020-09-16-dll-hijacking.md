@@ -1,7 +1,8 @@
 ---
-title: Threat Spotlight - DLL Hijacking
+title: Threat Spotlight - DLL Hijacking (and .NET)
 excerpt: How does Windows determine which DLL to load 🤔?
 category: threat-spotlight
+tags: [en-us, dotnet, guide]
 header:
   overlay_color: '#000'
   overlay_filter: '0.75'
