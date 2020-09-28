@@ -33,6 +33,9 @@ $sans-serif: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
   code {
     background-color: mix(#000, $notice-color, 50%)
   }
+  a {
+    color: mix(#000, $notice-color, 75%);
+  }
 }
 .notice--info {
   @include notice(#03a9f4);
