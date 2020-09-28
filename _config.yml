@@ -243,7 +243,6 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: true
       read_time: true
       show_date: true
       comments: true
@@ -251,6 +250,14 @@ defaults:
       related: true
       classes: wide
       tags: "en-us"
+  - scope:
+      path: ""
+    values:
+      author_profile: true
+      header:
+        overlay_color: "#000"
+        overlay_filter: "0.5"
+        overlay_image: /assets/images/header.jpg
 
 picture:
   suppress_warnings: true

@@ -3,4 +3,4 @@ main:
   - title: "About"
     url: /about
   - title: "Posts"
-    url: /posts
+    url: /categories
