@@ -513,7 +513,7 @@ Flag: `rgbCTF{pr3d1ct4bl3_k3y_n33d5_no_w41t_cab79d}`
 >
 > `There's this small up and coming language called java I want to tell you about`
 
-This solve was made possible by our Java guru, [Kieran](https://github.com/k-boyle), who pointed me to the right direction. Go give them a follow!
+This problem was solved by our Java guru, [Kieran](https://github.com/k-boyle). Go give them a follow!
 {: .notice--success}
 
 The moment I saw the `Main.java` file I burst out in tears. Just... [take a look](https://gist.github.com/Still34/cc33aa76c6649761f95769dfc9e0094f).
@@ -715,6 +715,9 @@ Your ticket did not win. Try again.
 After connecting to the server once and trying out the challenge hands-on, I was able to plot out the following flowchart.
 
 ![Lotto flowchart](/assets/images/posts/rgbctf-2020-07-14/pt1/lotto-flowchart.svg)
+
+This solve was made possible by, [Kieran](https://github.com/k-boyle), who pointed out that the bounds check was exploitable. Go give them a follow!
+{: .notice--success}
 
 Let's take a step back to see if we can find any other potential attack vectors in the code. If we take a look at how the program determines the number of tickets can be bought, we quickly find a loophole that we can exploit.
 
