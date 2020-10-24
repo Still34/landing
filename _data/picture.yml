@@ -5,7 +5,7 @@ presets:
     formats: [webp, original]
     format_quality:
       jpg: 90
-      webp: 85
+      webp: 95
     markup: auto
     link_source: true
     dimension_attributes: true
@@ -15,6 +15,9 @@ presets:
   figure:
     base_width: 600
     pixel_ratios: [1, 1.5, 2]
+    format_quality:
+      jpg: 90
+      webp: 95
     fallback_width: 600
     link_source: true
     attributes: 
@@ -24,7 +27,7 @@ presets:
     formats: [webp, original]
     format_quality:
       jpg: 90
-      webp: 85
+      webp: 95
     markup: auto
     link_source: true
     dimension_attributes: true
