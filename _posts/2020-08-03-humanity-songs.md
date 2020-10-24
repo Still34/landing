@@ -1,7 +1,7 @@
 ---
 title: Humanity and Sentimental Value of Songs
 excerpt: Songs are much more powerful than you'd think.
-category: rambling
+category: personal
 tags: philosophy en-us
 date: 2020-08-03T13:46:13.906Z
 ---

@@ -1,7 +1,7 @@
 ---
 title: \"Hated by Life Itself (命に嫌われている)\"
 excerpt: We are Hated by Life Itself, but we live on.
-category: rambling
+category: personal
 tags: philosophy en-us
 header:
   overlay_color: '#000'
