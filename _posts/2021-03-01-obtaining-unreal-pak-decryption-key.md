@@ -5,7 +5,7 @@ category: infosec
 header:
   overlay_color: '#000'
   overlay_filter: '0.75'
-  overlay_image: /assets/images/posts/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9.png
+  overlay_image: /assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9.png
 lastmod: 2021-03-01T15:25:35.048Z
 toc: true
 ---
@@ -19,7 +19,7 @@ I've been playing a game that I love, and the best part of it is its wicked soun
 
 I was stumped at this part for a while, as there doesn't appear to be any official documentation on how Windows Apps' filesystem security is handled. I first tried to obtain the files by running a PowerShell session as `NT AUTHORITY/SYSTEM`. After all, SYSTEM *should* have absolute control over the filesystem, right?
 
-{% picture figure /assets/images/posts/4ecdb5cf688db0c710f5bf85a853e06470bf3871471d77a5a5b1a7e08f337c9d.png %}
+{% picture figure /assets/images/posts/unreal-pak/4ecdb5cf688db0c710f5bf85a853e06470bf3871471d77a5a5b1a7e08f337c9d.png %}
 
 Well, er, no?
 
@@ -47,13 +47,13 @@ Ah well, time for plan B.
 
 After some research, I found out that [UWPDumper](https://github.com/Wunkolo/UWPDumper.git) does the job perfectly. Looking at the source code, it looks like the application injects itself into the UWP process, sets its access control as `S-1-15-2-1` (ALL_APP_PACKAGES) and creates a remote thread that handles the file read write. Well, at least in the future I'd know what to do now. Anyways, I used the existing binary from the repo and got the files I was looking for.
 
-{% picture figure /assets/images/posts/690e643c0e37ab84fec6dddb23bb945511f671fda21ecc18846019fc45295368.png %}
+{% picture figure /assets/images/posts/unreal-pak/690e643c0e37ab84fec6dddb23bb945511f671fda21ecc18846019fc45295368.png %}
 
 ## Dumping the Internal Files
 
 Since the majority of the dump came from this `XXXXXX-WinGDK.pak` file, I'd have to assume most of the assets came from this file. The handle view in Process Hacker confirms this, where no other visible files are loaded except for this file, the executable itself, and its dependencies.
 
-{% picture figure /assets/images/posts/d90f12ff934b416e3b06ecec6484b7af2a2a942e10e429c52b3590bff5bcfb3b.png %}
+{% picture figure /assets/images/posts/unreal-pak/d90f12ff934b416e3b06ecec6484b7af2a2a942e10e429c52b3590bff5bcfb3b.png %}
 
 After some [additional](https://gbatemp.net/threads/how-to-unpack-and-repack-unreal-engine-4-files.531784/) [reading](https://github.com/allcoolthingsatoneplace/UnrealPakTool), I had concluded that this is gonna be more than just a one-click-and-it's-done type of job.
 
@@ -61,7 +61,7 @@ In order to dump the PAK, I had to first determine the version of the Unreal Eng
 
 Thankfully, by checking the properties of the game binary, the engine had compiled its version name in there, which is `4.25.0`.
 
-{% picture figure /assets/images/posts/ab1411e953c2902b415b3a720ff33c7e7da970c386fe2b1e2ed0414234b9d15c.png %}
+{% picture figure /assets/images/posts/unreal-pak/ab1411e953c2902b415b3a720ff33c7e7da970c386fe2b1e2ed0414234b9d15c.png %}
 
 Next up, let's try dumping the game using UnrealPak, an official utility that handles PAK-related operation. A copy of the [4.25.x UnrealPak can be found on GitHub.](https://github.com/allcoolthingsatoneplace/UnrealPakTool) Let's give it a go!
 
@@ -132,35 +132,35 @@ Well darn. It looks like the files are encrypted. [After doing some reading](htt
 
 Ah yes, debugging time! Thankfully, Unreal Engine is now open-source, meaning I should be able to follow the source code to follow the code and find the decryption routine.
 
-{% picture figure /assets/images/posts/fc36c40c3c2bf3bd897951a40c4a68021e01b8bdb4a54c5e2d82d420deb853e2.png %}
+{% picture figure /assets/images/posts/unreal-pak/fc36c40c3c2bf3bd897951a40c4a68021e01b8bdb4a54c5e2d82d420deb853e2.png %}
 
 Let's first find the decryption routine in the 4.25 Unreal source code. We can do that by simply looking up the word `decrypt` in the repo.
 
 <figure class="half">
-{% picture nomarkdown /assets/images/posts/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584.png %}
-{% picture nomarkdown /assets/images/posts/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f.png %}  
+{% picture nomarkdown /assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584.png %}
+{% picture nomarkdown /assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f.png %}  
 </figure>
 
 That was easy enough. We can also see that the function is also referenced on L5043 - and there are strings surrounding it. Perfect, that should help us pinpoint where exactly the function is in memory. `GetPakEncryptionKey` sounds interesting. We should take a look there later. Let's fire up x64dbg. Since we already know what the surrounding strings are, we can just do a string search for literally any of them - in this case `Failed to find requested encryption key` - to quickly pinpoint the address of the function.
 
-{% picture figure /assets/images/posts/a806ab35da0a3332326e46fee23f4438f8f3bcb78466d7b3f4b596588871d6de.png %}  
+{% picture figure /assets/images/posts/unreal-pak/a806ab35da0a3332326e46fee23f4438f8f3bcb78466d7b3f4b596588871d6de.png %}  
 
 After we've found the address, we can set a breakpoint on its parent routine and watch it run.
 
 <figure class="half">
-{% picture nomarkdown /assets/images/posts/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0.png %}  
-{% picture nomarkdown /assets/images/posts/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0.png %}  
+{% picture nomarkdown /assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0.png %}  
+{% picture nomarkdown /assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0.png %}  
 </figure>
 
 "Huh, that's strange. I thought the function was quite small, and if this were `GetPakEncryptionKey`, what happened to the `DecryptData` method?" you may think. What more than likely happened here was compiler optimization. Instead of having to call more than one subroutine, the compiler will often try to find and merge routines together at compile-time to optimize the number of instructions required to carry out the task. 
 
 At this point, it's just the matter of trial and error and seeing what each subroutine returns in their corresponding registers. When a subroutine returns, x64dbg will highlight the register(s) that has changed since the execution in red. 
 
-{% picture figure /assets/images/posts/e2587f3173f6d03314faf0fdf19f7d937bc4fcaf0c116dc77787e45935d8e9d8.png %}  
+{% picture figure /assets/images/posts/unreal-pak/e2587f3173f6d03314faf0fdf19f7d937bc4fcaf0c116dc77787e45935d8e9d8.png %}  
 
 By inspecting each register in dump, we can quickly find the AES key required to decrypt the data. In this case, the corresponding register for the decryption method containing the key was RCX. How did I know what was in the dump was in fact the key? We already knew based on previous documentations that the AES encryption key is a SHA-1 hash. There are 160 bits in a SHA-1 hash, which is the equivalent of 20 bytes. The output just so happens to contain a continuous 20-byte data.
 
-{% picture figure /assets/images/posts/d738f9312e190b1cb41a474f6609f20b9769e94049a58d99080cff0ffc1dac7f.png %}  
+{% picture figure /assets/images/posts/unreal-pak/d738f9312e190b1cb41a474f6609f20b9769e94049a58d99080cff0ffc1dac7f.png %}  
 
 Now that we have the SHA-1 AES key, we can now feed it to UnrealPak! UnrealPak takes a Base64'd AES key in its configuration file (typically `crypto.json`). All we need to do now is jot down the key, convert it to Base64, and bam, we can now run the decryption process! For the decryption process, I found that I needed to actually install the Unreal Editor itself for it to work, so I guess we didn't need to download that GitHub mirror after all.
 
@@ -198,7 +198,7 @@ Now that we have the SHA-1 AES key, we can now feed it to UnrealPak! UnrealPak t
 }
 ```
 
-{% picture figure /assets/images/posts/0979c7637c516f1bdd6ae87250c466dd642fdcd03667aa75ab0136c8ae807420.png %}  
+{% picture figure /assets/images/posts/unreal-pak/0979c7637c516f1bdd6ae87250c466dd642fdcd03667aa75ab0136c8ae807420.png %}  
 
 Nice! Now I can explore the game's content to my heart's content with things like `john-wick-parse` for deserializing `*.uasset` files, and `umodel` for viewing models!
 
@@ -206,11 +206,11 @@ Nice! Now I can explore the game's content to my heart's content with things lik
 
 For dumping and extracting the game's WWise audio bank, I had to use a tool called [`wwiseutil`](https://github.com/hpxro7/wwiseutil) to view and extract the game's `*.bnk` files.
 
-{% picture figure /assets/images/posts/26e2947cb1b4f248f4568fa101e6573b37dd4025f90d1d116abab7dbd9dbefdd.png %}  
+{% picture figure /assets/images/posts/unreal-pak/26e2947cb1b4f248f4568fa101e6573b37dd4025f90d1d116abab7dbd9dbefdd.png %}  
 
 Then finally, I can use a foobar2000 extension called [vgmstream](https://www.foobar2000.org/components/view/foo_input_vgmstream) to listen to and transcode the audio from the WEM format to WAV.
 
-{% picture figure /assets/images/posts/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9.png %}  
+{% picture figure /assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9.png %}  
 
 
 ## Repackaging the Game
@@ -243,6 +243,6 @@ In this post, we went through how Unreal uses a SHA-1 hash as its AES key to dec
 
 While I had fun decrypting and dumping the game and discovering previously uncertain information about the mechanics, there were a few things that disappointed me. First of all, I realized the game chose to opt for Wwise's proprietary compressed audio instead of the uncompressed format. The compression is the equivalent of 192kbps MP3 with a very noticeable 18KHz cut-off. That is what I call a yikes for a game that has its focus on audio. Second, the fact that the developers had unfortunately signed a Microsoft exclusivity contract meant that they had to roll out the game using the MSIX format - a format that I will make a rant on some time after the publication of this post.
 
-{% picture figure /assets/images/posts/5ec952c4701a6fced03c7973cc2a5aa87b4d7695ec8f382c4c40f9baa5fed2d7.png %}
+{% picture figure /assets/images/posts/unreal-pak/5ec952c4701a6fced03c7973cc2a5aa87b4d7695ec8f382c4c40f9baa5fed2d7.png %}
 
 Ah well, that about wraps up this post, though! Thanks for reading and going through this journey with me!
