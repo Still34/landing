@@ -51,7 +51,7 @@ GEM
       mime-types (~> 3)
       mini_magick (~> 4)
       objective_elements (~> 1.1.2)
-    kramdown (2.3.0)
+    kramdown (2.3.1)
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
