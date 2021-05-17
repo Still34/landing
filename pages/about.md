@@ -7,14 +7,11 @@ header:
   overlay_filter: "0.5"
   overlay_image: /assets/images/avatar-lp.png
 intro: 
-  - excerpt: 'Infosec researcher, photographer, developer from Taiwan.'
+  - excerpt: 'Threat intelligence researcher, photographer, developer from Taiwan.'
 whoami:
   - image_path: "/assets/images/avatar-512.png"
     title: "Who am I?"
-    excerpt: "I am Still Hsu, a bilingual infosec researcher, backend developer, videographer, photographer, SFX post-production artist. I find interest in various different things in life. If something seems fun, then I'll spend the rest of my life pursuing the said thing - and information security just happens to be one of them!"
-    url: "bio"
-    btn_label: "Read More"
-    btn_class: "btn--primary"
+    excerpt: "I am Still Hsu, a bilingual threat intelligence researcher, backend developer, videographer, photographer, SFX post-production artist. I find interest in various different things in life. If something seems fun, then I'll spend the rest of my life pursuing the said thing - and information security just happens to be one of them!"
 ctf:
   - image_path: /assets/images/about/checkered-flag.png
     title: "🚩 CTFs & Events"
