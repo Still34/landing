@@ -26,12 +26,20 @@ multimedia:
     url: "about#media-showcase"
     btn_label: "Read More"
     btn_class: "btn--primary"
+localization:
+  - image_path: /assets/images/about/globe.svg
+    title: "🌐 Localization Contributor"
+    excerpt: 'I contribute to community projects every now and then, by providing localization (i18n) for projects or apps that I find interesting or love.'
+    url: "/i18n-history"
+    btn_label: "Read More"
+    btn_class: "btn--primary"
 ---
 
 {% include feature_row id="intro" type="center" %}
 {% include feature_row id="whoami" type="center"%}
 {% include feature_row id="ctf" type="left"%}
 {% include feature_row id="multimedia" type="right"%}
+{% include feature_row id="localization" type="left"%}
 
 ## CTFs/Events Attended
 {: #attended }
@@ -64,7 +72,3 @@ multimedia:
   - 🥉 53/1047
 - AUCTF 2020
   - 🥉 220/1184
-
-## Media Showcase
-{: #media-showcase }
-
