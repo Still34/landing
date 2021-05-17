@@ -47,6 +47,8 @@ multimedia:
 - HITCON CMT 2018
 - HITCON CMT 2019
 - DEVCORE CONF 2019
+- CYBERSEC 2021
+  - Session "Threat Intelligence 101"
 
 ### CTFs
 
