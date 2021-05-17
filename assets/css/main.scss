@@ -31,11 +31,14 @@ $sans-serif: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
   background-color: $notice-color;
   margin: 1em 0 !important;
   code {
-    background-color: mix(#000, $notice-color, 50%)
+    background-color: mix(#000, $notice-color, 50%);
   }
   a {
     color: mix(#000, $notice-color, 75%);
   }
+}
+::selection {
+  background: $base0d;
 }
 .notice--info {
   @include notice(#03a9f4);
@@ -57,11 +60,18 @@ details > * {
 }
 ul li,
 ol li {
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
 }
-.author__urls.social-icons .fab{
-  color: #fff6fb
+.author__urls.social-icons .fab {
+  color: #fff6fb;
 }
-.homepage-feature>.feature__wrapper{
+.homepage-feature > .feature__wrapper {
   display: flex;
+}
+p > code,
+a > code,
+li > code,
+figcaption > code,
+td > code {
+  background: $base02;
 }
