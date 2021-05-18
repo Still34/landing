@@ -17,6 +17,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
       - uses: Still34/jekyll-action@master
-        env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
-          JEKYLL_ENV: production
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
