@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: vendor/bundle
-      #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-gems-
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
       - uses: Still34/jekyll-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
