@@ -1,0 +1,3 @@
+Contact: mailto:business@stillu.cc
+GPG Key: https://stillu.cc/.well-known/pubkey.asc
+Preferred-Languages: en
