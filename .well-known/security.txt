@@ -1,3 +1,6 @@
 Contact: mailto:business@stillu.cc
-GPG Key: https://stillu.cc/.well-known/pubkey.asc
-Preferred-Languages: en
+Contact: mailto:still@teamt5.org
+Expires: 2022-08-21T16:00:00.000Z
+Encryption: https://stillu.cc/pubkey.asc
+Preferred-Languages: en, zh
+Canonical: https://stillu.cc/.well-known/security.txt
