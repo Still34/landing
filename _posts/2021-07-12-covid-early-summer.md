@@ -1,8 +1,18 @@
 ---
-title: Lockdown, Taiwan, 2021
-excerpt: Impact of lockdown in Taiwan and my personal life.
+title: 'Taiwan and COVID-19: Early Summer, 2021'
+excerpt: 'Our first lockdown, the initial impact, and changes to my personal life.'
 category: personal
+header:
+    overlay_color: '#000'
+    overlay_filter: '0.75'
+    overlay_image: /assets/images/posts/2021-pandemic/cat.JPG
+    actions:
+      - label: 'Next Part'
+        url: /personal/2021/08/18/covid-late-summer/
+lastmod: 2021-08-18T13:47:58.029Z
 ---
+
+> This post is part of an on-going series that describes my personal experience with the coronavirus pandemic. Click the button in the header to read the next part.
 
 Throughout 2020, Taiwan had done an amazing job at keeping COVID out of the country. Daily cases were low and practically nonexistent. Unfortunately, all of it came crashing down some time around May 2021. It all started with pilots being infected and improper quarantining of the few travelers that were still coming in and out of the island. The outbreak quickly skyrocketed; the case numbers rose quickly from a mere ten to more than thousands a day. 
 
