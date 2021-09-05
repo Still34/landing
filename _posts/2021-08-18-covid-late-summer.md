@@ -32,7 +32,7 @@ productivity at the same time. Starting some time around May, we've been
 instructed to work from home lest an outbreak occurs at the company.
 
 {% picture figure /assets/images/posts/2021-pandemic/commute-bus-ride.JPG %}  
-<figcaption>Goodbye, my daily commute life (well, for now anyways).</figcaption>
+<figcaption>Goodbye, my daily commute life (well, for 3 months anyways).</figcaption>
 
 This move made sense, especially due to the nature of our job, where working at
 an office really isn't necessary. As long as we have access to the internal
@@ -56,13 +56,9 @@ Occasionally I'd get work duty outside of my usual work hours that I feel
 the need to fulfill or doing work stuff during the weekends. Of course, none
 of this was obligatory, and my company did not ask me to do any of this, but
 it simply becomes a habit to work on whatever when you spend all the time in
-front of the same computer doing both personal and work stuff all day. While
-the lockdown has been lifted at the time of writing this post, most of my
-colleagues are still working from home due to an on-going renovation going
-on at our office and the fear of taking public transports during this
-strange time.
+front of the same computer doing both personal and work stuff all day.
 
-Speaking of, let's talk about the lockdown.
+After getting back to work however, I've become much more focused instead of slacking off every now and then thankfully. At the time of writing this draft, mostly all of us have gone back to the office for work. While commute is still a bit bleh, now I have another reason to bust out my Switch during these hours.
 
 ## Lifting of Lockdown in Taiwan
 
@@ -77,4 +73,3 @@ another region or country, as the definition may or may not match your
 expectations or definition.
 {: .notice--info}
 
-Anyways,
