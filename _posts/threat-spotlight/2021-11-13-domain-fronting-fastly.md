@@ -6,7 +6,7 @@ tags: [en-us, guide]
 header:
   overlay_color: '#000'
   overlay_filter: '0.75'
-  overlay_image: 
+  overlay_image: /assets/images/posts/domain-fronting/2021-11-13_19-28-47.png
 ---
 
 
