@@ -1,4 +1,7 @@
 Contact: mastodon:still@g0v.social
+Contact: mastodon:still@infosec.exchange
+Contact: mastodon:still@mas.to
+Contact: mastodon:still@c.im
 Contact: twitter:@AzakaSekai_
 Contact: mailto:business@stillu.cc
 Expires: 2023-08-26T16:00:00.000Z
