@@ -113,6 +113,7 @@ include:
   - _pages
   - .well-known/security.txt
   - .well-known/pubkey.asc
+  - .well-known/security.txt.sig
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
