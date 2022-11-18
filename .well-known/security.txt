@@ -1,10 +1,12 @@
 Contact: mastodon:still@g0v.social
 Contact: mastodon:still@infosec.exchange
+Contact: mastodon:azakasekai@vt.social
 Contact: mastodon:still@mas.to
 Contact: mastodon:still@c.im
 Contact: twitter:@AzakaSekai_
 Contact: mailto:business@stillu.cc
 Expires: 2023-08-26T16:00:00.000Z
-Encryption: https://stillu.cc/pubkey.asc
 Preferred-Languages: en, zh
+Encryption: https://stillu.cc/.well-known/pubkey.asc
 Canonical: https://stillu.cc/.well-known/security.txt
+Signature: https://stillu.cc/.well-known/security.txt.sig
