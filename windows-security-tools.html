@@ -1,0 +1,1130 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Windows Security Tools - Just Still</title>
+<meta name="description" content="A collection of useful tools for Windows infosec researchers.">
+
+
+  <meta name="author" content="Still Hsu">
+  
+  <meta property="article:author" content="Still Hsu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Just Still">
+<meta property="og:title" content="Windows Security Tools">
+<meta property="og:url" content="https://stillu.cc/windows-security-tools">
+
+
+  <meta property="og:description" content="A collection of useful tools for Windows infosec researchers.">
+
+
+
+  <meta property="og:image" content="https://stillu.cc/assets/screenshots/cape.png">
+
+
+
+  <meta name="twitter:site" content="@StillAzureH">
+  <meta name="twitter:title" content="Windows Security Tools">
+  <meta name="twitter:description" content="A collection of useful tools for Windows infosec researchers.">
+  <meta name="twitter:url" content="https://stillu.cc/windows-security-tools">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://stillu.cc/assets/screenshots/cape.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-07-20T20:16:13+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://stillu.cc/windows-security-tools">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Still Hsu",
+      "url": "https://stillu.cc/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Just Still Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/manifest.json">
+<meta name="msapplication-TileColor" content="#F21368">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#F21368">
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/avatar-512.png" alt="Just Still"></a>
+        
+        <a class="site-title" href="/">
+          Just Still
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories">Posts</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/assets/screenshots/cape.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Windows Security Tools
+
+        
+      </h1>
+      
+        <p class="page__lead">A collection of useful tools for Windows infosec researchers.
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-07-20T20:16:13+08:00">July 20, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Cape Sandbox
+</span>
+  
+</div>
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://stillu.cc/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        <li class="current">Windows Security Tools</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar-512.png" alt="Still Hsu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Still Hsu</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Developer, photographer, infosec researcher.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Taiwan</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://twitter.com/StillAzureH" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/Still34" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/.well-known/pubkey.asc" rel="nofollow noopener noreferrer"><i class="fas fa-user-lock" aria-hidden="true"></i><span class="label">GPG (Email)</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:business@stillu.cc">
+            <meta itemprop="email" content="business@stillu.cc" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Windows Security Tools">
+    <meta itemprop="description" content="A collection of useful tools for Windows infosec researchers.">
+    <meta itemprop="datePublished" content="2020-07-20T20:16:13+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#reverse-engineering">Reverse Engineering</a><ul><li><a href="#generic-binaries">Generic Binaries</a></li><li><a href="#net-binaries">.NET Binaries</a></li></ul></li><li><a href="#dynamic-analysis">Dynamic Analysis</a><ul><li><a href="#sandbox">Sandbox</a></li><li><a href="#network">Network</a></li><li><a href="#binary">Binary</a></li></ul></li><li><a href="#static-analysis">Static Analysis</a></li><li><a href="#powershell">PowerShell</a><ul><li><a href="#red-team">Red Team</a></li><li><a href="#blue-team">Blue Team</a></li></ul></li><li><a href="#useful-notes">Useful Notes</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="reverse-engineering">Reverse Engineering</h2>
+
+<p class="notice--danger">Use multiple tools for comparison when decompiling! Every tool creates different results. <strong>Always</strong> use multiple decompilers if you encounter weird results.</p>
+
+<h3 id="generic-binaries">Generic Binaries</h3>
+
+<ul>
+  <li><a href="https://ghidra-sre.org">Ghidra</a>
+    <ul>
+      <li>✅ <strong>Pricing</strong>: Free</li>
+      <li>✅ <strong>Codebase</strong>: Open-source</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Made by NSA</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://binary.ninja/">Binary Ninja</a>
+    <ul>
+      <li>⚠ <strong>Pricing</strong>: Paid ($149 USD/$4,500 NTD)</li>
+      <li>⚠ <strong>Codebase</strong>: Proprietary</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Cheap alternative to IDA Pro</li>
+          <li>Supports plugin development</li>
+          <li>Support native psuedo-code decompiler on the latest dev branch</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://www.hex-rays.com/products/ida/index.shtml">IDA Pro</a>
+    <ul>
+      <li>⚠ <strong>Pricing</strong>: Paid ($1,879 USD/$57,000 NTD)
+        <ul>
+          <li>For base application; this does not include any necessary decompilers</li>
+        </ul>
+      </li>
+      <li>⚠ <strong>Codebase</strong>: Proprietary</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Industry standard</li>
+          <li>Supports 50+ CPU instruction types</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="net-binaries">.NET Binaries</h3>
+
+<ul>
+  <li><a href="https://github.com/0xd4d/dnSpy">dnSpy</a>
+    <ul>
+      <li>✅ <strong>Pricing</strong>: Free</li>
+      <li>✅ <strong>Codebase</strong>: Open-source</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Cross-platform</li>
+          <li>Has a built-in debugger and anti-anti-debug features
+            <ul>
+              <li>By default spoofs <code class="language-plaintext highlighter-rouge">IsDebuggerPresent</code>, <code class="language-plaintext highlighter-rouge">CheckRemoteDebuggerPresent</code>, and <code class="language-plaintext highlighter-rouge">System.Diagnostics.Debugger</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://www.jetbrains.com/decompiler/">dotPeek</a>
+    <ul>
+      <li>✅ <strong>Pricing</strong>: Free</li>
+      <li>⚠ <strong>Codebase</strong>: Proprietary</li>
+    </ul>
+  </li>
+  <li><a href="https://www.red-gate.com/products/dotnet-development/reflector/">.NET Reflector</a>
+    <ul>
+      <li>⚠ <strong>Pricing</strong>: Paid ($205 USD/$6,200 NTD)</li>
+      <li>⚠ <strong>Codebase</strong>: Proprietary</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li><strong>Can decompile to async state machine level</strong></li>
+          <li>Students can apply for the .NET Developer Bundle for free</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="dynamic-analysis">Dynamic Analysis</h2>
+
+<h3 id="sandbox">Sandbox</h3>
+
+<ul>
+  <li><a href="https://github.com/kevoreilly/CAPEv2">Cape Sandbox</a>
+    <ul>
+      <li>✅ <strong>Pricing</strong>: Free</li>
+      <li>✅ <strong>Codebase</strong>: Open-source</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Useful for a quick dynamic/static analysis</li>
+          <li>Provides the following
+            <ul>
+              <li>PCAP</li>
+              <li>Memory dump</li>
+              <li>Handles used</li>
+              <li>W32API called</li>
+              <li>DNS requests</li>
+              <li>Files dropped</li>
+              <li>Sandbox screenshots</li>
+            </ul>
+          </li>
+          <li>Highly configurable</li>
+          <li>Hosts
+            <ul>
+              <li><a href="https://capesandbox.com/">Official host</a></li>
+              <li><a href="https://sandbox.xor.al/">Backup host</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://app.any.run/">any.run</a>
+    <ul>
+      <li>⚠ <strong>Pricing</strong>: Freemium</li>
+      <li>⚠ <strong>Codebase</strong>: Proprietary</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li><a href="https://app.any.run/plans">Multiple tiers</a></li>
+          <li>Free tier
+            <ul>
+              <li>⚠ 16 MB Maximum</li>
+              <li>⚠ 32-bit Windows 7 only</li>
+              <li>List important/suspicious processes only</li>
+              <li>List DNS requests</li>
+              <li>Highlight MITRE ATT&amp;CK™ matrix</li>
+              <li>Sandbox screenshots</li>
+              <li>Files dropped</li>
+              <li>The following features are registered members only
+                <ul>
+                  <li>Sample download</li>
+                  <li>PCAP download</li>
+                  <li>Export process graph (SVG)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>“Searcher” tier ($89 USD/mo)
+            <ul>
+              <li>32 MB Maximum</li>
+              <li>64-bit Windows 7</li>
+              <li>Video record</li>
+              <li>MITM Proxy for HTTPs requests</li>
+              <li>Show all processes</li>
+              <li>Advanced threat analysis</li>
+            </ul>
+          </li>
+          <li>Russia-based service
+            <ul>
+              <li><a href="https://app.any.run/privacy.html">Privacy Policy</a> states that any information will only be used by <code class="language-plaintext highlighter-rouge">ANY.RUN</code> unless required by law</li>
+            </ul>
+
+            <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Registrar: Regional Network Information Center, JSC dba RU-CENTER
+Registrar IANA ID: 463
+Registrar Abuse Contact Email: tld-ncc@nic.ru
+Registrar Abuse Contact Phone: +7.4957370601
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Registry Registrant ID: df98cdacb0e74fbd8a6ad39efd7cf1b8-DONUTS
+Registrant Name: Privacy protection service - whoisproxy.ru
+Registrant Organization: Privacy protection service - whoisproxy.ru
+Registrant Street: PO box 99, whoisproxy.ru
+Registrant City: Moscow
+Registrant State/Province: Moscow
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="network">Network</h3>
+
+<ul>
+  <li><a href="https://www.telerik.com/fiddler">Fiddler</a>
+    <ul>
+      <li>✅ <strong>Pricing</strong>: Free</li>
+      <li>⚠ <strong>Codebase</strong>: Proprietary</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>HTTP(s) debugger</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://portswigger.net/burp/communitydownload">Burp Suite</a>
+    <ul>
+      <li>⚠ <strong>Pricing</strong>: Free limited shareware; paid ($399 USD/$12,000 TWD)</li>
+      <li>⚠ <strong>Codebase</strong>: Proprietary</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Cross-platform</li>
+          <li>HTTP(s) debugger</li>
+          <li>Popular among web pentesters</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/fireeye/flare-fakenet-ng">FakeNet-NG</a>
+    <ul>
+      <li>✅ <strong>Pricing</strong>: Free</li>
+      <li>✅ <strong>Codebase</strong>: Open-source</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Cross-platform</li>
+          <li>⚠ Based on Python 2.x</li>
+          <li>Listens for DNS/HTTP(s)/SSL requests</li>
+          <li>Attempts to serve legitimate files
+            <ul>
+              <li>e.g. if the malware requests an JPG file, it will return the user-specific JPG file</li>
+            </ul>
+          </li>
+          <li>Ability to create capture file (<code class="language-plaintext highlighter-rouge">*.pcap</code>)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="binary">Binary</h3>
+
+<ul>
+  <li><a href="https://processhacker.sourceforge.io/">Process Hacker</a>
+    <ul>
+      <li>✅ <strong>Pricing</strong>: Free</li>
+      <li>✅ <strong>Codebase</strong>: Open-source</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Based on Process Explorer</li>
+          <li>View process tree, network ports, disk activity</li>
+          <li>Manage services</li>
+          <li>Flag malicious executable</li>
+          <li>Inject DLL</li>
+          <li>Manage per-app thread(s)</li>
+          <li>Show if the process is…
+            <ul>
+              <li>Packed by a packer</li>
+              <li>Digitally signed</li>
+              <li>A .NET process</li>
+            </ul>
+          </li>
+          <li>Too many to list</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer">Process Explorer</a>
+    <ul>
+      <li>✅ <strong>Pricing</strong>: Free</li>
+      <li>⚠ <strong>Codebase</strong>: Proprietary</li>
+      <li>📝 <strong>Notes</strong>:
+        <ul>
+          <li>Created by Microsoft</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="static-analysis">Static Analysis</h2>
+
+<ul>
+  <li>strings
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">scoop install strings</code></li>
+    </ul>
+  </li>
+  <li>trid
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">scoop install trid</code></li>
+    </ul>
+  </li>
+  <li>pestudio
+    <ul>
+      <li>Performs <code class="language-plaintext highlighter-rouge">strings</code> and VirusTotal analysis</li>
+      <li>Shows referenced API calls</li>
+      <li>Checks for signature validity</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="powershell">PowerShell</h2>
+
+<h3 id="red-team">Red Team</h3>
+
+<ul>
+  <li><a href="https://github.com/giMini/PowerMemory">PowerMemory</a>
+    <ul>
+      <li>In-memory credentials discovery</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/Arvanaghi/CheckPlease">CheckPlease</a>
+    <ul>
+      <li>Sandbox evasion</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/api0cradle/UltimateAppLockerByPassList">UltimateAppLockerByPassList</a>
+    <ul>
+      <li>AppLocker bypass techniques</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/danielbohannon/Invoke-Obfuscation">Invoke-Obfuscation</a>
+    <ul>
+      <li>PowerShell obfuscation</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="blue-team">Blue Team</h3>
+
+<h2 id="useful-notes">Useful Notes</h2>
+
+<ul>
+  <li>Starting from Windows 10 v1803, <code class="language-plaintext highlighter-rouge">curl</code> is included with the OS.
+    <ul>
+      <li>PowerShell users may need to invoke <code class="language-plaintext highlighter-rouge">curl.exe</code> instead of <code class="language-plaintext highlighter-rouge">curl</code> to avoid the <code class="language-plaintext highlighter-rouge">Invoke-WebRequest</code> alias.</li>
+      <li>Alternatively, remove the alias by using <code class="language-plaintext highlighter-rouge">Remove-Alias curl</code>.</li>
+    </ul>
+  </li>
+  <li><a href="https://m417z.com/winbindex/">Winbindex</a>
+    <ul>
+      <li>An index of Windows binaries, including download links for executables such as <code class="language-plaintext highlighter-rouge">*.exe</code>, <code class="language-plaintext highlighter-rouge">*.DLL</code> and <code class="language-plaintext highlighter-rouge">*.sys</code> files.</li>
+      <li>Useful for testing or analyzing specific binaries from various Windows versions</li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#en-us" class="page__taxonomy-item" rel="tag">en-us</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#infosec" class="page__taxonomy-item" rel="tag">infosec</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-07-20T20:16:13+08:00">July 20, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=StillAzureH&text=Windows+Security+Tools%20https%3A%2F%2Fstillu.cc%2Fwindows-security-tools" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstillu.cc%2Fwindows-security-tools" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fstillu.cc%2Fwindows-security-tools" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/infosec/2020/07/19/closer-look-at-capa/" class="pagination--pager" title="A Closer Look at CAPA
+">Previous</a>
+    
+    
+      <a href="/personal/2020/08/03/humanity-songs/" class="pagination--pager" title="Humanity and Sentimental Value of Songs
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ida-tips/2022/01/22/saved-desktops-across-32bit-64bit/" rel="permalink">IDA Trickeries #1: Using Saved Desktop Across IDAs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-22T00:00:00+08:00">January 22, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">So like… who at Hex-rays implemented this?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/threat-spotlight/2021/11/13/domain-fronting-fastly/" rel="permalink">Threat Spotlight - Domain Fronting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-13T00:00:00+08:00">November 13, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Fast(ly) but deadly.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/10/29/barinsta-and-facebook/" rel="permalink">Facebook, Monopoly, and Barinsta
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+08:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Facebook and its anti-competitive strategy.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/07/12/lockdown-taiwan-2021/" rel="permalink">Lockdown, Taiwan, 2021
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-07-12T00:00:00+08:00">July 12, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Impact of lockdown in Taiwan and my personal life.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Still Hsu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N6FGTZBMTZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N6FGTZBMTZ', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'Still34/landing');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

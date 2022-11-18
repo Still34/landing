@@ -1,0 +1,1143 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>A Closer Look at CAPA - Just Still</title>
+<meta name="description" content="A new static analysis tool from FireEye?">
+
+
+  <meta name="author" content="Still Hsu">
+  
+  <meta property="article:author" content="Still Hsu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Just Still">
+<meta property="og:title" content="A Closer Look at CAPA">
+<meta property="og:url" content="https://stillu.cc/infosec/2020/07/19/closer-look-at-capa/">
+
+
+  <meta property="og:description" content="A new static analysis tool from FireEye?">
+
+
+
+  <meta property="og:image" content="https://stillu.cc/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084.png">
+
+
+
+  <meta name="twitter:site" content="@StillAzureH">
+  <meta name="twitter:title" content="A Closer Look at CAPA">
+  <meta name="twitter:description" content="A new static analysis tool from FireEye?">
+  <meta name="twitter:url" content="https://stillu.cc/infosec/2020/07/19/closer-look-at-capa/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://stillu.cc/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-07-19T19:18:15+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://stillu.cc/infosec/2020/07/19/closer-look-at-capa/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Still Hsu",
+      "url": "https://stillu.cc/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Just Still Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/manifest.json">
+<meta name="msapplication-TileColor" content="#F21368">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#F21368">
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/avatar-512.png" alt="Just Still"></a>
+        
+        <a class="site-title" href="/">
+          Just Still
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories">Posts</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          A Closer Look at CAPA
+
+        
+      </h1>
+      
+        <p class="page__lead">A new static analysis tool from FireEye?
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-07-19T19:18:15+08:00">July 19, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://stillu.cc/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#infosec" itemprop="item"><span itemprop="name">Infosec</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#2020" itemprop="item"><span itemprop="name">2020</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#07" itemprop="item"><span itemprop="name">07</span></a>
+          <meta itemprop="position" content="4" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#19" itemprop="item"><span itemprop="name">19</span></a>
+          <meta itemprop="position" content="5" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">A Closer Look at CAPA</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar-512.png" alt="Still Hsu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Still Hsu</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Developer, photographer, infosec researcher.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Taiwan</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://twitter.com/StillAzureH" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/Still34" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/.well-known/pubkey.asc" rel="nofollow noopener noreferrer"><i class="fas fa-user-lock" aria-hidden="true"></i><span class="label">GPG (Email)</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:business@stillu.cc">
+            <meta itemprop="email" content="business@stillu.cc" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="A Closer Look at CAPA">
+    <meta itemprop="description" content="A new static analysis tool from FireEye?">
+    <meta itemprop="datePublished" content="2020-07-19T19:18:15+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="what-is-it">What is it</h2>
+
+<p>While looking around Fireeye’s website for the latest news on their Flare-on CTF, I found that they had just recently released a new tool for threat researchers, dubbed <code class="language-plaintext highlighter-rouge">capa</code>. I thought it’d be a perfect opportunity to further expand ever-growing collection of <a href="/windows-security-tools">Windows Security Tools</a>. So what is it?</p>
+
+<p>As explained by the authors themselves,</p>
+
+<blockquote>
+  <p>capa is the FLARE team’s newest open-source tool for analyzing malicious programs. Our tool provides a framework for the community to encode, recognize, and share behaviors that we’ve seen in malware. Regardless of your background, when you use capa, you invoke decades of cumulative reverse engineering experience to figure out what a program does.</p>
+
+  <p>- <a href="https://www.fireeye.com/blog/threat-research/2020/07/capa-automatically-identify-malware-capabilities.html">capa: Automatically Identify Malware Capabilities</a></p>
+</blockquote>
+
+<p>Time to put it in practice then! For testing, I’ve downloaded a real-world malware straight from a <a href="https://capesandbox.com/analysis/27798/">CAPE Sandbox test</a>. Hashes of the malicious executable can be found below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>File Size</td>
+      <td>601088 bytes</td>
+    </tr>
+    <tr>
+      <td>File Type</td>
+      <td>PE32 executable (GUI) Intel 80386, for MS Windows</td>
+    </tr>
+    <tr>
+      <td>PE timestamp</td>
+      <td>1992-06-19 22:22:17</td>
+    </tr>
+    <tr>
+      <td>MD5</td>
+      <td>040e497c26b9609145715352da4e76d1</td>
+    </tr>
+    <tr>
+      <td>SHA1</td>
+      <td>901893e827a35fddca1563c35514c69d86899993</td>
+    </tr>
+    <tr>
+      <td>SHA256</td>
+      <td>b7a17727462906ac85e4082ac63a7a3884e67c222e36e9696e445b3ff882bf28</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="usage">Usage</h2>
+
+<p class="notice--info">The version of <code class="language-plaintext highlighter-rouge">capa</code> used in the article is <code class="language-plaintext highlighter-rouge">v1.0.0-9-g97b8a5e</code>, the earliest release build; features are subject to change.</p>
+
+<p>Let’s first take a look at what it can do for us with <code class="language-plaintext highlighter-rouge">capa --help</code>.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usage: capa-v1.0.0-win.exe [-h] [--version] [-r RULES]
+                           [-f {auto,pe,sc32,sc64,freeze}] [-t TAG] [-j] [-v]
+                           [-vv] [-d] [-q] [--color {auto,always,never}]
+                           sample
+
+identify capabilities in programs.
+
+Copyright (C) 2020 FireEye, Inc. All Rights Reserved.
+
+positional arguments:
+  sample                path to sample to analyze
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  -r RULES, --rules RULES
+                        path to rule file or directory, use embedded rules by
+                        default
+  -f {auto,pe,sc32,sc64,freeze}, --format {auto,pe,sc32,sc64,freeze}
+                        select sample format, auto: (default) detect file type
+                        automatically, pe: Windows PE file, sc32: 32-bit
+                        shellcode, sc64: 64-bit shellcode, freeze: features
+                        previously frozen by capa
+  -t TAG, --tag TAG     filter on rule meta field values
+  -j, --json            emit JSON instead of text
+  -v, --verbose         enable verbose result document (no effect with --json)
+  -vv, --vverbose       enable very verbose result document (no effect with
+                        --json)
+  -d, --debug           enable debugging output on STDERR
+  -q, --quiet           disable all output but errors
+  --color {auto,always,never}
+                        enable ANSI color codes in results, default: only
+                        during interactive session
+
+By default, capa uses a default set of embedded rules.
+You can see the rule set here:
+  https://github.com/fireeye/capa-rules
+
+To provide your own rule set, use the <span class="sb">`-r`</span> flag:
+  capa  --rules /path/to/rules  suspicious.exe
+  capa  -r      /path/to/rules  suspicious.exe
+
+examples:
+  identify capabilities in a binary
+    capa suspicous.exe
+
+  identify capabilities in 32-bit shellcode, see <span class="sb">`-f`</span> for all supported formats
+    capa -f sc32 shellcode.bin
+
+  report match locations
+    capa -v suspicous.exe
+
+  report all feature match details
+    capa -vv suspicious.exe
+
+  filter rules by meta fields, e.g. rule name or namespace
+    capa -t "create TCP socket" suspicious.exe
+</code></pre></div></div>
+
+<h2 id="standard-report">Standard Report</h2>
+
+<p>Quite a few things! Maybe we’ll first start off by invoking capa with no parameters and see what it tells us about the malware, so <code class="language-plaintext highlighter-rouge">capa 'Quotation Request.ex_'</code>.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4628 functions [00:26, 175.16 functions/s]
++------------------------+------------------------------------------------------------------------------------+
+| md5                    | 040e497c26b9609145715352da4e76d1                                                   |
+| path                   | Quotataion Request.ex_                                                             |
++------------------------+------------------------------------------------------------------------------------+
+
++------------------------+------------------------------------------------------------------------------------+
+| ATT&amp;CK Tactic          | ATT&amp;CK Technique                                                                   |
+|------------------------+------------------------------------------------------------------------------------|
+| COLLECTION             | Input Capture::Keylogging [T1056.001]                                              |
+|                        | Screen Capture [T1113]                                                             |
+| DEFENSE EVASION        | Obfuscated Files or Information [T1027]                                            |
+|                        | Process Injection [T1055]                                                          |
+|                        | Virtualization/Sandbox Evasion::System Checks [T1497.001]                          |
+| DISCOVERY              | Application Window Discovery [T1010]                                               |
+|                        | File and Directory Discovery [T1083]                                               |
+|                        | Query Registry [T1012]                                                             |
+|                        | System Information Discovery [T1082]                                               |
+| EXECUTION              | Shared Modules [T1129]                                                             |
++------------------------+------------------------------------------------------------------------------------+
+
++------------------------------------------------------+------------------------------------------------------+
+| CAPABILITY                                           | NAMESPACE                                            |
+|------------------------------------------------------+------------------------------------------------------|
+| check for time delay via GetTickCount (4 matches)    | anti-analysis/anti-debugging/debugger-detection      |
+| execute anti-VM instructions (15 matches)            | anti-analysis/anti-vm/vm-detection                   |
+| log keystrokes                                       | collection/keylog                                    |
+| log keystrokes via polling (7 matches)               | collection/keylog                                    |
+| capture screenshot (2 matches)                       | collection/screenshot                                |
+| compiled with Borland Delphi                         | compiler/delphi                                      |
+| encode data using XOR (2 matches)                    | data-manipulation/encoding/xor                       |
+| contain a resource (.rsrc) section                   | executable/pe/section/rsrc                           |
+| contain a thread local storage (.tls) section        | executable/pe/section/tls                            |
+| extract resource via kernel32 functions (4 matches)  | executable/resource                                  |
+| get common file path                                 | host-interaction/file-system                         |
+| get file size                                        | host-interaction/file-system/meta                    |
+| get file version info                                | host-interaction/file-system/meta                    |
+| read file                                            | host-interaction/file-system/read                    |
+| write file (3 matches)                               | host-interaction/file-system/write                   |
+| set application hook (2 matches)                     | host-interaction/gui                                 |
+| set global application hook                          | host-interaction/gui                                 |
+| enumerate graphical windows (2 matches)              | host-interaction/gui/window/find                     |
+| find graphical window                                | host-interaction/gui/window/find                     |
+| get keyboard layout (2 matches)                      | host-interaction/hardware/keyboard/layout            |
+| get disk information                                 | host-interaction/hardware/storage                    |
+| get system information                               | host-interaction/os/info                             |
+| allocate RWX memory (2 matches)                      | host-interaction/process/inject                      |
+| open registry key (4 matches)                        | host-interaction/registry/open                       |
+| query registry entry (4 matches)                     | host-interaction/registry/query                      |
+| query registry value (4 matches)                     | host-interaction/registry/query                      |
+| create thread (2 matches)                            | host-interaction/thread/create                       |
+| link function at runtime (11 matches)                | linking/runtime-linking                              |
+| parse PE header (32 matches)                         | load-code/pe                                         |
++------------------------------------------------------+------------------------------------------------------+
+</code></pre></div></div>
+
+<p>Interesting! Right off the bat it’s already told us a lot about our malware. For example, some red flags often seen in malware, including VM/sandbox detection (<code class="language-plaintext highlighter-rouge">execute anti-VM instructions</code>), keylogging (<code class="language-plaintext highlighter-rouge">log keystrokes</code>), allocate read-write-executable memory (<code class="language-plaintext highlighter-rouge">allocate RWX memory</code>) and more. Neat!</p>
+
+<h2 id="verbose-report--vv">Verbose Report (<code class="language-plaintext highlighter-rouge">-vv</code>)</h2>
+
+<p>Let’s see if we can get more details about the malware by invoking <code class="language-plaintext highlighter-rouge">-vv</code> as the parameter.</p>
+
+<p><a href="/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084.png"><picture><source srcset="/generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-400-463267392.webp 400w, /generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-600-463267392.webp 600w, /generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-800-463267392.webp 800w, /generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-1000-463267392.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-400-ac9644612.png 400w, /generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-600-ac9644612.png 600w, /generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-800-ac9644612.png 800w, /generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-1000-ac9644612.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084-800-ac9644612.png" width="1920" height="1080"></picture></a></p>
+
+<p>Whoa! All of the sudden we’re getting so much more information! Let’s break it down by taking a look at some of the features noted by capa.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log keystrokes
+namespace  collection/keylog
+author     moritz.raabe@fireeye.com
+scope      function
+att&amp;ck     Collection::Input Capture::Keylogging [T1056.001]
+examples   C91887D861D9BD4A5872249B641BC9F9:0x4015FD
+function @ 0x444928
+  or:
+    api: user32.MapVirtualKey @ 0x444947
+
+log keystrokes via polling (7 matches)
+namespace  collection/keylog
+author     michael.hunhoff@fireeye.com
+scope      function
+att&amp;ck     Collection::Input Capture::Keylogging [T1056.001]
+examples   Practical Malware Analysis Lab 11-03.dll_:0x10001030
+function @ 0x433434
+  or:
+    api: user32.GetKeyState @ 0x43345B
+function @ 0x436B7C
+  or:
+    api: user32.GetKeyboardState @ 0x436CB1
+function @ 0x444928
+  or:
+    api: user32.GetKeyNameText @ 0x444960
+function @ 0x4489E4
+  or:
+    api: user32.GetKeyState @ 0x448A08, 0x448A1A
+function @ 0x44C0FC
+  or:
+    api: user32.GetKeyState @ 0x44C13A
+function @ 0x44C150
+  or:
+    api: user32.GetKeyState @ 0x44C15C, 0x44C16B
+function @ 0x451128
+  or:
+    api: user32.GetKeyState @ 0x451130, 0x451151, 0x45115F
+</code></pre></div></div>
+
+<p>For example, one of the red flags I mentioned earlier was the fact that it logs keystrokes - but how does capa know this? With the built-in rules Fireeye had put in capa, it can quickly identify and flag common Win32 API calls that threat actors love to use to further exfiltrate user data. In this instance, it found that a function at address <code class="language-plaintext highlighter-rouge">0x444928</code> was identified to be using the <code class="language-plaintext highlighter-rouge">MapVirtualKey</code> method from the user32 API. Additionally, several references to <code class="language-plaintext highlighter-rouge">GetKeyState</code> were found as well. So what are these calls?</p>
+
+<blockquote>
+  <p><strong>MapVirtualKeyA function</strong></p>
+
+  <p>An application can use MapVirtualKey to translate scan codes to the virtual-key code constants VK_SHIFT, VK_CONTROL, and VK_MENU, and vice versa. These translations do not distinguish between the left and right instances of the SHIFT, CTRL, or ALT keys.</p>
+
+  <p>- <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mapvirtualkeya">Microsoft Docs</a></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>GetKeyState function</strong></p>
+
+  <p>The key status returned from this function changes as a thread reads key messages from its message queue. The status does not reflect the interrupt-level state associated with the hardware. Use the GetAsyncKeyState function to retrieve that information.</p>
+
+  <p>An application calls GetKeyState in response to a keyboard-input message. This function retrieves the state of the key when the input message was generated.</p>
+
+  <p>- <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeystate">Microsoft Docs</a></p>
+</blockquote>
+
+<p>While the appearance of these functions do not necessarily mean that the host executable is malicious, it is when combined with other red flags that a bigger picture emerge. Let’s take a closer look at the referenced addresses, starting with <code class="language-plaintext highlighter-rouge">user32.MapVirtualKey @ 0x444947</code>. By going to the function address in Ghidra/IDA/other disassemblers, we can indeed see a reference to the <code class="language-plaintext highlighter-rouge">MapVirtualKeyA</code> function.</p>
+
+<p><a href="/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b.png"><picture><source srcset="/generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-400-0e911aea9.webp 400w, /generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-600-0e911aea9.webp 600w, /generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-800-0e911aea9.webp 800w, /generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-1000-0e911aea9.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-400-2d95aba9c.png 400w, /generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-600-2d95aba9c.png 600w, /generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-800-2d95aba9c.png 800w, /generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-1000-2d95aba9c.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b-800-2d95aba9c.png" width="1920" height="1080"></picture></a></p>
+
+<p>What stands out even more about the tool is that it even includes the corresponding <a href="https://attack.mitre.org/">ATT&amp;CK Matrix</a> for each item and example of where this type of attack method can be found in known samples.</p>
+
+<p><a href="/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b.png"><picture><source srcset="/generated/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b-400-9c432fb84.webp 400w, /generated/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b-600-9c432fb84.webp 600w, /generated/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b-699-9c432fb84.webp 699w" type="image/webp"><source srcset="/generated/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b-400-f5c7163ac.png 400w, /generated/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b-600-f5c7163ac.png 600w, /generated/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b-699-f5c7163ac.png 699w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b-699-f5c7163ac.png" width="699" height="775"></picture></a></p>
+
+<h2 id="comparisons-against-existing-tools">Comparisons Against Existing Tools</h2>
+
+<h3 id="pestudio">pestudio</h3>
+
+<p>But does this bring anything new to the table? Let’s compare this to my favorite static analysis tool, <a href="https://www.winitor.com/">pestudio</a>.</p>
+
+<p>For those uninitiated, pestudio is a tool that allows malware researchers to quickly examine the PE information of an executable. It analyzes the imports, strings, resources, libraries, etc. referenced within the file and submits the file to VirusTotal (if enabled). After analyzing, everything is scored and highlights any potentially questionable references.</p>
+
+<p><a href="/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8.png"><picture><source srcset="/generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-400-a6668ed71.webp 400w, /generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-600-a6668ed71.webp 600w, /generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-800-a6668ed71.webp 800w, /generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-1000-a6668ed71.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-400-303840a46.png 400w, /generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-600-303840a46.png 600w, /generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-800-303840a46.png 800w, /generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-1000-303840a46.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8-800-303840a46.png" width="1520" height="774"></picture></a></p>
+
+<p>So how does it stack up against <code class="language-plaintext highlighter-rouge">capa</code>? While pestudio also highlights most of the questionable imports or Win32 API calls, it was only able to show the relative offset of the <strong>string</strong> - it failed to find the call in the imports category. It also failed to highlight the corresponding ATT&amp;CK technique - even though it did group the string into <code class="language-plaintext highlighter-rouge">keyboard-and-mouse</code>.</p>
+
+<p><a href="/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382.png"><picture><source srcset="/generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-400-ead2c08d5.webp 400w, /generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-600-ead2c08d5.webp 600w, /generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-800-ead2c08d5.webp 800w, /generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-1000-ead2c08d5.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-400-e13291fdc.png 400w, /generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-600-e13291fdc.png 600w, /generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-800-e13291fdc.png 800w, /generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-1000-e13291fdc.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382-800-e13291fdc.png" width="1920" height="1080"></picture></a></p>
+
+<h3 id="cape-sandbox">CAPE Sandbox</h3>
+
+<p>Now before you scream about how unfair this comparison may seem, I’d like to remind you that CAPE <em>does</em> offer static analysis outside of a hybrid one.</p>
+
+<p><a href="/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23.png"><picture><source srcset="/generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-400-444c57981.webp 400w, /generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-600-444c57981.webp 600w, /generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-800-444c57981.webp 800w, /generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-1000-444c57981.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-400-74652f582.png 400w, /generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-600-74652f582.png 600w, /generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-800-74652f582.png 800w, /generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-1000-74652f582.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23-800-74652f582.png" width="1920" height="969"></picture></a></p>
+
+<p>The following items were what CAPE was able to find during the static analysis,</p>
+
+<ul>
+  <li>PE Information
+    <ul>
+      <li>Expected vs. actual checksum</li>
+      <li>Compile time</li>
+      <li>Icon</li>
+    </ul>
+  </li>
+  <li>Sections</li>
+  <li>Resources</li>
+  <li>Imports
+    <ul>
+      <li>Address</li>
+      <li>API name
+        <ul>
+          <li>With direct link to Microsoft Docs!</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>So given that CAPE was able to get us all the imports and their relevant addresses, doesn’t this make <code class="language-plaintext highlighter-rouge">capa</code> useless? No! Far from it! The fact that <code class="language-plaintext highlighter-rouge">capa</code> was able to provide us with additional insights such as the relevant ATT&amp;CK techniques and specific characteristics of the API calls is enough to help a researcher.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>As always, there is <em>never</em> a perfect tool when it comes to malware analysis, as threat actors will always find ways to evade detections. The fact that there is now an additional tool that can aid blue team/malware researchers is awesome in itself. I can see myself using this tool a lot in the future. In fact, I’d probably use CAPE, capa and pestudio in conjunction in the future when performing an initial malware assessment.</p>
+
+<h3 id="suggestions">Suggestions</h3>
+
+<p>While the tool is very helpful and adds additional arsenals to blue teams and malware researchers around the world, there are still a few things I’d like to see implemented in the future.</p>
+
+<ul>
+  <li>Show more data relevant to the detection
+    <ul>
+      <li>For example, in the malware analyzed above, <code class="language-plaintext highlighter-rouge">capa</code> was able to detect that the file may attempt to query registry value. If <code class="language-plaintext highlighter-rouge">capa</code> was able to show the relevant registry key or entry next to the API call that would save researchers a lot of time (assuming it’s a compile-time constant or something that can be calculated or obtained during analysis-time).</li>
+      <li><a href="assets/images/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc.png"><picture><source srcset="/generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-400-bbe262472.webp 400w, /generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-600-bbe262472.webp 600w, /generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-800-bbe262472.webp 800w, /generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-1000-bbe262472.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-400-b873eac29.png 400w, /generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-600-b873eac29.png 600w, /generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-800-b873eac29.png 800w, /generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-1000-b873eac29.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc-800-b873eac29.png" width="1520" height="774"></picture></a></li>
+    </ul>
+  </li>
+  <li>Improve background contrast
+    <ul>
+      <li>When using the tool in the default PowerShell window, the foreground color of the text was barely readable.</li>
+      <li><a href="assets/images/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439.png"><picture><source srcset="/generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-400-b0e391e63.webp 400w, /generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-600-b0e391e63.webp 600w, /generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-800-b0e391e63.webp 800w, /generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-1000-b0e391e63.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-400-f78cca7de.png 400w, /generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-600-f78cca7de.png 600w, /generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-800-f78cca7de.png 800w, /generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-1000-f78cca7de.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439-800-f78cca7de.png" width="1920" height="1080"></picture></a></li>
+    </ul>
+  </li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#en-us" class="page__taxonomy-item" rel="tag">en-us</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#infosec" class="page__taxonomy-item" rel="tag">infosec</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-07-19T19:18:15+08:00">July 19, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=StillAzureH&text=A+Closer+Look+at+CAPA%20https%3A%2F%2Fstillu.cc%2Finfosec%2F2020%2F07%2F19%2Fcloser-look-at-capa%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstillu.cc%2Finfosec%2F2020%2F07%2F19%2Fcloser-look-at-capa%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fstillu.cc%2Finfosec%2F2020%2F07%2F19%2Fcloser-look-at-capa%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/writeup/rgbctf-2020-part-2" class="pagination--pager" title="rgbCTF 2020 Writeup - Part 2
+">Previous</a>
+    
+    
+      <a href="/windows-security-tools" class="pagination--pager" title="Windows Security Tools
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ida-tips/2022/01/22/saved-desktops-across-32bit-64bit/" rel="permalink">IDA Trickeries #1: Using Saved Desktop Across IDAs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-22T00:00:00+08:00">January 22, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">So like… who at Hex-rays implemented this?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/threat-spotlight/2021/11/13/domain-fronting-fastly/" rel="permalink">Threat Spotlight - Domain Fronting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-13T00:00:00+08:00">November 13, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Fast(ly) but deadly.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/10/29/barinsta-and-facebook/" rel="permalink">Facebook, Monopoly, and Barinsta
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+08:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Facebook and its anti-competitive strategy.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/07/12/lockdown-taiwan-2021/" rel="permalink">Lockdown, Taiwan, 2021
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-07-12T00:00:00+08:00">July 12, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Impact of lockdown in Taiwan and my personal life.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Still Hsu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N6FGTZBMTZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N6FGTZBMTZ', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'Still34/landing');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

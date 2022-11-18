@@ -1,0 +1,1086 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>How I Extracted an Unreal Engine Game’s WWise Audio - Just Still</title>
+<meta name="description" content="When you really want a game’s soundtrack, but the publisher hasn’t released them yet.">
+
+
+  <meta name="author" content="Still Hsu">
+  
+  <meta property="article:author" content="Still Hsu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Just Still">
+<meta property="og:title" content="How I Extracted an Unreal Engine Game’s WWise Audio">
+<meta property="og:url" content="https://stillu.cc/infosec/2021/03/01/obtaining-unreal-pak-decryption-key/">
+
+
+  <meta property="og:description" content="When you really want a game’s soundtrack, but the publisher hasn’t released them yet.">
+
+
+
+  <meta property="og:image" content="https://stillu.cc/assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9.png">
+
+
+
+  <meta name="twitter:site" content="@StillAzureH">
+  <meta name="twitter:title" content="How I Extracted an Unreal Engine Game’s WWise Audio">
+  <meta name="twitter:description" content="When you really want a game’s soundtrack, but the publisher hasn’t released them yet.">
+  <meta name="twitter:url" content="https://stillu.cc/infosec/2021/03/01/obtaining-unreal-pak-decryption-key/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://stillu.cc/assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2021-03-01T00:00:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://stillu.cc/infosec/2021/03/01/obtaining-unreal-pak-decryption-key/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Still Hsu",
+      "url": "https://stillu.cc/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Just Still Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/manifest.json">
+<meta name="msapplication-TileColor" content="#F21368">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#F21368">
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/avatar-512.png" alt="Just Still"></a>
+        
+        <a class="site-title" href="/">
+          Just Still
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories">Posts</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          How I Extracted an Unreal Engine Game’s WWise Audio
+
+        
+      </h1>
+      
+        <p class="page__lead">When you <em>really</em> want a game’s soundtrack, but the publisher hasn’t released them yet.
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-03-01T00:00:00+08:00">March 1, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://stillu.cc/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#infosec" itemprop="item"><span itemprop="name">Infosec</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#2021" itemprop="item"><span itemprop="name">2021</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#03" itemprop="item"><span itemprop="name">03</span></a>
+          <meta itemprop="position" content="4" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#01" itemprop="item"><span itemprop="name">01</span></a>
+          <meta itemprop="position" content="5" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">How I Extracted an Unreal Engine Game's WWise Audio</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar-512.png" alt="Still Hsu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Still Hsu</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Developer, photographer, infosec researcher.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Taiwan</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://twitter.com/StillAzureH" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/Still34" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/.well-known/pubkey.asc" rel="nofollow noopener noreferrer"><i class="fas fa-user-lock" aria-hidden="true"></i><span class="label">GPG (Email)</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:business@stillu.cc">
+            <meta itemprop="email" content="business@stillu.cc" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How I Extracted an Unreal Engine Game’s WWise Audio">
+    <meta itemprop="description" content="When you really want a game’s soundtrack, but the publisher hasn’t released them yet.">
+    <meta itemprop="datePublished" content="2021-03-01T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#obtaining-the-game-files">Obtaining the Game Files</a></li><li><a href="#dumping-the-internal-files">Dumping the Internal Files</a></li><li><a href="#decrypting-the-pak">Decrypting the PAK</a></li><li><a href="#dumping-the-audio">Dumping the Audio</a></li><li><a href="#repackaging-the-game">Repackaging the Game</a></li><li><a href="#conclusion">Conclusion</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p class="notice--info"><strong>⚠ Disclaimer</strong> The following post has the game’s name, ID, and encryption key redacted.</p>
+
+<p>I’ve been playing a game that I love, and the best part of it is its wicked soundtrack. Buuuut, the publisher hasn’t released the official soundtrack for it, and I just couldn’t wait for its release. Since I knew the game <em>has to</em> load in its asset from somewhere, I figured time to crack it wide open then!</p>
+
+<h2 id="obtaining-the-game-files">Obtaining the Game Files</h2>
+
+<p>I was stumped at this part for a while, as there doesn’t appear to be any official documentation on how Windows Apps’ filesystem security is handled. I first tried to obtain the files by running a PowerShell session as <code class="language-plaintext highlighter-rouge">NT AUTHORITY/SYSTEM</code>. After all, SYSTEM <em>should</em> have absolute control over the filesystem, right?</p>
+
+<p><a href="/assets/images/posts/unreal-pak/4ecdb5cf688db0c710f5bf85a853e06470bf3871471d77a5a5b1a7e08f337c9d.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/4ecdb5cf688db0c710f5bf85a853e06470bf3871471d77a5a5b1a7e08f337c9d-600-97069e2aa.png" srcset="/generated/assets/images/posts/unreal-pak/4ecdb5cf688db0c710f5bf85a853e06470bf3871471d77a5a5b1a7e08f337c9d-600-97069e2aa.png 1.0x, /generated/assets/images/posts/unreal-pak/4ecdb5cf688db0c710f5bf85a853e06470bf3871471d77a5a5b1a7e08f337c9d-900.0-97069e2aa.png 1.5x, /generated/assets/images/posts/unreal-pak/4ecdb5cf688db0c710f5bf85a853e06470bf3871471d77a5a5b1a7e08f337c9d-1200-97069e2aa.png 2.0x"></a></p>
+
+<p>Well, er, no?</p>
+
+<p>Despite <code class="language-plaintext highlighter-rouge">icacls</code> reporting that <code class="language-plaintext highlighter-rouge">NT AUTHORITY/SYSTEM</code> <em>should</em> in theory have access to the directory, I just could not get PowerShell to read anything from there - even after I enabled every security token imaginable.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:\Program Files\WindowsApps\[REDACTED]&gt; icacls .
+. BUILTIN\Users:(OI)(CI)(Rc,S,RD,REA,X,RA)
+  S-1-15-3-247021172-3446442793-3455440376-3877820015-2750965022-664881756-722356460:(OI)(CI)(RX)
+  BUILTIN\Users:(OI)(CI)(R)
+  NT SERVICE\TrustedInstaller:(I)(F)
+  NT SERVICE\TrustedInstaller:(I)(OI)(CI)(IO)(F)
+  S-1-15-3-1024-3635283841-2530182609-996808640-1887759898-3848208603-3313616867-983405619-2501854204:(I)(RX)
+  S-1-15-3-1024-3635283841-2530182609-996808640-1887759898-3848208603-3313616867-983405619-2501854204:(I)(OI)(CI)(IO)(GR,GE)
+  NT AUTHORITY\SYSTEM:(I)(F)
+  NT AUTHORITY\SYSTEM:(I)(OI)(CI)(IO)(F)
+  BUILTIN\Administrators:(I)(CI)(RX)
+  NT AUTHORITY\LOCAL SERVICE:(I)(OI)(CI)(RX)
+  NT AUTHORITY\NETWORK SERVICE:(I)(OI)(CI)(RX)
+  NT AUTHORITY\RESTRICTED:(I)(OI)(CI)(RX)
+  S-1-19-512-4096:(OI)(CI)(RX,D,WDAC,WO,WA)
+</code></pre></div></div>
+
+<p>Ah well, time for plan B.</p>
+
+<p>After some research, I found out that <a href="https://github.com/Wunkolo/UWPDumper.git">UWPDumper</a> does the job perfectly. Looking at the source code, it looks like the application injects itself into the UWP process, sets its access control as <code class="language-plaintext highlighter-rouge">S-1-15-2-1</code> (ALL_APP_PACKAGES) and creates a remote thread that handles the file read write. Well, at least in the future I’d know what to do now. Anyways, I used the existing binary from the repo and got the files I was looking for.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/690e643c0e37ab84fec6dddb23bb945511f671fda21ecc18846019fc45295368.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/690e643c0e37ab84fec6dddb23bb945511f671fda21ecc18846019fc45295368-600-b59e0f71f.png" srcset="/generated/assets/images/posts/unreal-pak/690e643c0e37ab84fec6dddb23bb945511f671fda21ecc18846019fc45295368-600-b59e0f71f.png 1.0x, /generated/assets/images/posts/unreal-pak/690e643c0e37ab84fec6dddb23bb945511f671fda21ecc18846019fc45295368-900.0-b59e0f71f.png 1.5x, /generated/assets/images/posts/unreal-pak/690e643c0e37ab84fec6dddb23bb945511f671fda21ecc18846019fc45295368-1142-b59e0f71f.png 1.9x"></a></p>
+
+<h2 id="dumping-the-internal-files">Dumping the Internal Files</h2>
+
+<p>Since the majority of the dump came from this <code class="language-plaintext highlighter-rouge">XXXXXX-WinGDK.pak</code> file, I’d have to assume most of the assets came from this file. The handle view in Process Hacker confirms this, where no other visible files are loaded except for this file, the executable itself, and its dependencies.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/d90f12ff934b416e3b06ecec6484b7af2a2a942e10e429c52b3590bff5bcfb3b.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/d90f12ff934b416e3b06ecec6484b7af2a2a942e10e429c52b3590bff5bcfb3b-600-e328e2e74.png" srcset="/generated/assets/images/posts/unreal-pak/d90f12ff934b416e3b06ecec6484b7af2a2a942e10e429c52b3590bff5bcfb3b-600-e328e2e74.png 1.0x, /generated/assets/images/posts/unreal-pak/d90f12ff934b416e3b06ecec6484b7af2a2a942e10e429c52b3590bff5bcfb3b-900.0-e328e2e74.png 1.5x, /generated/assets/images/posts/unreal-pak/d90f12ff934b416e3b06ecec6484b7af2a2a942e10e429c52b3590bff5bcfb3b-1200-e328e2e74.png 2.0x"></a></p>
+
+<p>After some <a href="https://gbatemp.net/threads/how-to-unpack-and-repack-unreal-engine-4-files.531784/">additional</a> <a href="https://github.com/allcoolthingsatoneplace/UnrealPakTool">reading</a>, I had concluded that this is gonna be more than just a one-click-and-it’s-done type of job.</p>
+
+<p>In order to dump the PAK, I had to first determine the version of the Unreal Engine used to build the game. Why? Because apparently Unreal is <em>really</em> sensitive to version changes. Any new version increment (excluding patch increment, fortunately) will cause issues. Heck, even different version of <code class="language-plaintext highlighter-rouge">uassets</code> can cause the engine to not load the asset.</p>
+
+<p>Thankfully, by checking the properties of the game binary, the engine had compiled its version name in there, which is <code class="language-plaintext highlighter-rouge">4.25.0</code>.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/ab1411e953c2902b415b3a720ff33c7e7da970c386fe2b1e2ed0414234b9d15c.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/ab1411e953c2902b415b3a720ff33c7e7da970c386fe2b1e2ed0414234b9d15c-539-80a4b045a.png" srcset="/generated/assets/images/posts/unreal-pak/ab1411e953c2902b415b3a720ff33c7e7da970c386fe2b1e2ed0414234b9d15c-539-80a4b045a.png 0.9x"></a></p>
+
+<p>Next up, let’s try dumping the game using UnrealPak, an official utility that handles PAK-related operation. A copy of the <a href="https://github.com/allcoolthingsatoneplace/UnrealPakTool">4.25.x UnrealPak can be found on GitHub.</a> Let’s give it a go!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ ./unrealpak.exe
+LogPaths: Warning: No paths for game localization data were specifed in the game configuration.
+LogPakFile: Display: Using command line for crypto configuration
+LogPakFile: Error: No pak file name specified. Usage:
+LogPakFile: Error:   UnrealPak &lt;PakFilename&gt; -Test
+LogPakFile: Error:   UnrealPak &lt;PakFilename&gt; -List [-ExcludeDeleted]
+LogPakFile: Error:   UnrealPak &lt;PakFilename&gt; &lt;GameUProjectName&gt; &lt;GameFolderName&gt; -ExportDependencies=&lt;OutputFileBase&gt; -NoAssetRegistryCache -ForceDependsGathering
+LogPakFile: Error:   UnrealPak &lt;PakFilename&gt; -Extract &lt;ExtractDir&gt; [-Filter=&lt;filename&gt;]
+LogPakFile: Error:   UnrealPak &lt;PakFilename&gt; -Create=&lt;ResponseFile&gt; [Options]
+LogPakFile: Error:   UnrealPak &lt;PakFilename&gt; -Dest=&lt;MountPoint&gt;
+LogPakFile: Error:   UnrealPak &lt;PakFilename&gt; -Repack [-Output=Path] [-ExcludeDeleted] [Options]
+LogPakFile: Error:   UnrealPak &lt;PakFilename1&gt; &lt;PakFilename2&gt; -diff
+LogPakFile: Error:   UnrealPak &lt;PakFolder&gt; -AuditFiles [-OnlyDeleted] [-CSV=&lt;filename&gt;] [-order=&lt;OrderingFile&gt;] [-SortByOrdering]
+LogPakFile: Error:   UnrealPak &lt;PakFilename&gt; -WhatsAtOffset [offset1] [offset2] [offset3] [...]
+LogPakFile: Error:   UnrealPak &lt;PakFolder&gt; -GeneratePIXMappingFile -OutputPath=&lt;Path&gt;
+LogPakFile: Error:   Options:
+LogPakFile: Error:     -blocksize=&lt;BlockSize&gt;
+LogPakFile: Error:     -bitwindow=&lt;BitWindow&gt;
+LogPakFile: Error:     -compress
+LogPakFile: Error:     -encrypt
+LogPakFile: Error:     -order=&lt;OrderingFile&gt;
+LogPakFile: Error:     -diff (requires 2 filenames first)
+LogPakFile: Error:     -enginedir (specify engine dir for when using ini encryption configs)
+LogPakFile: Error:     -projectdir (specify project dir for when using ini encryption configs)
+LogPakFile: Error:     -encryptionini (specify ini base name to gather encryption settings from)
+LogPakFile: Error:     -extracttomountpoint (Extract to mount point path of pak file)
+LogPakFile: Error:     -encryptindex (encrypt the pak file index, making it unusable in unrealpak without supplying the key)
+LogPakFile: Error:     -compressionformat[s]=&lt;Format[,format2,...]&gt; (set the format(s) to compress with, falling back on failures)
+LogPakFile: Error:     -encryptionkeyoverrideguid (override the encryption key guid used for encrypting data in this pak file)
+LogPakFile: Error:     -sign (generate a signature (.sig) file alongside the pak)
+LogPakFile: Error:     -fallbackOrderForNonUassetFiles (if order is not specified for ubulk/uexp files, figure out implicit order based on the uasset order. Generally applies only to the cooker order)
+LogPakFile: Display: Unreal pak executed in 0.017149 seconds
+</code></pre></div></div>
+
+<p>Alright, let’s try <code class="language-plaintext highlighter-rouge">-Test</code> to get a quick start.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ .\UnrealPak.exe -test .\[REDACTED]-WinGDK.pak
+LogPaths: Warning: No paths for game localization data were specified in the game configuration.
+LogPakFile: Display: Using command line for crypto configuration
+LogWindows: Error: === Critical error: ===
+LogWindows: Error:
+LogWindows: Error: Fatal error: [File:C:/Users/spark/Desktop/UnrealEngine/Engine/Source/Runtime/PakFile/Private/IPlatformFilePak.cpp] [Line: 273]
+LogWindows: Error: Failed to find requested encryption key 00000000000000000000000000000000
+LogWindows: Error: [Callstack] 0x00007ffc63238ef6 UnrealPak-PakFile.dll!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ffc63231d52 UnrealPak-PakFile.dll!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ffc6323dbe8 UnrealPak-PakFile.dll!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ffc6323b44f UnrealPak-PakFile.dll!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ffc632286d7 UnrealPak-PakFile.dll!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ffc630db1a6 UnrealPak-PakFileUtilities.dll!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ff6df52a507 UnrealPak.exe!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ff6df52b278 UnrealPak.exe!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ffca85c7034 KERNEL32.DLL!UnknownFunction []
+LogWindows: Error: [Callstack] 0x00007ffca9f7d0d1 ntdll.dll!UnknownFunction []
+LogWindows: Error:
+LogWindows: Error:
+LogWindows: Error:
+LogWindows: Error:
+</code></pre></div></div>
+
+<p>Well darn. It looks like the files are encrypted. <a href="https://blog.jamie.holdings/2019/03/23/reverse-engineering-aes-keys-from-unreal-engine-4-projects/">After doing some reading</a>, it appears Unreal’s PAK format are typically encrypted using AES with a SHA-1 key.</p>
+
+<h2 id="decrypting-the-pak">Decrypting the PAK</h2>
+
+<p>Ah yes, debugging time! Thankfully, Unreal Engine is now open-source, meaning I should be able to follow the source code to follow the code and find the decryption routine.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/fc36c40c3c2bf3bd897951a40c4a68021e01b8bdb4a54c5e2d82d420deb853e2.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/fc36c40c3c2bf3bd897951a40c4a68021e01b8bdb4a54c5e2d82d420deb853e2-600-478df7f98.png" srcset="/generated/assets/images/posts/unreal-pak/fc36c40c3c2bf3bd897951a40c4a68021e01b8bdb4a54c5e2d82d420deb853e2-600-478df7f98.png 1.0x, /generated/assets/images/posts/unreal-pak/fc36c40c3c2bf3bd897951a40c4a68021e01b8bdb4a54c5e2d82d420deb853e2-900.0-478df7f98.png 1.5x, /generated/assets/images/posts/unreal-pak/fc36c40c3c2bf3bd897951a40c4a68021e01b8bdb4a54c5e2d82d420deb853e2-1200-478df7f98.png 2.0x"></a></p>
+
+<p>Let’s first find the decryption routine in the 4.25 Unreal source code. We can do that by simply looking up the word <code class="language-plaintext highlighter-rouge">decrypt</code> in the repo.</p>
+
+<figure class="half">
+<a href="/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-400-96d374f7e.webp 400w, /generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-600-96d374f7e.webp 600w, /generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-800-96d374f7e.webp 800w, /generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-1000-96d374f7e.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-400-ed96246a0.png 400w, /generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-600-ed96246a0.png 600w, /generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-800-ed96246a0.png 800w, /generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-1000-ed96246a0.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584-800-ed96246a0.png" width="1998" height="795" />
+  </picture>
+</a>
+
+<a href="/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-400-f841b3b8e.webp 400w, /generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-600-f841b3b8e.webp 600w, /generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-800-f841b3b8e.webp 800w, /generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-1000-f841b3b8e.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-400-aed2c1724.png 400w, /generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-600-aed2c1724.png 600w, /generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-800-aed2c1724.png 800w, /generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-1000-aed2c1724.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f-800-aed2c1724.png" width="1686" height="501" />
+  </picture>
+</a>
+  
+</figure>
+
+<p>That was easy enough. We can also see that the function is also referenced on L5043 - and there are strings surrounding it. Perfect, that should help us pinpoint where exactly the function is in memory. <code class="language-plaintext highlighter-rouge">GetPakEncryptionKey</code> sounds interesting. We should take a look there later. Let’s fire up x64dbg. Since we already know what the surrounding strings are, we can just do a string search for literally any of them - in this case <code class="language-plaintext highlighter-rouge">Failed to find requested encryption key</code> - to quickly pinpoint the address of the function.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/a806ab35da0a3332326e46fee23f4438f8f3bcb78466d7b3f4b596588871d6de.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/a806ab35da0a3332326e46fee23f4438f8f3bcb78466d7b3f4b596588871d6de-600-ec49c95ab.png" srcset="/generated/assets/images/posts/unreal-pak/a806ab35da0a3332326e46fee23f4438f8f3bcb78466d7b3f4b596588871d6de-600-ec49c95ab.png 1.0x, /generated/assets/images/posts/unreal-pak/a806ab35da0a3332326e46fee23f4438f8f3bcb78466d7b3f4b596588871d6de-900.0-ec49c95ab.png 1.5x, /generated/assets/images/posts/unreal-pak/a806ab35da0a3332326e46fee23f4438f8f3bcb78466d7b3f4b596588871d6de-1200-ec49c95ab.png 2.0x"></a></p>
+
+<p>After we’ve found the address, we can set a breakpoint on its parent routine and watch it run.</p>
+
+<figure class="half">
+<a href="/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-400-4c9f87b35.webp 400w, /generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-600-4c9f87b35.webp 600w, /generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-800-4c9f87b35.webp 800w, /generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-1000-4c9f87b35.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-400-0df79d4ba.png 400w, /generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-600-0df79d4ba.png 600w, /generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-800-0df79d4ba.png 800w, /generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-1000-0df79d4ba.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0-800-0df79d4ba.png" width="1540" height="728" />
+  </picture>
+</a>
+  
+<a href="/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-400-8a83862aa.webp 400w, /generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-600-8a83862aa.webp 600w, /generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-800-8a83862aa.webp 800w, /generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-1000-8a83862aa.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-400-74a88cb4e.png 400w, /generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-600-74a88cb4e.png 600w, /generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-800-74a88cb4e.png 800w, /generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-1000-74a88cb4e.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0-800-74a88cb4e.png" width="2505" height="1573" />
+  </picture>
+</a>
+  
+</figure>
+
+<p>“Huh, that’s strange. I thought the function was quite small, and if this were <code class="language-plaintext highlighter-rouge">GetPakEncryptionKey</code>, what happened to the <code class="language-plaintext highlighter-rouge">DecryptData</code> method?” you may think. What more than likely happened here was compiler optimization. Instead of having to call more than one subroutine, the compiler will often try to find and merge routines together at compile-time to optimize the number of instructions required to carry out the task.</p>
+
+<p>At this point, it’s just the matter of trial and error and seeing what each subroutine returns in their corresponding registers. When a subroutine returns, x64dbg will highlight the register(s) that has changed since the execution in red.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/e2587f3173f6d03314faf0fdf19f7d937bc4fcaf0c116dc77787e45935d8e9d8.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/e2587f3173f6d03314faf0fdf19f7d937bc4fcaf0c116dc77787e45935d8e9d8-600-1027461b2.png" srcset="/generated/assets/images/posts/unreal-pak/e2587f3173f6d03314faf0fdf19f7d937bc4fcaf0c116dc77787e45935d8e9d8-600-1027461b2.png 1.0x, /generated/assets/images/posts/unreal-pak/e2587f3173f6d03314faf0fdf19f7d937bc4fcaf0c116dc77787e45935d8e9d8-806-1027461b2.png 1.34x"></a></p>
+
+<p>By inspecting each register in dump, we can quickly find the AES key required to decrypt the data. In this case, the corresponding register for the decryption method containing the key was RCX. How did I know what was in the dump was in fact the key? We already knew based on previous documentations that the AES encryption key is a SHA-1 hash. There are 160 bits in a SHA-1 hash, which is the equivalent of 20 bytes. The output just so happens to contain a continuous 20-byte data.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/d738f9312e190b1cb41a474f6609f20b9769e94049a58d99080cff0ffc1dac7f.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/d738f9312e190b1cb41a474f6609f20b9769e94049a58d99080cff0ffc1dac7f-600-6ec35e81b.png" srcset="/generated/assets/images/posts/unreal-pak/d738f9312e190b1cb41a474f6609f20b9769e94049a58d99080cff0ffc1dac7f-600-6ec35e81b.png 1.0x, /generated/assets/images/posts/unreal-pak/d738f9312e190b1cb41a474f6609f20b9769e94049a58d99080cff0ffc1dac7f-900.0-6ec35e81b.png 1.5x, /generated/assets/images/posts/unreal-pak/d738f9312e190b1cb41a474f6609f20b9769e94049a58d99080cff0ffc1dac7f-1200-6ec35e81b.png 2.0x"></a></p>
+
+<p>Now that we have the SHA-1 AES key, we can now feed it to UnrealPak! UnrealPak takes a Base64’d AES key in its configuration file (typically <code class="language-plaintext highlighter-rouge">crypto.json</code>). All we need to do now is jot down the key, convert it to Base64, and bam, we can now run the decryption process! For the decryption process, I found that I needed to actually install the Unreal Editor itself for it to work, so I guess we didn’t need to download that GitHub mirror after all.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">programfiles</span><span class="s2">\Epic Games\UE_4.25\Engine\Binaries\Win64\UnrealPak.exe"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">userprofile</span><span class="s2">\Desktop\DUMP\&lt;REDACTED&gt;\Content\Paks\&lt;REDACTED&gt;-WinGDK.pak"</span><span class="w"> </span><span class="nt">-Extract</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">userprofile</span><span class="s2">\Desktop\DUMP_PAK"</span><span class="w"> </span><span class="nt">-CryptoKeys</span><span class="o">=</span><span class="s2">"Crypto.json"</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nl">"$types"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"UnrealBuildTool.EncryptionAndSigning+CryptoSettings, UnrealBuildTool, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"UnrealBuildTool.EncryptionAndSigning+EncryptionKey, UnrealBuildTool, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"UnrealBuildTool.EncryptionAndSigning+SigningKeyPair, UnrealBuildTool, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"UnrealBuildTool.EncryptionAndSigning+SigningKey, UnrealBuildTool, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nl">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"EncryptionKey"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Guid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"null"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;REDACTED&gt;"</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nl">"SigningKey"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"bEnablePakSigning"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"bEnablePakIndexEncryption"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"bEnablePakIniEncryption"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"bEnablePakUAssetEncryption"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"bEnablePakFullAssetEncryption"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"bDataCryptoRequired"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"PakEncryptionRequired"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"PakSigningRequired"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"SecondaryEncryptionKeys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><a href="/assets/images/posts/unreal-pak/0979c7637c516f1bdd6ae87250c466dd642fdcd03667aa75ab0136c8ae807420.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/0979c7637c516f1bdd6ae87250c466dd642fdcd03667aa75ab0136c8ae807420-600-d0c753af3.png" srcset="/generated/assets/images/posts/unreal-pak/0979c7637c516f1bdd6ae87250c466dd642fdcd03667aa75ab0136c8ae807420-600-d0c753af3.png 1.0x, /generated/assets/images/posts/unreal-pak/0979c7637c516f1bdd6ae87250c466dd642fdcd03667aa75ab0136c8ae807420-900.0-d0c753af3.png 1.5x, /generated/assets/images/posts/unreal-pak/0979c7637c516f1bdd6ae87250c466dd642fdcd03667aa75ab0136c8ae807420-1108-d0c753af3.png 1.85x"></a></p>
+
+<p>Nice! Now I can explore the game’s content to my heart’s content with things like <code class="language-plaintext highlighter-rouge">john-wick-parse</code> for deserializing <code class="language-plaintext highlighter-rouge">*.uasset</code> files, and <code class="language-plaintext highlighter-rouge">umodel</code> for viewing models!</p>
+
+<h2 id="dumping-the-audio">Dumping the Audio</h2>
+
+<p>For dumping and extracting the game’s WWise audio bank, I had to use a tool called <a href="https://github.com/hpxro7/wwiseutil"><code class="language-plaintext highlighter-rouge">wwiseutil</code></a> to view and extract the game’s <code class="language-plaintext highlighter-rouge">*.bnk</code> files.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/26e2947cb1b4f248f4568fa101e6573b37dd4025f90d1d116abab7dbd9dbefdd.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/26e2947cb1b4f248f4568fa101e6573b37dd4025f90d1d116abab7dbd9dbefdd-600-c94c4eba9.png" srcset="/generated/assets/images/posts/unreal-pak/26e2947cb1b4f248f4568fa101e6573b37dd4025f90d1d116abab7dbd9dbefdd-600-c94c4eba9.png 1.0x, /generated/assets/images/posts/unreal-pak/26e2947cb1b4f248f4568fa101e6573b37dd4025f90d1d116abab7dbd9dbefdd-900.0-c94c4eba9.png 1.5x, /generated/assets/images/posts/unreal-pak/26e2947cb1b4f248f4568fa101e6573b37dd4025f90d1d116abab7dbd9dbefdd-902-c94c4eba9.png 1.5x"></a></p>
+
+<p>Then finally, I can use a foobar2000 extension called <a href="https://www.foobar2000.org/components/view/foo_input_vgmstream">vgmstream</a> to listen to and transcode the audio from the WEM format to WAV.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9-600-4f449f96e.png" srcset="/generated/assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9-600-4f449f96e.png 1.0x, /generated/assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9-900.0-4f449f96e.png 1.5x, /generated/assets/images/posts/unreal-pak/2e2ec2f135afbc4f395cfc393791eb6c16480530d49a2b26fdd6c5a7c100a6b9-1200-4f449f96e.png 2.0x"></a></p>
+
+<h2 id="repackaging-the-game">Repackaging the Game</h2>
+
+<p>This part actually had me stumped for a day or two, since there weren’t too many documentations out there that outline for Unreal Editor packs and cooks its PAK file. I had to find out the command-line parameters used by the Editor by viewing them in Process Hacker. Essentially, the Editor first compiles a list of files needed to be in the PAK to a text file in the format of <code class="language-plaintext highlighter-rouge">&lt;path_to_file&gt; &lt;internal_path&gt;</code>. For example,</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ...</span><span class="w">
+</span><span class="s2">"C:/Users/Still/Desktop/DUMP_PAK/Engine/Content/Functions/Engine_MaterialFunctions02/HueShift.uasset"</span><span class="w"> </span><span class="s2">"../../../Engine/Content/Functions/Engine_MaterialFunctions02/HueShift.uasset"</span><span class="w">
+</span><span class="s2">"C:/Users/Still/Desktop/DUMP_PAK/Engine/Content/Functions/Engine_MaterialFunctions02/Lerp_Multiple_Float3.uasset"</span><span class="w"> </span><span class="s2">"../../../Engine/Content/Functions/Engine_MaterialFunctions02/Lerp_Multiple_Float3.uasset"</span><span class="w">
+</span><span class="s2">"C:/Users/Still/Desktop/DUMP_PAK/Engine/Content/Functions/Engine_MaterialFunctions02/SafeNormalize.uasset"</span><span class="w"> </span><span class="s2">"../../../Engine/Content/Functions/Engine_MaterialFunctions02/SafeNormalize.uasset"</span><span class="w">
+</span><span class="c"># ...</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Thankfully, I didn’t really need to reconstruct one myself. During the previous extraction step, UnrealPak will already print out what files were extracted. Simply capture the output of the tool and replace irrelevant strings that do not conform to the above format and shift the strings around, and you’ll be set! After then, run the UnrealPak tool with a <code class="language-plaintext highlighter-rouge">Create</code>, <code class="language-plaintext highlighter-rouge">Encrypt</code> and <code class="language-plaintext highlighter-rouge">CryptoKeys</code> parameter (formatted below).</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># capture the output to a file</span><span class="w">
+</span><span class="o">.</span><span class="n">\UnrealPak.exe</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">userprofile</span><span class="s2">\Desktop\DUMP\REDACTED\Content\Paks\REDACTED-WinGDK.pak"</span><span class="w"> </span><span class="nt">-Extract</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">userprofile</span><span class="s2">\Desktop\DUMP_PAK"</span><span class="w"> </span><span class="nt">-CryptoKeys</span><span class="o">=</span><span class="s2">"Crypto.json"</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="n">output.log</span><span class="w">
+</span><span class="c"># do the string replacement here yourself; I always did it by hand with regular expression in VSC.</span><span class="w">
+</span><span class="c"># repackage the file based on our existing crypto key and file list then launch the game</span><span class="w">
+</span><span class="n">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">programfiles</span><span class="s2">\Epic Games\UE_4.25\Engine\Binaries\Win64\"</span><span class="p">;</span><span class="w"> </span><span class="o">.</span><span class="n">\UnrealPak.exe</span><span class="w"> </span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">userprofile</span><span class="nx">\Desktop\DUMP\REDACTED\Content\Paks\REDACTED-WinGDK.pak</span><span class="w"> </span><span class="nt">-Create</span><span class="o">=</span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">userprofile</span><span class="s2">\Downloads\UnrealPakTool\output.log"</span><span class="w"> </span><span class="nt">-Encrypt</span><span class="w"> </span><span class="nt">-cryptokeys</span><span class="o">=</span><span class="s2">"Crypto.json"</span><span class="p">;</span><span class="w"> </span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">userprofile</span><span class="n">\Desktop\DUMP\REDACTED\Binaries\WinGDK\REDACTED-WinGDK-Shipping.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Have fun modding the game with Shrek or something absolutely memey!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this post, we went through how Unreal uses a SHA-1 hash as its AES key to decrypt its content, and how we can dump the said content into its decrypted form. This was a fun exercise for me, as I was truly passionate about discovering more about this game and I wanted to see just how familiar I am with the x64dbg debugger now that I have a full-time job that requires me to work with debugger every day.</p>
+
+<p>While I had fun decrypting and dumping the game and discovering previously uncertain information about the mechanics, there were a few things that disappointed me. First of all, I realized the game chose to opt for Wwise’s proprietary compressed audio instead of the uncompressed format. The compression is the equivalent of 192kbps MP3 with a very noticeable 18KHz cut-off. That is what I call a yikes for a game that has its focus on audio. Second, the fact that the developers had unfortunately signed a Microsoft exclusivity contract meant that they had to roll out the game using the MSIX format - a format that I will make a rant on some time after the publication of this post.</p>
+
+<p><a href="/assets/images/posts/unreal-pak/5ec952c4701a6fced03c7973cc2a5aa87b4d7695ec8f382c4c40f9baa5fed2d7.png"><img class="lazy align-center" src="/generated/assets/images/posts/unreal-pak/5ec952c4701a6fced03c7973cc2a5aa87b4d7695ec8f382c4c40f9baa5fed2d7-600-638ed0620.png" srcset="/generated/assets/images/posts/unreal-pak/5ec952c4701a6fced03c7973cc2a5aa87b4d7695ec8f382c4c40f9baa5fed2d7-600-638ed0620.png 1.0x, /generated/assets/images/posts/unreal-pak/5ec952c4701a6fced03c7973cc2a5aa87b4d7695ec8f382c4c40f9baa5fed2d7-900.0-638ed0620.png 1.5x, /generated/assets/images/posts/unreal-pak/5ec952c4701a6fced03c7973cc2a5aa87b4d7695ec8f382c4c40f9baa5fed2d7-1200-638ed0620.png 2.0x"></a></p>
+
+<p>Ah well, that about wraps up this post, though! Thanks for reading and going through this journey with me!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#en-us" class="page__taxonomy-item" rel="tag">en-us</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#infosec" class="page__taxonomy-item" rel="tag">infosec</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-03-01T00:00:00+08:00">March 1, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=StillAzureH&text=How+I+Extracted+an+Unreal+Engine+Game%27s+WWise+Audio%20https%3A%2F%2Fstillu.cc%2Finfosec%2F2021%2F03%2F01%2Fobtaining-unreal-pak-decryption-key%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstillu.cc%2Finfosec%2F2021%2F03%2F01%2Fobtaining-unreal-pak-decryption-key%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fstillu.cc%2Finfosec%2F2021%2F03%2F01%2Fobtaining-unreal-pak-decryption-key%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/misc/2020/11/16/mystery-bsod-system-thread-exception-not-handled-amd/" class="pagination--pager" title="The Mysterious SYSTEM_THREAD_EXCEPTION_NOT_HANDLED and Hyper-V
+">Previous</a>
+    
+    
+      <a href="/personal/2021/07/12/lockdown-taiwan-2021/" class="pagination--pager" title="Lockdown, Taiwan, 2021
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ida-tips/2022/01/22/saved-desktops-across-32bit-64bit/" rel="permalink">IDA Trickeries #1: Using Saved Desktop Across IDAs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-22T00:00:00+08:00">January 22, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">So like… who at Hex-rays implemented this?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/threat-spotlight/2021/11/13/domain-fronting-fastly/" rel="permalink">Threat Spotlight - Domain Fronting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-13T00:00:00+08:00">November 13, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Fast(ly) but deadly.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/10/29/barinsta-and-facebook/" rel="permalink">Facebook, Monopoly, and Barinsta
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+08:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Facebook and its anti-competitive strategy.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/07/12/lockdown-taiwan-2021/" rel="permalink">Lockdown, Taiwan, 2021
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-07-12T00:00:00+08:00">July 12, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Impact of lockdown in Taiwan and my personal life.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Still Hsu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N6FGTZBMTZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N6FGTZBMTZ', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'Still34/landing');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

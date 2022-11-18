@@ -1,0 +1,1045 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Threat Spotlight - DLL Hijacking (and .NET) - Just Still</title>
+<meta name="description" content="How does Windows determine which DLL to load 🤔?">
+
+
+  <meta name="author" content="Still Hsu">
+  
+  <meta property="article:author" content="Still Hsu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Just Still">
+<meta property="og:title" content="Threat Spotlight - DLL Hijacking (and .NET)">
+<meta property="og:url" content="https://stillu.cc/threat-spotlight/2020/09/16/dll-hijacking/">
+
+
+  <meta property="og:description" content="How does Windows determine which DLL to load 🤔?">
+
+
+
+  <meta property="og:image" content="https://stillu.cc/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png">
+
+
+
+  <meta name="twitter:site" content="@StillAzureH">
+  <meta name="twitter:title" content="Threat Spotlight - DLL Hijacking (and .NET)">
+  <meta name="twitter:description" content="How does Windows determine which DLL to load 🤔?">
+  <meta name="twitter:url" content="https://stillu.cc/threat-spotlight/2020/09/16/dll-hijacking/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://stillu.cc/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-09-16T00:00:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://stillu.cc/threat-spotlight/2020/09/16/dll-hijacking/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Still Hsu",
+      "url": "https://stillu.cc/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Just Still Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/manifest.json">
+<meta name="msapplication-TileColor" content="#F21368">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#F21368">
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/avatar-512.png" alt="Just Still"></a>
+        
+        <a class="site-title" href="/">
+          Just Still
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories">Posts</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Threat Spotlight - DLL Hijacking (and .NET)
+
+        
+      </h1>
+      
+        <p class="page__lead">How does Windows determine which DLL to load 🤔?
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-16T00:00:00+08:00">September 16, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://stillu.cc/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#threat-spotlight" itemprop="item"><span itemprop="name">Threat spotlight</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#2020" itemprop="item"><span itemprop="name">2020</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#09" itemprop="item"><span itemprop="name">09</span></a>
+          <meta itemprop="position" content="4" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#16" itemprop="item"><span itemprop="name">16</span></a>
+          <meta itemprop="position" content="5" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Threat Spotlight - DLL Hijacking (and .NET)</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar-512.png" alt="Still Hsu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Still Hsu</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Developer, photographer, infosec researcher.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Taiwan</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://twitter.com/StillAzureH" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/Still34" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/.well-known/pubkey.asc" rel="nofollow noopener noreferrer"><i class="fas fa-user-lock" aria-hidden="true"></i><span class="label">GPG (Email)</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:business@stillu.cc">
+            <meta itemprop="email" content="business@stillu.cc" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Threat Spotlight - DLL Hijacking (and .NET)">
+    <meta itemprop="description" content="How does Windows determine which DLL to load 🤔?">
+    <meta itemprop="datePublished" content="2020-09-16T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#tldr">TL;DR</a></li><li><a href="#dll-search-order">DLL Search Order</a></li><li><a href="#the-problem">The Problem</a></li><li><a href="#the-solution">The Solution</a><ul><li><a href="#net">.NET</a></li><li><a href="#win32-loadlibraryex">Win32 LoadLibraryEx</a></li></ul></li><li><a href="#additional-resources">Additional Resources</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>Welcome to a new series I’m calling Threat Spotlight! In this series, we will focus on common vulnerabilities or potential risk factors that developers or security researchers should consider when securing their systems.</p>
+
+<p>In this article, we’ll be focusing on the way Windows handles DLL loading, how threat actors may attack the search chain, and what developers can do to avoid such weakness.</p>
+
+<h2 id="tldr">TL;DR</h2>
+
+<p>Make sure your environment has the entire orange section secured, and use <code class="language-plaintext highlighter-rouge">LoadLibraryEx</code> with <a href="https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexa#security-remarks">secure flags</a> and use absolute path for the DLL if possible.</p>
+
+<p><a href="/assets/images/posts/dll-hijacking/dll-hijack.png"><img class="lazy align-center" src="/generated/assets/images/posts/dll-hijacking/dll-hijack-600-20553a434.png" srcset="/generated/assets/images/posts/dll-hijacking/dll-hijack-600-20553a434.png 1.0x, /generated/assets/images/posts/dll-hijacking/dll-hijack-900.0-20553a434.png 1.5x, /generated/assets/images/posts/dll-hijacking/dll-hijack-1191-20553a434.png 1.99x"></a></p>
+
+<h2 id="dll-search-order">DLL Search Order</h2>
+
+<p>As always, to understand how Windows handles things, we need to look no further than the official documentation - <a href="https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order">Dynamic-Link Library Search Order</a>. In the section “Search Order for Desktop Applications,” the documentation notes the following.</p>
+
+<blockquote>
+  <p>Desktop applications can control the location from which a DLL is loaded by specifying a full path, using DLL redirection, or by using a manifest. If none of these methods are used, the system searches for the DLL at load time as described in this section.</p>
+
+  <p>Before the system searches for a DLL, it checks the following:</p>
+
+  <ul>
+    <li>If a DLL with the same module name is already loaded in memory, the system uses the loaded DLL, no matter which directory it is in. The system does not search for the DLL.</li>
+    <li>If the DLL is on the list of known DLLs for the version of Windows on which the application is running, the system uses its copy of the known DLL (and the known DLL’s dependent DLLs, if any). The system does not search for the DLL. For a list of known DLLs on the current system, see the following registry key: <code class="language-plaintext highlighter-rouge">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs</code>.</li>
+  </ul>
+</blockquote>
+
+<p>So, what does that tell us? The paragraph tells us that before searching for a DLL, Windows will first check: a) if the library is already loaded in the memory, if so, use that, to avoid loading the same DLL in memory; b) if the DLL is in the <code class="language-plaintext highlighter-rouge">KnownDLLs</code> list under <code class="language-plaintext highlighter-rouge">HKLM\System\CurrentControlSet\Control\Session Manager\KnownDLLs</code>.</p>
+
+<p><a href="/assets/images/posts/dll-hijacking/dll-hijack-pre-search.png"><img class="lazy align-center" src="/generated/assets/images/posts/dll-hijacking/dll-hijack-pre-search-600-eac5a6e6c.png" srcset="/generated/assets/images/posts/dll-hijacking/dll-hijack-pre-search-600-eac5a6e6c.png 1.0x, /generated/assets/images/posts/dll-hijacking/dll-hijack-pre-search-900.0-eac5a6e6c.png 1.5x, /generated/assets/images/posts/dll-hijacking/dll-hijack-pre-search-1191-eac5a6e6c.png 1.99x"></a></p>
+
+<p>This section is generally safe from threat actor, as these factors cannot be controlled by attackers under normal circumstances.</p>
+
+<p class="notice--warning"><strong>⚠ Warning</strong> By default, Windows uses what is known as the “Safe DLL Search Mode” to search for the requested library. This mode is controlled by the <code class="language-plaintext highlighter-rouge">HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\SafeDllSearchMode</code> registry value. Because <code class="language-plaintext highlighter-rouge">SafeDLLSearchMode</code> is enabled by default, we will only cover the default behavior.</p>
+
+<p>But what about after that? Once again, let’s refer to the official documentation for clues.</p>
+
+<blockquote>
+  <ol>
+    <li>The directory from which the application loaded.</li>
+    <li>The system directory. Use the <code class="language-plaintext highlighter-rouge">GetSystemDirectory</code> function to get the path of this directory.</li>
+    <li>The 16-bit system directory. There is no function that obtains the path of this directory, but it is searched.</li>
+    <li>The Windows directory. Use the <code class="language-plaintext highlighter-rouge">GetWindowsDirectory</code> function to get the path of this directory.</li>
+    <li>The current directory.</li>
+    <li>The directories that are listed in the PATH environment variable. Note that this does not include the per-application path specified by the App Paths registry key. The App Paths key is not used when computing the DLL search path.</li>
+  </ol>
+</blockquote>
+
+<p>Given the above steps, we can plot out what the search order is going to look like:</p>
+
+<p><a href="/assets/images/posts/dll-hijacking/dll-hijack.png"><img class="lazy align-center" src="/generated/assets/images/posts/dll-hijacking/dll-hijack-600-20553a434.png" srcset="/generated/assets/images/posts/dll-hijacking/dll-hijack-600-20553a434.png 1.0x, /generated/assets/images/posts/dll-hijacking/dll-hijack-900.0-20553a434.png 1.5x, /generated/assets/images/posts/dll-hijacking/dll-hijack-1191-20553a434.png 1.99x"></a></p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>See the problem? The parts marked in red can easily be manipulated by threat actors, especially if they have arbitrary write permissions. If the attacker could drop files into the application folder or into any of the environment path folders with weak permissions, they could easily cause havoc by replacing the intended DLL with a malicious one (with exceptions, see <a href="#the-solution">The Solution</a>).</p>
+
+<p>Consider the following C# code:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">DllImport</span><span class="p">(</span><span class="s">"unknown.dll"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">static</span> <span class="k">extern</span> <span class="k">void</span> <span class="nf">UnknownMethod</span><span class="p">();</span>
+<span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nf">UnknownMethod</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>And our <code class="language-plaintext highlighter-rouge">unknown.dll</code> C++ code:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+</span><span class="k">extern</span> <span class="s">"C"</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">dllexport</span><span class="p">)</span>
+<span class="kt">void</span> <span class="nf">UnknownMethod</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello, World!"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>When we run the application, it will attempt to look for <code class="language-plaintext highlighter-rouge">unknown.dll</code> in various directories based on the search order. In this instance, <code class="language-plaintext highlighter-rouge">unknown.dll</code> is planted at where the current working directory is (where <code class="language-plaintext highlighter-rouge">dotnet myapp.dll</code> is called). We can observe this behavior using <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/procmon">Process Monitor</a>.</p>
+
+<figure>
+  <a href="/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-400-71595a74f.webp 400w, /generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-600-71595a74f.webp 600w, /generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-800-71595a74f.webp 800w, /generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-1000-71595a74f.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-400-5ce050329.png 400w, /generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-600-5ce050329.png 600w, /generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-800-5ce050329.png 800w, /generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-1000-5ce050329.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698-800-5ce050329.png" width="2240" height="250" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-400-8fc394092.webp 400w, /generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-600-8fc394092.webp 600w, /generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-800-8fc394092.webp 800w, /generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-848-8fc394092.webp 848w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-400-bebb7633a.png 400w, /generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-600-bebb7633a.png 600w, /generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-800-bebb7633a.png 800w, /generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-848-bebb7633a.png 848w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd-800-bebb7633a.png" width="848" height="371" />
+  </picture>
+</a>
+
+  <figcaption>
+    The dotnet application successfully found the requested DLL at the current working directory.
+    Our program executed as expected with "Hello, World!" printed.
+  </figcaption>
+</figure>
+
+<p>So let’s say our threat actor has managed to gain access to the Windows or System directory and dropped in their malicious DLL, what would happen when we execute the application again?</p>
+
+<figure>
+  <a href="/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-400-8ee9b8b95.webp 400w, /generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-600-8ee9b8b95.webp 600w, /generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-800-8ee9b8b95.webp 800w, /generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-1000-8ee9b8b95.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-400-b14f43d83.png 400w, /generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-600-b14f43d83.png 600w, /generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-800-b14f43d83.png 800w, /generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-1000-b14f43d83.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb-800-b14f43d83.png" width="2231" height="208" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-400-9e4e07d5a.webp 400w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-600-9e4e07d5a.webp 600w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-800-9e4e07d5a.webp 800w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-1000-9e4e07d5a.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-400-e8d3f937e.png 400w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-600-e8d3f937e.png 600w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-800-e8d3f937e.png 800w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-1000-e8d3f937e.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-800-e8d3f937e.png" width="1015" height="359" />
+  </picture>
+</a>
+
+  <figcaption>
+    Suddenly, our program stopped executing with the expected behavior!
+  </figcaption>
+</figure>
+
+<p>Now, this is a very unlikely scenario as the threat actor would first have to elevate their user account with one that has Administrator ACL permissions in order to perform a file write into a protected directory.</p>
+
+<p>Here’s a more likely scenario - what if we were to delete the DLL from the application folder and find a weak ACL controlled directory that is present within our <code class="language-plaintext highlighter-rouge">%PATH%</code>? Fortunately for us (and me), <a href="https://github.com/itm4n/PrivescCheck">PrivescCheck</a> can help us find PATH directories with weak permissions.</p>
+
+<p><a href="/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb.png"><picture><source srcset="/generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-400-cc9dfa50e.webp 400w, /generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-600-cc9dfa50e.webp 600w, /generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-800-cc9dfa50e.webp 800w, /generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-1000-cc9dfa50e.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-400-d99d16699.png 400w, /generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-600-d99d16699.png 600w, /generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-800-d99d16699.png 800w, /generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-1000-d99d16699.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/dll-hijacking/d5675e55e1f7c0f327214d5d828ad1938ca9b8d145db65012f3136bc2c860ceb-800-d99d16699.png" width="1783" height="522"></picture></a></p>
+
+<p>With <code class="language-plaintext highlighter-rouge">Invoke-DllHijackingCheck</code>, we are able to quickly find folders that anyone under <code class="language-plaintext highlighter-rouge">NT AUTHORITY\Authenticated Users</code> can write to. Let’s try moving our malicious DLL there.</p>
+
+<figure>
+  <a href="/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-400-70eb47ae9.webp 400w, /generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-600-70eb47ae9.webp 600w, /generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-800-70eb47ae9.webp 800w, /generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-1000-70eb47ae9.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-400-34b6ec89d.png 400w, /generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-600-34b6ec89d.png 600w, /generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-800-34b6ec89d.png 800w, /generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-1000-34b6ec89d.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab-800-34b6ec89d.png" width="2250" height="1129" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-400-9e4e07d5a.webp 400w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-600-9e4e07d5a.webp 600w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-800-9e4e07d5a.webp 800w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-1000-9e4e07d5a.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-400-e8d3f937e.png 400w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-600-e8d3f937e.png 600w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-800-e8d3f937e.png 800w, /generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-1000-e8d3f937e.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4-800-e8d3f937e.png" width="1015" height="359" />
+  </picture>
+</a>
+
+  <figcaption>
+    Success! We managed to successfully hijack the unknown.dll.
+  </figcaption>
+</figure>
+
+<p>DLL hijacking could also be used to target Windows services - though very few of them, if at all, are still vulnerable in one way or another. With PrivescCheck, we can find potentially vulnerable services by invoking <code class="language-plaintext highlighter-rouge">Invoke-HijackableDllsCheck</code>. It will list out the services that has hijackable DLLs, what user account will the process be run as when the hijack is complete, and whether or not a reboot is required for the hijack to work.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PS</span><span class="w"> </span><span class="nx">C:\Users\Still</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Invoke-HijackableDllsCheck</span><span class="w">
+
+</span><span class="n">Name</span><span class="w">               </span><span class="nx">Description</span><span class="w">                                       </span><span class="nx">RunAs</span><span class="w">                     </span><span class="nx">RebootRequired</span><span class="w">
+</span><span class="o">----</span><span class="w">               </span><span class="o">-----------</span><span class="w">                                       </span><span class="o">-----</span><span class="w">                     </span><span class="o">--------------</span><span class="w">
+</span><span class="n">cdpsgshims.dll</span><span class="w">     </span><span class="nx">Loaded</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">CDPSvc</span><span class="w"> </span><span class="nx">upon</span><span class="w"> </span><span class="nx">service</span><span class="w"> </span><span class="nx">startup</span><span class="w">             </span><span class="nx">NT</span><span class="w"> </span><span class="nx">AUTHORITY\LocalService</span><span class="w">           </span><span class="nx">True</span><span class="w">
+</span><span class="n">WptsExtensions.dll</span><span class="w"> </span><span class="nx">Loaded</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Task</span><span class="w"> </span><span class="nx">Scheduler</span><span class="w"> </span><span class="nx">upon</span><span class="w"> </span><span class="nx">service</span><span class="w"> </span><span class="nx">startup</span><span class="w"> </span><span class="nx">LocalSystem</span><span class="w">                         </span><span class="nx">True</span><span class="w">
+</span></code></pre></div></div>
+
+<p>For more details and hands on practices of DLL hijacking, I recommend itm4n’s excellent article regarding DLL hijacking, which can be found in the <a href="#additional-resources">Additional Resources</a> section.</p>
+
+<h2 id="the-solution">The Solution</h2>
+
+<h3 id="net">.NET</h3>
+
+<p><del>You may have noticed my peculiar language/runtime choice for testing DLL hijacking. There is a reason that I chose dotnet over C/C++ here. Here’s the problem - <strong>there is not a single good solution to avoid DLL hijacking when working with dotnet.</strong> At least, not that I can tell. The only method that I can tell is by invoking the <code class="language-plaintext highlighter-rouge">LoadLibrary</code> call directly, as opposed to calling the DLL exports. With <code class="language-plaintext highlighter-rouge">LoadLibraryEx</code>, DLL hijacking can be alleviated to some degree (see below).</del></p>
+
+<p><del>If you do know a good method of preventing dotnet DLL hijacking, please do let me know in the comments.</del></p>
+
+<p>For .NET Core 3.0 and above (inc. .NET 5), <a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.nativelibrary?view=netcore-3.1">the use of <code class="language-plaintext highlighter-rouge">System.Runtime.InteropServices.NativeLibrary</code> class</a> is preferred. So, in our case, we can rewrite the application like this to specify that we only want to search within the assembly directory:</p>
+
+<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">delegate</span> <span class="k">void</span> <span class="nf">UnknownMethod</span><span class="p">();</span>
+<span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">NativeLibrary</span><span class="p">.</span><span class="nf">TryLoad</span><span class="p">(</span><span class="s">"unknown.dll"</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Program</span><span class="p">).</span><span class="n">Assembly</span><span class="p">,</span> <span class="n">DllImportSearchPath</span><span class="p">.</span><span class="n">AssemblyDirectory</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">entryPointer</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">NativeLibrary</span><span class="p">.</span><span class="nf">TryGetExport</span><span class="p">(</span><span class="n">entryPointer</span><span class="p">,</span> <span class="s">"UnknownMethod"</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">methodPointer</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">MyUnknownMethod</span> <span class="p">=</span> <span class="n">Marshal</span><span class="p">.</span><span class="n">GetDelegateForFunctionPointer</span><span class="p">&lt;</span><span class="n">UnknownMethod</span><span class="p">&gt;(</span><span class="n">methodPointer</span><span class="p">);</span>
+            <span class="nf">MyUnknownMethod</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Failed to locate the DLL within the application directory."</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>No more exceptions when dealing with <code class="language-plaintext highlighter-rouge">extern</code> with missing DLL or fumbling with DLL search order!</p>
+
+<h3 id="win32-loadlibraryex">Win32 <code class="language-plaintext highlighter-rouge">LoadLibraryEx</code></h3>
+
+<p>In Windows 8 or above (or Windows 7 or below with KB2533623 installed), the <code class="language-plaintext highlighter-rouge">LoadLibraryEx</code> function has a number of new flags that are created specifically to address this issue.</p>
+
+<p>The new flags are <code class="language-plaintext highlighter-rouge">LOAD_LIBRARY_SEARCH_APPLICATION_DIR</code>, <code class="language-plaintext highlighter-rouge">LOAD_LIBRARY_SEARCH_SYSTEM32</code>, <code class="language-plaintext highlighter-rouge">LOAD_LIBRARY_SEARCH_USER_DIRS</code> and more. Additionally, there are flags such as <code class="language-plaintext highlighter-rouge">LOAD_LIBRARY_REQUIRE_SIGNED_TARGET</code>, <code class="language-plaintext highlighter-rouge">LOAD_LIBRARY_SAFE_CURRENT_DIRS</code> to better ensure the integrity of the library before it is loaded. I’m not going to delve into what each flag does here, as they are best explained in the <a href="https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexa">LoadLibraryExA function (libloaderapi.h)</a> documentation.</p>
+
+<h2 id="additional-resources">Additional Resources</h2>
+
+<p>The following are excellent articles that provide better insights into this type of attack and remedy,</p>
+
+<ul>
+  <li><a href="https://stackoverflow.com/questions/45272417/preventing-dll-hijacking-vulnerability-does-not-working-in-c-sharp">Preventing DLL hijacking vulnerability does not working in C#</a></li>
+  <li><a href="https://itm4n.github.io/windows-dll-hijacking-clarified/">Windows DLL Hijacking (Hopefully) Clarified</a> by itm4n</li>
+  <li><a href="https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order#search-order-for-desktop-applications">Dynamic-Link Library Search Order - Win32 apps</a></li>
+  <li><a href="https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-security">Dynamic-Link Library Security - Win32 apps</a></li>
+  <li><a href="https://msrc-blog.microsoft.com/2018/04/04/triaging-a-dll-planting-vulnerability/">Triaging a DLL planting vulnerability - Microsoft Security Response Center</a></li>
+  <li><a href="https://remoteawesomethoughts.blogspot.com/2019/05/windows-10-task-schedulerservice.html">Windows 10 - Task Scheduler service - Privilege Escalation/Persistence through DLL planting</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#dotnet" class="page__taxonomy-item" rel="tag">dotnet</a><span class="sep">, </span>
+    
+      <a href="/tags/#en-us" class="page__taxonomy-item" rel="tag">en-us</a><span class="sep">, </span>
+    
+      <a href="/tags/#guide" class="page__taxonomy-item" rel="tag">guide</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#threat-spotlight" class="page__taxonomy-item" rel="tag">threat-spotlight</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-09-16T00:00:00+08:00">September 16, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=StillAzureH&text=Threat+Spotlight+-+DLL+Hijacking+%28and+.NET%29%20https%3A%2F%2Fstillu.cc%2Fthreat-spotlight%2F2020%2F09%2F16%2Fdll-hijacking%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstillu.cc%2Fthreat-spotlight%2F2020%2F09%2F16%2Fdll-hijacking%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fstillu.cc%2Fthreat-spotlight%2F2020%2F09%2F16%2Fdll-hijacking%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/personal/2020/08/03/humanity-songs/" class="pagination--pager" title="Humanity and Sentimental Value of Songs
+">Previous</a>
+    
+    
+      <a href="/infosec/2020/09/28/hitcon-2020/" class="pagination--pager" title="The HITCON 2020 Experience
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ida-tips/2022/01/22/saved-desktops-across-32bit-64bit/" rel="permalink">IDA Trickeries #1: Using Saved Desktop Across IDAs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-22T00:00:00+08:00">January 22, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">So like… who at Hex-rays implemented this?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/threat-spotlight/2021/11/13/domain-fronting-fastly/" rel="permalink">Threat Spotlight - Domain Fronting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-13T00:00:00+08:00">November 13, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Fast(ly) but deadly.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/10/29/barinsta-and-facebook/" rel="permalink">Facebook, Monopoly, and Barinsta
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+08:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Facebook and its anti-competitive strategy.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/07/12/lockdown-taiwan-2021/" rel="permalink">Lockdown, Taiwan, 2021
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-07-12T00:00:00+08:00">July 12, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Impact of lockdown in Taiwan and my personal life.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Still Hsu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N6FGTZBMTZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N6FGTZBMTZ', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'Still34/landing');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

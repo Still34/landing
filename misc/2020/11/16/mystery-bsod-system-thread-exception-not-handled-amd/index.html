@@ -1,0 +1,866 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>The Mysterious SYSTEM_THREAD_EXCEPTION_NOT_HANDLED and Hyper-V - Just Still</title>
+<meta name="description" content="AMD PSS + Hyper-V = F">
+
+
+  <meta name="author" content="Still Hsu">
+  
+  <meta property="article:author" content="Still Hsu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Just Still">
+<meta property="og:title" content="The Mysterious SYSTEM_THREAD_EXCEPTION_NOT_HANDLED and Hyper-V">
+<meta property="og:url" content="https://stillu.cc/misc/2020/11/16/mystery-bsod-system-thread-exception-not-handled-amd/">
+
+
+  <meta property="og:description" content="AMD PSS + Hyper-V = F">
+
+
+
+  <meta property="og:image" content="https://stillu.cc/assets/images/header.jpg">
+
+
+
+  <meta name="twitter:site" content="@StillAzureH">
+  <meta name="twitter:title" content="The Mysterious SYSTEM_THREAD_EXCEPTION_NOT_HANDLED and Hyper-V">
+  <meta name="twitter:description" content="AMD PSS + Hyper-V = F">
+  <meta name="twitter:url" content="https://stillu.cc/misc/2020/11/16/mystery-bsod-system-thread-exception-not-handled-amd/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://stillu.cc/assets/images/header.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-11-16T00:00:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://stillu.cc/misc/2020/11/16/mystery-bsod-system-thread-exception-not-handled-amd/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Still Hsu",
+      "url": "https://stillu.cc/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Just Still Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/manifest.json">
+<meta name="msapplication-TileColor" content="#F21368">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#F21368">
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/avatar-512.png" alt="Just Still"></a>
+        
+        <a class="site-title" href="/">
+          Just Still
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories">Posts</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/header.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          The Mysterious SYSTEM_THREAD_EXCEPTION_NOT_HANDLED and Hyper-V
+
+        
+      </h1>
+      
+        <p class="page__lead">AMD PSS + Hyper-V = F
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-16T00:00:00+08:00">November 16, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://stillu.cc/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#misc" itemprop="item"><span itemprop="name">Misc</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#2020" itemprop="item"><span itemprop="name">2020</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#11" itemprop="item"><span itemprop="name">11</span></a>
+          <meta itemprop="position" content="4" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#16" itemprop="item"><span itemprop="name">16</span></a>
+          <meta itemprop="position" content="5" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">The Mysterious SYSTEM_THREAD_EXCEPTION_NOT_HANDLED and Hyper-V</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar-512.png" alt="Still Hsu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Still Hsu</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Developer, photographer, infosec researcher.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Taiwan</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://twitter.com/StillAzureH" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/Still34" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/.well-known/pubkey.asc" rel="nofollow noopener noreferrer"><i class="fas fa-user-lock" aria-hidden="true"></i><span class="label">GPG (Email)</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:business@stillu.cc">
+            <meta itemprop="email" content="business@stillu.cc" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="The Mysterious SYSTEM_THREAD_EXCEPTION_NOT_HANDLED and Hyper-V">
+    <meta itemprop="description" content="AMD PSS + Hyper-V = F">
+    <meta itemprop="datePublished" content="2020-11-16T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="tldr">TL;DR</h2>
+
+<p>If the BSoD happened after enabling Hyper-V-related features, <em>and</em> if you are on an AMD platform, disable AMD PSS in the BIOS.</p>
+
+<p class="notice--warning">Disabling Memory Integrity supposedly works too, but <strong>NOT RECOMMENDED</strong> for security reasons.</p>
+
+<h2 id="the-story">The Story</h2>
+
+<p>My weekend could have been a lot smoother this week. Here’s the story: I’ve been using Hyper-V ever since WSL 2 was first introduced to the Windows 10 preview builds. Since running a hypervisor (VMware layer) inside another hypervisor (Hyper-V layer) is not exactly ideal performance-wise, I figured I might as well give Hyper-V a try.</p>
+
+<p><a href="/assets/images/posts/e722c7e01dd42b7e3b8729e2b56697c334c3f6281a07ab9997b35696410af0e5.png"><img class="lazy align-center" src="/generated/assets/images/posts/e722c7e01dd42b7e3b8729e2b56697c334c3f6281a07ab9997b35696410af0e5-600-c55d34f98.png" srcset="/generated/assets/images/posts/e722c7e01dd42b7e3b8729e2b56697c334c3f6281a07ab9997b35696410af0e5-600-c55d34f98.png 1.0x, /generated/assets/images/posts/e722c7e01dd42b7e3b8729e2b56697c334c3f6281a07ab9997b35696410af0e5-900.0-c55d34f98.png 1.5x, /generated/assets/images/posts/e722c7e01dd42b7e3b8729e2b56697c334c3f6281a07ab9997b35696410af0e5-1200-c55d34f98.png 2.0x"></a></p>
+
+<p>Fast forward to yesterday. I was setting up a Windows 7 Hyper-V instance for my malware lab at home. During the setup, I figured I’d add my on-board Wi-Fi module as an External VM Hyper-V Switch.</p>
+
+<p>…annnnd I couldn’t. I keep running into this mysterious <code class="language-plaintext highlighter-rouge">Element not found</code> and <code class="language-plaintext highlighter-rouge">Folder already exists</code> error. Looking it up, I had tried everything from <code class="language-plaintext highlighter-rouge">netcfg -d</code> to reinstalling the network driver - nothing worked. Great.</p>
+
+<p><a href="/assets/images/posts/3bb00caa35e52b5f699c90910bdabd07bd3fc0d1cde0ee72431603d0407bd42a.png"><img class="lazy align-center" src="/generated/assets/images/posts/3bb00caa35e52b5f699c90910bdabd07bd3fc0d1cde0ee72431603d0407bd42a-600-aad7a001c.png" srcset="/generated/assets/images/posts/3bb00caa35e52b5f699c90910bdabd07bd3fc0d1cde0ee72431603d0407bd42a-600-aad7a001c.png 1.0x, /generated/assets/images/posts/3bb00caa35e52b5f699c90910bdabd07bd3fc0d1cde0ee72431603d0407bd42a-829-aad7a001c.png 1.38x"></a></p>
+
+<p>As a last resort, I tried the nuke approach: re-install the Hyper-V feature on my Windows 10 20H2 (19042.630) installation by disabling and re-enabling the Hyper-V and its related Windows features (i.e., <code class="language-plaintext highlighter-rouge">Hyper-V</code>, <code class="language-plaintext highlighter-rouge">Virtual Machine Platform</code>, <code class="language-plaintext highlighter-rouge">Windows Hypervisor Platform</code>, <code class="language-plaintext highlighter-rouge">Windows Subsystem for Linux</code>, <code class="language-plaintext highlighter-rouge">Microsoft Defender Application Guard</code>). And that was where my trouble got even worse.</p>
+
+<p>After re-enabling the features, my Windows couldn’t even reach the Windows loading screen without this pesky <code class="language-plaintext highlighter-rouge">SYSTEM_THREAD_EXCEPTION_NOT_HANDLED</code> BSoD.</p>
+
+<p><a href="/assets/images/posts/3f4359142bf87d749b0a5cf2b756e3be7afd66699d7cdf9bce12702f807d7e74.png"><img class="lazy align-center" src="/generated/assets/images/posts/3f4359142bf87d749b0a5cf2b756e3be7afd66699d7cdf9bce12702f807d7e74-600-676eb5a75.png" srcset="/generated/assets/images/posts/3f4359142bf87d749b0a5cf2b756e3be7afd66699d7cdf9bce12702f807d7e74-600-676eb5a75.png 1.0x, /generated/assets/images/posts/3f4359142bf87d749b0a5cf2b756e3be7afd66699d7cdf9bce12702f807d7e74-900.0-676eb5a75.png 1.5x, /generated/assets/images/posts/3f4359142bf87d749b0a5cf2b756e3be7afd66699d7cdf9bce12702f807d7e74-1024-676eb5a75.png 1.71x"></a></p>
+
+<p>At this point I was like, “Welp, I guess my system is just cursed.” I didn’t even bother troubleshooting beyond the basic “let’s enter safe mode and see if that works” and “let’s see what the Internet has to say” steps. Since I already have regular backups (<em>you should too</em>), reinstalling Windows really wasn’t that big of a deal to me; might as well just do it then.</p>
+
+<p><a href="/assets/images/posts/aca24a4af39768458fd3034667ae0f451975142b5c7e0e3dbdd13ba4f181a193.jpg"><img class="lazy align-center" src="/generated/assets/images/posts/aca24a4af39768458fd3034667ae0f451975142b5c7e0e3dbdd13ba4f181a193-600-49ce7b5e6.jpg" srcset="/generated/assets/images/posts/aca24a4af39768458fd3034667ae0f451975142b5c7e0e3dbdd13ba4f181a193-600-49ce7b5e6.jpg 1.0x, /generated/assets/images/posts/aca24a4af39768458fd3034667ae0f451975142b5c7e0e3dbdd13ba4f181a193-900.0-49ce7b5e6.jpg 1.5x, /generated/assets/images/posts/aca24a4af39768458fd3034667ae0f451975142b5c7e0e3dbdd13ba4f181a193-1200-49ce7b5e6.jpg 2.0x"></a></p>
+
+<p>After reinstalling Windows 20H2 (<em>after like an hour or two of getting the latest Windows ISO, thanks Microsoft for throttling the traffic</em>) and getting my most essential programs set up, I went ahead and enabled Hyper-V features again.</p>
+
+<p><a href="/assets/images/posts/37488bb1b84a7ff265ea968c2a1d64a6af25623a3c00c2ebd3dad9c0ef7a9b02.png"><img class="lazy align-center" src="/generated/assets/images/posts/37488bb1b84a7ff265ea968c2a1d64a6af25623a3c00c2ebd3dad9c0ef7a9b02-600-536f2eb8f.png" srcset="/generated/assets/images/posts/37488bb1b84a7ff265ea968c2a1d64a6af25623a3c00c2ebd3dad9c0ef7a9b02-600-536f2eb8f.png 1.0x, /generated/assets/images/posts/37488bb1b84a7ff265ea968c2a1d64a6af25623a3c00c2ebd3dad9c0ef7a9b02-694-536f2eb8f.png 1.16x"></a></p>
+
+<p>…annnnd we’re back to this blue screen crap.</p>
+
+<p>Thankfully, a Microsoft employee on the PowerShell Discord that I visit regularly suggested that it was a known issue on some platforms, particularly, Lenovo laptops with biometric passthrough. Initially I didn’t really buy into that suggestion, as it seemed like a niche Lenovo-related incident, but he did suggest turning off virtualization features in the BIOS to see if it would help. Disabling AMD SVM (the AMD equivalent of Intel VT-d) did allow me to boot back into Windows. Upon getting past the loading screen, Windows noticed the installed features aren’t working as intended and rolled back the features.</p>
+
+<p>That’s great and all, but… I kinda need SVM if I want to use any software that utilize hardware virtualization at all! Since the person on Discord mentioned that it was “certain features” causing this BSoD, I decided to try to pinpoint the issue myself. I first tried disabling certain CPU features that I knew I wasn’t using or explicitly required to be on, then I enabled Windows Features one by one, instead of enabling all at once. Everything booted. Okay cool.</p>
+
+<p>Let’s try re-enabling AMD PSS, one of the features I disabled. And ladies and gentlemen, that was it! This non-descriptive feature with a vaguely technical description was causing the issue. I can’t imagine why ACPI-related features would lead to this bizarre issue, but more importantly - whoever in charge of writing the feature description over at ASUS needs to revise them. I have <em>no idea</em> what any of that meant without consulting AMD’s tech specs.</p>
+
+<p><a href="/assets/images/posts/24fceb358766c2eaeecf139b8e69776dd3688d801ccb8b71802eab2823d6dfce.jpg"><img class="lazy align-center" src="/generated/assets/images/posts/24fceb358766c2eaeecf139b8e69776dd3688d801ccb8b71802eab2823d6dfce-600-a6be72cf7.jpg" srcset="/generated/assets/images/posts/24fceb358766c2eaeecf139b8e69776dd3688d801ccb8b71802eab2823d6dfce-600-a6be72cf7.jpg 1.0x, /generated/assets/images/posts/24fceb358766c2eaeecf139b8e69776dd3688d801ccb8b71802eab2823d6dfce-900.0-a6be72cf7.jpg 1.5x, /generated/assets/images/posts/24fceb358766c2eaeecf139b8e69776dd3688d801ccb8b71802eab2823d6dfce-1200-a6be72cf7.jpg 2.0x"></a></p>
+
+<p>By the way, the Wi-Fi bridging VM switch thing? Still doesn’t work after a reinstall. Thanks Microsoft. I swear, VMware seems more than reliable at this rate.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#en-us" class="page__taxonomy-item" rel="tag">en-us</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#misc" class="page__taxonomy-item" rel="tag">misc</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-11-16T00:00:00+08:00">November 16, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=StillAzureH&text=The+Mysterious+SYSTEM_THREAD_EXCEPTION_NOT_HANDLED+and+Hyper-V%20https%3A%2F%2Fstillu.cc%2Fmisc%2F2020%2F11%2F16%2Fmystery-bsod-system-thread-exception-not-handled-amd%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstillu.cc%2Fmisc%2F2020%2F11%2F16%2Fmystery-bsod-system-thread-exception-not-handled-amd%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fstillu.cc%2Fmisc%2F2020%2F11%2F16%2Fmystery-bsod-system-thread-exception-not-handled-amd%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/personal/2020/10/25/new-chapter-of-life/" class="pagination--pager" title="A New Chapter in Life
+">Previous</a>
+    
+    
+      <a href="/infosec/2021/03/01/obtaining-unreal-pak-decryption-key/" class="pagination--pager" title="How I Extracted an Unreal Engine Game’s WWise Audio
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ida-tips/2022/01/22/saved-desktops-across-32bit-64bit/" rel="permalink">IDA Trickeries #1: Using Saved Desktop Across IDAs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-22T00:00:00+08:00">January 22, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">So like… who at Hex-rays implemented this?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/threat-spotlight/2021/11/13/domain-fronting-fastly/" rel="permalink">Threat Spotlight - Domain Fronting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-13T00:00:00+08:00">November 13, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Fast(ly) but deadly.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/10/29/barinsta-and-facebook/" rel="permalink">Facebook, Monopoly, and Barinsta
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+08:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Facebook and its anti-competitive strategy.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/07/12/lockdown-taiwan-2021/" rel="permalink">Lockdown, Taiwan, 2021
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-07-12T00:00:00+08:00">July 12, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Impact of lockdown in Taiwan and my personal life.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Still Hsu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N6FGTZBMTZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N6FGTZBMTZ', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'Still34/landing');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

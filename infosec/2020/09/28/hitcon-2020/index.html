@@ -1,0 +1,1484 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>The HITCON 2020 Experience - Just Still</title>
+<meta name="description" content="HITCON CMT 2020 is upon us again!">
+
+
+  <meta name="author" content="Still Hsu">
+  
+  <meta property="article:author" content="Still Hsu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Just Still">
+<meta property="og:title" content="The HITCON 2020 Experience">
+<meta property="og:url" content="https://stillu.cc/infosec/2020/09/28/hitcon-2020/">
+
+
+  <meta property="og:description" content="HITCON CMT 2020 is upon us again!">
+
+
+
+  <meta property="og:image" content="https://stillu.cc/assets/images/posts/hitcon-cmt-2020/banner.jpg">
+
+
+
+  <meta name="twitter:site" content="@StillAzureH">
+  <meta name="twitter:title" content="The HITCON 2020 Experience">
+  <meta name="twitter:description" content="HITCON CMT 2020 is upon us again!">
+  <meta name="twitter:url" content="https://stillu.cc/infosec/2020/09/28/hitcon-2020/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://stillu.cc/assets/images/posts/hitcon-cmt-2020/banner.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-09-28T14:32:17+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://stillu.cc/infosec/2020/09/28/hitcon-2020/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Still Hsu",
+      "url": "https://stillu.cc/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Just Still Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/manifest.json">
+<meta name="msapplication-TileColor" content="#F21368">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#F21368">
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/avatar-512.png" alt="Just Still"></a>
+        
+        <a class="site-title" href="/">
+          Just Still
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories">Posts</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/assets/images/posts/hitcon-cmt-2020/banner.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          The HITCON 2020 Experience
+
+        
+      </h1>
+      
+        <p class="page__lead">HITCON CMT 2020 is upon us again!
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-09-28T14:32:17+08:00">September 28, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          20 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://stillu.cc/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#infosec" itemprop="item"><span itemprop="name">Infosec</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#2020" itemprop="item"><span itemprop="name">2020</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#09" itemprop="item"><span itemprop="name">09</span></a>
+          <meta itemprop="position" content="4" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#28" itemprop="item"><span itemprop="name">28</span></a>
+          <meta itemprop="position" content="5" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">The HITCON 2020 Experience</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar-512.png" alt="Still Hsu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Still Hsu</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Developer, photographer, infosec researcher.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Taiwan</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://twitter.com/StillAzureH" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/Still34" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/.well-known/pubkey.asc" rel="nofollow noopener noreferrer"><i class="fas fa-user-lock" aria-hidden="true"></i><span class="label">GPG (Email)</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:business@stillu.cc">
+            <meta itemprop="email" content="business@stillu.cc" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="The HITCON 2020 Experience">
+    <meta itemprop="description" content="HITCON CMT 2020 is upon us again!">
+    <meta itemprop="datePublished" content="2020-09-28T14:32:17+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#prologue">Prologue</a></li><li><a href="#day-1">Day 1</a><ul><li><a href="#day-1-agenda">Day 1 Agenda</a></li><li><a href="#2020-industrial-cybersecurity-landscape-ics--infosec">2020 Industrial Cybersecurity Landscape (ICS &amp; Infosec)</a></li><li><a href="#lunch-break-intermissions">Lunch Break (Intermissions!)</a></li><li><a href="#operation-i-am-tom-ad-infiltration">Operation: I Am Tom (AD Infiltration)</a></li><li><a href="#tropic-troopers-usbferry-apt-vs-air-gapped-environments">Tropic Trooper’s USBFerry (APT vs. Air-gapped Environments)</a></li><li><a href="#a-ctf-style-escape-journey-on-vmware-workstation-guest-to-host-rce">A CTF-Style Escape Journey on VMWare Workstation (Guest-to-Host RCE)</a></li><li><a href="#end-of-day-1">End of Day 1</a></li></ul></li><li><a href="#day-2">Day 2</a><ul><li><a href="#day-2-agenda">Day 2 Agenda</a></li><li><a href="#exploiting-samsung-s10-secure-boot-root-wo-tripping-knox">Exploiting Samsung S10 Secure Boot (Root w/o Tripping KNOX)</a></li><li><a href="#lnk-to-rce-bugs-in-windows-shell-link-parser-windows-lnk-cves">LNK to RCE: Bugs in Windows Shell Link Parser (Windows *.lnk CVEs)</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p class="notice--warning"><strong>⚠ Disclaimer</strong> This trip was made by possible by the funding provided by the HITCON 2020 Student Program. While select students are required to write a publicly accessible review of the event, HITCON was <strong>NOT</strong> given any copy approval or an early preview. I try to present my articles as unbiased as possible.</p>
+
+<h2 id="prologue">Prologue</h2>
+
+<p>Attending HITCON Community conference has basically been a yearly routine of mine since 2018. Year and year I’m more and more amazed by the quality of the talks and the overall conference - this year was no exception. Every year the organization has surpassed my expectations with their ambitions.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-400-e6f8c9b47.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-600-e6f8c9b47.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-800-e6f8c9b47.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-1000-e6f8c9b47.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-400-34c8eb7f0.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-600-34c8eb7f0.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-800-34c8eb7f0.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-1000-34c8eb7f0.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/a9b4119a2c159ad69ef9641c7655323948183ce3bee094f9b77af7ade0604388-800-34c8eb7f0.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-400-ec7474730.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-600-ec7474730.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-800-ec7474730.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-1000-ec7474730.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-400-ba48617f5.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-600-ba48617f5.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-800-ba48617f5.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-1000-ba48617f5.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/63d8692635cb82c199cab411af89c5403d8ed74ab4c224069c5775aa6ae90b84-800-ba48617f5.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-400-76140a4c6.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-600-76140a4c6.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-800-76140a4c6.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-1000-76140a4c6.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-400-1acad1b7b.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-600-1acad1b7b.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-800-1acad1b7b.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-1000-1acad1b7b.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/1122e71907dae1eda4583f6541462d3e9b6fa381aebcbb4cf343c9c2eb22917a-800-1acad1b7b.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <figcaption>Badge and the looooong line of queue.</figcaption>
+</figure>
+
+<p>Due to COVID-19, the organization went out of their way to set up remote sessions for both domestic and foreign attendees. While I’ve heard there were numerous hiccups with the online sessions, I believe it’ll get better over time (assuming this is kept a tradition for the coming years). With everything else going on in the world in 2020, I’d like to think we’re extraordinarily lucky to be able to have the physical conference running. Since most events are moved to online if not outright canned around the world this year due to the pandemic, the fact that Taiwan was barely impacted is nothing short of a miracle.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-400-3da868005.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-600-3da868005.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-800-3da868005.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-1000-3da868005.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-400-e999db919.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-600-e999db919.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-800-e999db919.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-1000-e999db919.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/e51b9cafb1ce81f0a8174408000b169a383d4d3138fe49a0a1b46a043b1d75d8-800-e999db919.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-400-6b29e8e91.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-600-6b29e8e91.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-800-6b29e8e91.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-1000-6b29e8e91.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-400-275d94ae3.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-600-275d94ae3.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-800-275d94ae3.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-1000-275d94ae3.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/69efcef64cef9561c537965e152358bca586e58c70a76fed3449f3b35ade7fd7-800-275d94ae3.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-400-29181326d.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-600-29181326d.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-800-29181326d.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-1000-29181326d.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-400-261badf8c.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-600-261badf8c.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-800-261badf8c.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-1000-261badf8c.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/a7c8e75d5c71979d1b34a1aa85ae8a65b45615a0cff2de521602bc311c2f5acb-800-261badf8c.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <figcaption>Included care package for attendees.</figcaption>
+</figure>
+
+<p>To Taiwan and the rest of the world, I do believe this truly is a turning point for everyone involved - not only because of the various hazards going on right now. In terms of information security, I can certainly feel that the government this year is feeling some sort of pressure from the recent infosec incidents that had occurred in the past 3 years. During this year’s AIS3 (<em>Advanced Information Security Summer School</em>) courses, there was a noticeable presence of National Security and Industrial Control System related courses - which was unprecedented on this scale. In fact, it seems like such a crucial topic that the Vice President of Taiwan even showed up during this year’s HITCON opening ceremony.</p>
+
+<p><a href="/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b.jpg"><picture><source srcset="/generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-400-dbae78c25.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-600-dbae78c25.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-800-dbae78c25.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-1000-dbae78c25.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-400-296bb4a21.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-600-296bb4a21.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-800-296bb4a21.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-1000-296bb4a21.jpg 1000w" type="image/jpeg"><img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/bed184a8ab375fac3cd953eee88b093938e6dbc1a1c06943242933d314f5fd2b-800-296bb4a21.jpg" width="3984" height="2241"></picture></a></p>
+
+<h2 id="day-1">Day 1</h2>
+
+<h3 id="day-1-agenda">Day 1 Agenda</h3>
+
+<figure>
+  <a href="/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-400-3917b4b7d.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-600-3917b4b7d.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-800-3917b4b7d.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-1000-3917b4b7d.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-400-3b62112a6.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-600-3b62112a6.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-800-3b62112a6.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-1000-3b62112a6.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/ddf884bdd04cefb263eca5bd8412c619b029a28f7ace02680ecc89d5fc308a80-800-3b62112a6.png" width="1583" height="678" />
+  </picture>
+</a>
+
+  <figcaption>Click to see the full agenda.</figcaption>
+</figure>
+
+<h3 id="2020-industrial-cybersecurity-landscape-ics--infosec">2020 Industrial Cybersecurity Landscape (ICS &amp; Infosec)</h3>
+
+<p>After the opening, the rising importance of OT (<em>Operational Technology</em>, as opposed to IT - <em>Information Technology</em>) security was made apparent with the first talk of the day - “Industrial Cybersecurity Landscape in 2020: Trends, Challenges, and Opportunities.” Various APT groups have been preying on Taiwan in the past few years, and the OT industry is perhaps the biggest target of all, <a href="https://www.2-spyware.com/the-tsmc-appears-to-be-hacked-by-a-version-of-wannacry-ransomware">as TSMC was attacked by WannaCry in 2018</a>. In fact, the entire semiconductor industry has been under continuous attack even outside of the OT environment, as evidenced by the <a href="https://www.zdnet.com/article/black-hat-hackers-are-now-using-cobalt-strike-and-skeleton-keys-to-target-semiconductor-firms/">Black Hat 2020 APT Chimera report by CyCraft</a>.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-400-e31a65d75.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-600-e31a65d75.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-800-e31a65d75.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-1000-e31a65d75.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-400-5cea24212.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-600-5cea24212.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-800-5cea24212.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-1000-5cea24212.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/58e0f898774e10516a83bbc2eb5029068c3331982ad76d6cfadbe6db75eac65f-800-5cea24212.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-400-d75522c2b.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-600-d75522c2b.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-800-d75522c2b.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-1000-d75522c2b.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-400-eac926560.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-600-eac926560.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-800-eac926560.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-1000-eac926560.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/34ed080a07d1d2041c7a5551c00953ee72cc545fd4acb4a1fec76b32c33dab9b-800-eac926560.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-400-5e7a96a81.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-600-5e7a96a81.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-800-5e7a96a81.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-1000-5e7a96a81.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-400-23fc7838d.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-600-23fc7838d.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-800-23fc7838d.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-1000-23fc7838d.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/0fc58c1195850469ee0214d072dbe539c35962aa337f7f8708a5e03e5ffeb6c9-800-23fc7838d.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <figcaption>The future is looking gloomy if we don't invest more in OT security.</figcaption>
+</figure>
+
+<h3 id="lunch-break-intermissions">Lunch Break (Intermissions!)</h3>
+
+<p>I skipped over the next period of talks as I didn’t find anything particularly interesting that I wanted to listen to - which was rare. Alas, I went to work on my slides for my Lightning Talk session (I’ll get to that later). As always, the included meals and bonuses that came with the conference were amazing to have. This would be a fantastic chance for non-Taiwanese visitors to try out bentos.</p>
+
+<p><a href="/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390.jpg"><picture><source srcset="/generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-400-932831765.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-600-932831765.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-800-932831765.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-1000-932831765.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-400-92ae2b59d.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-600-92ae2b59d.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-800-92ae2b59d.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-1000-92ae2b59d.jpg 1000w" type="image/jpeg"><img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/f8c0999a31c7ee95c98b62887aae111c19b72c0329e5733b08c6559bf0f20390-800-92ae2b59d.jpg" width="4032" height="2268"></picture></a></p>
+
+<p>Under normal circumstances, I would have preferred to listen to the “APT Chimera - Operation targets Semiconductor Vendors” talk after the lunch break; fortunately, though, I had the chance to listen to the Dr. Bletchley’s excellent talk during this year’s AIS3 summer school. For those curious, you can find <a href="https://i.blackhat.com/USA-20/Thursday/us-20-Chen-Operation-Chimera-APT-Operation-Targets-Semiconductor-Vendors.pdf">the slides on Black Hat’s website</a>, as this talk was also shown off at this year’s Black Hat.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-400-88c8d841b.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-600-88c8d841b.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-800-88c8d841b.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-1000-88c8d841b.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-400-246a4b6eb.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-600-246a4b6eb.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-800-246a4b6eb.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-1000-246a4b6eb.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/0A8E60F44266496AA318161AC5139D4CAF06DFD68445D227ADC7F9F3A61F995F-800-246a4b6eb.png" width="1907" height="1073" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-400-32d116ff5.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-600-32d116ff5.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-800-32d116ff5.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-1000-32d116ff5.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-400-4a42306cb.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-600-4a42306cb.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-800-4a42306cb.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-1000-4a42306cb.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/989F104A91CD73611FDA5CB200C3B20D57C79023FE0ACF5C700CF446C7D5CC5A-800-4a42306cb.png" width="2000" height="1125" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-400-df71c8823.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-600-df71c8823.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-800-df71c8823.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-1000-df71c8823.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-400-a7e7912e4.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-600-a7e7912e4.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-800-a7e7912e4.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-1000-a7e7912e4.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/B642A8F673DEE836D3738D0EFB4D86819751A7D1BD2CE61E8A7EE93A7064E178-800-a7e7912e4.png" width="2000" height="1125" />
+  </picture>
+</a>
+  
+  <figcaption>CyCraft's astounding report on the semiconductor attacks by Chinese APT in the recent years in Taiwan.</figcaption>
+</figure>
+
+<p>Anyways, what I ended up doing was tuning in to the “company recruitment” segment, where sponsors do their sponsored segments and advertise their company in the hope of getting new blood. As mentioned in the prologue, 2020 is a turning point for everyone - the entire infosec industry, Taiwan, every country that suffered from COVID-19, and me.</p>
+
+<p>Why me? Because I’ve been on the lookout for a job myself as well. Not just any job, but a job that I can find myself enjoying in. Over the past few years, I’ve decided that the best type of job for me would be becoming a Security Researcher, joining a Red Team of sorts, or doing forensics-related work. In other words, I’ve been hoping to find companies that offer this type of job opportunity. Several companies did peak my interest, CyCraft, TeamT5, Panasonic Cybersecurity Lab, and several more. Getting a job may not sound like that big of a deal, but for me to get any jobs like that would require me to move to Taipei, the capital of the country. Where I’m from is very different from the bustling life of metropolis, which is why I’m kinda anxious about the future as well. I’ll make an updated rambling if I do manage to land a job, though.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-400-011b4b17a.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-600-011b4b17a.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-800-011b4b17a.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-1000-011b4b17a.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-400-7701bca8c.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-600-7701bca8c.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-800-7701bca8c.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-1000-7701bca8c.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/9de499b527bb9b010ecd7782765f614f37d9617e7819da88076bf0f1aa04fd5f-800-7701bca8c.jpg" width="4032" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-400-c36c86d44.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-600-c36c86d44.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-800-c36c86d44.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-1000-c36c86d44.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-400-df61e9fe5.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-600-df61e9fe5.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-800-df61e9fe5.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-1000-df61e9fe5.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/5195f0903c4ac9759a000dd7dd4d538953f1910c24c6cb25a33e8263c0ca7e10-800-df61e9fe5.jpg" width="4032" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-400-bff5b1e21.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-600-bff5b1e21.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-800-bff5b1e21.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-1000-bff5b1e21.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-400-78a32dbcf.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-600-78a32dbcf.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-800-78a32dbcf.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-1000-78a32dbcf.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/4c6bf7fbe1c47126379c73918c3668346f332dbaf5a3996e3f48412fef1a9bcd-800-78a32dbcf.jpg" width="4032" height="3024" />
+  </picture>
+</a>
+
+  <figcaption>Everyone's favorite segment - sponsors!</figcaption>
+</figure>
+
+<h3 id="operation-i-am-tom-ad-infiltration">Operation: I Am Tom (AD Infiltration)</h3>
+
+<p>The next segment I chose to tune in to was “Operation: I Am Tom,” a talk focusing on various attack vectors and methods <a href="https://teamt5.org/en/">TeamT5</a> had encountered when handling incident responses. Unfortunately, this session was marked as “On-site Only,” which means I’m not allowed to show off any of the slides featured in the talk. What I am allowed to do, though, is talk about some of the exciting highlights from the session.</p>
+
+<ul>
+  <li>The hosts mentioned the reason why the section was named “I Am Tom” was because while dealing with one of the incident response cases, the threat actor noticed the presence of SecOp and decided to drop a file called <code class="language-plaintext highlighter-rouge">iamtom.txt</code> under the root directory.
+    <ul>
+      <li>This shows that these threat actors are not only not afraid of these security researchers but would even dare fight back on the spot.</li>
+    </ul>
+  </li>
+  <li>Threat actors will try whatever possible to run Mimikatz on the victim server
+    <ul>
+      <li>Those who had dealt with Windows Server red teaming should need no introduction to Mimikatz. It is an open-source software used to dump NTLM keys. Threat actors love to use Mimikatz in order to move laterally within the victim organization.</li>
+      <li>The researchers noted the use of injection of <code class="language-plaintext highlighter-rouge">mimilib.dll</code>, a library that Mimikatz uses, into the Security Support Provider. If you are interested, XPN has an excellent article on this subject matter over at <a href="https://blog.xpnsec.com/exploring-mimikatz-part-2/">Exploring Mimikatz - Part 2 - SSP</a>.</li>
+    </ul>
+  </li>
+  <li>Use of genuine third-party software is not uncommon
+    <ul>
+      <li>In one of the cases, the attacker used a software called “Easy File Locker,” which was a genuine piece of software used to hide user’s files. The threat actor used the software to hide itself from SecOps.</li>
+      <li>While this type of attack method is rather uncommon, as these threat actors would typically embed such functionality in their malware instead of relying on an external program, this example shows that it can still happen.</li>
+    </ul>
+  </li>
+  <li>Use of old-tricks are still fairly common even when dealing with APTs
+    <ul>
+      <li>In this case, the researchers noted that some threat actors had sneakily replaced <code class="language-plaintext highlighter-rouge">sethc.exe</code> (Accessibility Shortcut Keys) with <code class="language-plaintext highlighter-rouge">cmd.exe</code>. By replacing the executable, the threat actor can then launch <code class="language-plaintext highlighter-rouge">cmd.exe</code> by invoking the sticky keys (pressing <code class="language-plaintext highlighter-rouge">Shift</code> 5 times).</li>
+    </ul>
+  </li>
+  <li>Use of Telegram API as RAT
+    <ul>
+      <li>To create inconspicuous traffic, threat actors may use third-party IM APIs in order to communicate with the C2 station. In this instance, the threat actor chose to use Telegram as their C2 endpoint.</li>
+      <li>The threat actor may use Telegram to send pre-determined commands to victim machines, and the victim machines would return the results in the same Telegram channel.</li>
+      <li>While the use of inconspicuous traffic as C2 stations <a href="https://www.secureworks.com/blog/twitter-based-botnet-command-and-control">is nothing new</a>, this incident still shows that this trick is still actively being used to this day.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Many more topics were presented in this talk, but the above were the ones I found the most interesting.</p>
+
+<p><a href="/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b.png"><picture><source srcset="/generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-400-cc1baff20.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-600-cc1baff20.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-800-cc1baff20.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-1000-cc1baff20.webp 1000w" type="image/webp"><source srcset="/generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-400-1352ad2ed.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-600-1352ad2ed.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-800-1352ad2ed.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-1000-1352ad2ed.png 1000w" type="image/png"><img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/58e659b13c6516eaa977bc34c55d8d79ff9f678f47ae48756966f481a9780f8b-800-1352ad2ed.png" width="2400" height="1029"></picture></a></p>
+
+<h3 id="tropic-troopers-usbferry-apt-vs-air-gapped-environments">Tropic Trooper’s USBFerry (APT vs. Air-gapped Environments)</h3>
+
+<p>Next up was Trend Micro’s talk on the APT group, Tropic Trooper’s, attack among air-gapped systems (a detailed report is on Trend Micro’s blog - <a href="https://www.trendmicro.com/en_us/research/20/e/tropic-troopers-back-usbferry-attack-targets-air-gapped-environments.html">Tropic Trooper’s USBFerry Targets Air-Gapped Networks</a>).</p>
+
+<p>This is one of the talks that I found the most fascinating. After all, breaking into a both physically-secured and technologically-secured environment is almost impossible - unless you are a very well-trained group of internet assassins, which honestly, sounds like what the APT group is like IRL.</p>
+
+<p>A quick rundown of a physically isolated system is as such,</p>
+
+<ul>
+  <li>Usually disconnected from the public network
+    <ul>
+      <li>This means attacking over remote is almost out of the picture.</li>
+    </ul>
+  </li>
+  <li>Rely on well-protected strategies for data exchange
+    <ul>
+      <li>e.g. biometric secured flash drives, using a quarantined machine to scan the device, air-gap switcher, etc.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>To fight against this, the APT group used a type of attack they dubbed “Ferry,” which, in this case, means “to cross the shore by ship to another.” Essentially, the malware would have to travel from devices to devices via removable media (such as USB thumb drives, floppy disks, memory cards, etc.), all while hoping that the malware would not be detected by the AV on the middle-man scanning machine as previously mentioned.</p>
+
+<p>According to the report, the threat actors infiltrated the group via the typical spear-phishing attack, with emails designed for military personnel (e.g., documents with specific weapon information, tanks, etc.). With this information in mind, it becomes apparent that the group behind the attack was most likely state-sponsored, as there’s no way your average Joe would have intelligence regarding weapon blue maps and such.</p>
+
+<figure class="half">
+  <a href="/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-400-77b68412e.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-600-77b68412e.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-800-77b68412e.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-1000-77b68412e.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-400-f3aa86433.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-600-f3aa86433.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-800-f3aa86433.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-1000-f3aa86433.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/34d42e37fcb7e8886213c0295714206ad16e464f8d7961fc84874c6ae74417b7-800-f3aa86433.png" width="1325" height="745" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-400-79008d3ef.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-600-79008d3ef.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-800-79008d3ef.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-1000-79008d3ef.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-400-c5de6b301.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-600-c5de6b301.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-800-c5de6b301.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-1000-c5de6b301.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/800f967d9d7614eeecbea3ab1caac9c1d0c2612ccdf9c4f97796376f2e8a7ca3-800-c5de6b301.png" width="1790" height="1007" />
+  </picture>
+</a>
+
+  <figcaption>Tropic Trooper's attack flow (from Trend Micro's <a href="https://www.trendmicro.com/en_us/research/20/e/tropic-troopers-back-usbferry-attack-targets-air-gapped-environments.html">Tropic Trooper’s USBFerry Targets Air-Gapped Networks</a>)</figcaption>
+</figure>
+
+<p>Perhaps the most interesting bit was that the researchers noted that the APT group would sometimes “forget” to exclude PDB strings in their malware when dropping new versions into the systems. From there, several intriguing version strings can be extracted from the debug symbol paths. The variant went from having the <code class="language-plaintext highlighter-rouge">PH</code> initial to <code class="language-plaintext highlighter-rouge">UF</code>, and when the name change happened, the directory name also included the word <code class="language-plaintext highlighter-rouge">USBFerry</code>. Going from a no-name project to one with a name means that the project has garnered enough reputation among the group members that they perhaps felt it was necessary to give it a name - and that’s why Trend Micro dubbed the attack “USBFerry.”</p>
+
+<p>This explanation did not sit well with me, though - surely, the APT group wouldn’t be dumb enough to leave the PDB path exposed during the build process, right? To me, this seems more like an intentional move from them to show off, perhaps? Not sure. Either way, I don’t think the PDB symbol paths were left intact just because they “forgot.”
+This type of attack is undoubtedly the most gripping to me, though, as the threat actors were obviously highly trained for this level of infiltration.</p>
+
+<h3 id="a-ctf-style-escape-journey-on-vmware-workstation-guest-to-host-rce">A CTF-Style Escape Journey on VMWare Workstation (Guest-to-Host RCE)</h3>
+
+<p>This talk was the one I was the most excited about in Day 1. Vulnerabilities that escape from the VM world to the userland are always considered the holy grail for malware. While fewer and fewer of them exist, this talk shows that it is still possible - well, <em>was</em>, after the vulnerability was patched. This vulnerability was assigned <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-5515">CVE-2019-5515</a> and <a href="https://www.vmware.com/security/advisories/VMSA-2019-0021.html">VMSA-2019-0021</a>, which affects VMWare Workstation 15.5 and other previous 15.x builds. Unfortunately, though, the bug is relatively old, as it was patched some time late last year, so most users are likely invulnerable to this exploit anymore. Either way, it was still very impressive that <a href="https://www.chaitin.cn">Chaitin Technology</a> was able to find such obscure vulnerability.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-400-dd42054f2.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-600-dd42054f2.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-800-dd42054f2.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-1000-dd42054f2.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-400-99c29c647.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-600-99c29c647.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-800-99c29c647.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-1000-99c29c647.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/238784ffbe8336bfe0653f4afa23643627a92a38dc2d80b2735934994cb28330-800-99c29c647.jpg" width="4032" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-400-f8e86beaa.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-600-f8e86beaa.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-800-f8e86beaa.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-1000-f8e86beaa.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-400-49907c1de.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-600-49907c1de.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-800-49907c1de.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-1000-49907c1de.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/7d5bf761b201530dbfb14d20649a2f404483893a97794181ec3617ef32390964-800-49907c1de.jpg" width="4032" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-400-1d4cc3512.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-600-1d4cc3512.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-800-1d4cc3512.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-1000-1d4cc3512.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-400-d64ba0168.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-600-d64ba0168.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-800-d64ba0168.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-1000-d64ba0168.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/423d574586195950fa11e17d1caf225d546a9851a5a65c8f683465dc46d8b0a0-800-d64ba0168.jpg" width="4032" height="3024" />
+  </picture>
+</a>
+
+</figure>
+
+<p>So, where was the exploit found? The vulnerability lies within the virtual e1000e ethernet driver. With a bunch of out-of-bound writes, the threat actor could successfully execute a RCE to the host machine. Unfortunately, a lot of what was featured in the talk was and is outside of my expertise, and the team did not release an official write-up regarding this vulnerability. As much as I’d love to look more into the case, there isn’t a whole lot I can base my research off of (and no, I do not have any photos outside of the 3 featured above).</p>
+
+<h3 id="end-of-day-1">End of Day 1</h3>
+
+<p>Day 1 was exhausting.</p>
+
+<p>Though I guess it applies to any conferences I go to these days, as they are typically filled with non-stop information barrage. Didn’t help that I only slept for a couple of hours at the hostel the day prior. From the topics presented throughout the entire day, I was the most intrigued with presentations like the air-gapped targeted attack and the real-world AD attack.</p>
+
+<p>Compared to last year though, the day one experience was less exciting this year around. Not sure if it was because I didn’t visit the booth events or because the talks on that particular day didn’t interest me enough. I think it would certainly help if I had someone else go with me.</p>
+
+<figure>
+  <a href="/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-400-92a5d0c61.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-600-92a5d0c61.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-800-92a5d0c61.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-1000-92a5d0c61.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-400-9de963de0.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-600-9de963de0.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-800-9de963de0.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-1000-9de963de0.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/681E1E8F47E641199C660E0CC66952853225C1755D1C6C8DF119F5F878C0F863-800-9de963de0.jpg" width="4032" height="1728" />
+  </picture>
+</a>
+
+  <figcaption>Events are far more enjoyable if you have a friend to go with - which I did not. Ah well, guess I'll have this mochi ice cream by myself.</figcaption>
+</figure>
+
+<p>Anyways, after the event, I thought I’d take this opportunity to look around the city. Y’know, to take in the capital of the island, since I’m more of a suburb city type of person - still not used to all this crowd and whatnot. The street near the hostel I stayed at was a bustling one. The entire street was lively, but feels… I don’t know, kinda dead men walking in a way? Not sure if it was just me, but I felt certain tension in the air as I was walking around the streets. Maybe I just was not used to the city, still, or I was simply tired. Either that, or busy cities are always like this.</p>
+
+<figure class="half">
+  <a href="/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-400-a166f69d9.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-600-a166f69d9.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-800-a166f69d9.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-1000-a166f69d9.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-400-590b103c8.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-600-590b103c8.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-800-590b103c8.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-1000-590b103c8.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/244613BBA357BD6D3F57FC5BB5C4F4FE7B96AD22F34DDAE50FAC823609BA0E89-800-590b103c8.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-400-94c281ca7.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-600-94c281ca7.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-800-94c281ca7.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-1000-94c281ca7.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-400-af65a7ce3.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-600-af65a7ce3.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-800-af65a7ce3.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-1000-af65a7ce3.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/49E8B1C64279AA8982E9949D690F7ECB64E43174B10A7E07AB3221DFE647A76B-800-af65a7ce3.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <figcaption>Bustling city with enmity in the air. Was it just me? Probably.</figcaption>
+</figure>
+
+<p>Anyhow, I dropped by the nearby department stores and bookstores to take my mind off things after getting some tea and dumplings as supper. Every time I go to bookstores and whatnot, I wish I could go out <em>not</em> empty-handed - but nah, I kept my cool and decided not to spend my already tight budget. It’s been a couple of grueling months not being able to afford entertainment. Hope I can get a new job soon. Still, it was cool seeing illustration books and oddities in places like these - especially seeing bookshelves full of Fate stuff.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-400-2c35a47c7.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-600-2c35a47c7.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-800-2c35a47c7.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-1000-2c35a47c7.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-400-0ca84bd34.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-600-0ca84bd34.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-800-0ca84bd34.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-1000-0ca84bd34.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/213AB494B3A02F9FD0D87F0A1C864A5B74272999BB3E79E718E0F7A1A513A1FD-800-0ca84bd34.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-400-7c208e5b9.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-600-7c208e5b9.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-800-7c208e5b9.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-1000-7c208e5b9.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-400-3f7d1d134.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-600-3f7d1d134.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-800-3f7d1d134.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-1000-3f7d1d134.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/2EE1ED6A4C22D7BD463E1B37C1C38419D75619FA378C7AB9B0E3968FE3746342-800-3f7d1d134.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-400-0c1a4091a.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-600-0c1a4091a.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-800-0c1a4091a.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-1000-0c1a4091a.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-400-b93934329.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-600-b93934329.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-800-b93934329.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-1000-b93934329.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/8AE5D29CBE6BDB016AA481BD7BC9F589847945444F72BADAC635C586DE4801C2-800-b93934329.jpg" width="3024" height="3024" />
+  </picture>
+</a>
+
+  <figcaption>Ah yes, books and foldables that I can't afford.</figcaption>
+</figure>
+
+<h2 id="day-2">Day 2</h2>
+
+<p>Feeling much more refreshed, I got ready, checked out at the hostel and went out.</p>
+
+<p>As I was heading out, I noticed that there a small breakfast shop just beneath the hostel. It seemed like a good moms’n’pops type of breakfast place. Always enjoyed this aspect of Taiwan, where local restaurants feel truly local instead of “just another chain fast food store” type of deal.</p>
+
+<p>Anyhow, I got a sandwich that was like, $35 NTD (~1 USD) or something and paid with a $1000 NTD (~$35 USD) bill. The woman who was busy working and frying food at the counter hastily took my bill and got me the change - until moments after I realized she literally handed me back another $1000 NTD bill with $465 dollars in change. I stood there for like, 30 seconds, thinking that it must have been a mistake, but should I tell her? I ended up asking “hey, uh, this change doesn’t look quite right?” She took a look at the change, and realized what a huge mistake she made and replaced the $1000 NTD note with a $500 NTD one. That’s more like it.</p>
+
+<p>As I was making my way to the nearby subway station, I pondered to myself, “what would have happened if I didn’t tell her about the change?” Y’know, I could have easily made some money then and there - and I know that would be wrong. The idea of it possibly happening though. The moment of panic that they’d realize that chunk of their money would be missing by the end of the day. They sure didn’t look poor, but they didn’t look like they were swimming in money either. What if that loss of money impacted the rest of their week or even month? Since we don’t know what their financial situation. It’s food for thought.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-400-96d7dd7b7.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-600-96d7dd7b7.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-800-96d7dd7b7.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-1000-96d7dd7b7.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-400-de61531e0.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-600-de61531e0.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-800-de61531e0.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-1000-de61531e0.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/8A8970797E100F762E563458C1AA4AF46F614DBBC6B94FDDD0E8BEB63C3EA314-800-de61531e0.jpg" width="4032" height="2268" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-400-4d474700a.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-600-4d474700a.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-800-4d474700a.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-1000-4d474700a.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-400-150c666e3.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-600-150c666e3.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-800-150c666e3.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-1000-150c666e3.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/161FBBB1454B70E440C900E55EF3E6FBBAEB12A858FEBD595C5767704930DD9C-800-150c666e3.jpg" width="4032" height="2268" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-400-61cccc335.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-600-61cccc335.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-800-61cccc335.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-1000-61cccc335.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-400-7eaa022c4.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-600-7eaa022c4.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-800-7eaa022c4.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-1000-7eaa022c4.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/B31F8A8057C4EA0FEFDCE21B46064A11B329B394E2C45BA1870D0DEF93AE2582-800-7eaa022c4.jpg" width="4032" height="2268" />
+  </picture>
+</a>
+
+  <figcaption>Attendees waiting for the shuttle bus to come.</figcaption>
+</figure>
+
+<h3 id="day-2-agenda">Day 2 Agenda</h3>
+
+<p>The first period looked very promising compared to the first day. Study regarding recent DVR/IoT DDoS attacks, smart card duping, bug bounty experience, and breaking a Galaxy S10 - all promising stuff. I ended up picking the S10 Secure Boot attack talk - we’ll get to why I ended up choosing that one later.</p>
+
+<figure>
+  <a href="/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-400-10ebfad78.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-600-10ebfad78.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-800-10ebfad78.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-1000-10ebfad78.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-400-8f7d7cfdc.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-600-8f7d7cfdc.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-800-8f7d7cfdc.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-1000-8f7d7cfdc.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/E3C78D63AD19E52D90910170E2228D361C43D0A07840D7E4E477E7CCF3EAE9ED-800-8f7d7cfdc.jpg" width="1256" height="538" />
+  </picture>
+</a>
+
+  <figcaption>Click to see the full agenda.</figcaption>
+</figure>
+
+<h3 id="exploiting-samsung-s10-secure-boot-root-wo-tripping-knox">Exploiting Samsung S10 Secure Boot (Root w/o Tripping KNOX)</h3>
+
+<p class="notice--warning"><strong>⚠ Warning</strong> Incoming rant. Skip two paragraphs if you only want to hear the details of the talk and my thoughts on it.</p>
+
+<p>Before I get into the talk, I’d like to talk about one of the reasons why I refuse to buy a Samsung device - lack of developer freedom. Sure, they offer revolutionary hardware and had brought us amazing devices like the Galaxy Z Flip 2 that was recently launched, but they are very stringent on “security.” Perhaps the best example for this argument is KNOX, an e-fuse that is blown should the user decide to unlock their bootloader. KNOX is a stored in a write-once memory chip, so once the fuse has been tripped, it is impossible to reset the fuse state without replacing the entire board.</p>
+
+<p>I never really understood how this increases the overall “security” of the device. I can understand the standard Android approach where a warning has to be displayed when the bootloader is unlocked, as it warns the user that the device may be or may have been tampered with. I can also understand the benefit that KNOX may bring, such as invalidating the security keys used to encrypt user-space content to erase contents of secured folder. I get that. But does it have to be a permanent thing? If the fuse is blown, Samsung can reject your warranty request just because you tried to unlock your bootloader and flashed something else. What if I <em>didn’t</em> want OneUI? The consumer should have a choice in doing so and not be tied with this crap.</p>
+
+<figure>
+  <a href="/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-400-aa046367f.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-600-aa046367f.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-800-aa046367f.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-1000-aa046367f.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-400-454682c1a.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-600-454682c1a.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-800-454682c1a.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-1000-454682c1a.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/6B43C4AF6D8DF02B2AF14BA84BCB7F0AC60A2234140746916771D73AEB3FF3EC-800-454682c1a.jpg" width="2448" height="1049" />
+  </picture>
+</a>
+
+  <figcaption>Status of the KNOX e-fuse bit under ODIN mode (Source: unlockguy.net).</figcaption>
+</figure>
+
+<p>Anyways, now that we know that KNOX is a write-once-only bit on a chip that is tripped when a bootloader unlock or root attempt is detected, let’s move on. I chose to tune in to this talk because I had some prior knowledge regarding how Android handles its bootloading process (<code class="language-plaintext highlighter-rouge">dm-verity</code> and whatnot) and was curious to see how the researcher was able to not only defeat KNOX but also how Samsung handled the entire case.</p>
+
+<p>The researcher, Jeffxx, first demoed how this type of execution could be carried out in a real-world scenario. For instance, say Bob’s phone is dead and he wants to borrow Alice’s charger. Alice’s like, “sure, you go relax, and I’ll plug it up.” Bob goes away for a coffee while Alice enters ODIN mode on the device, pushes the malicious code, and reboots the device. After a while, Bob returns and asks for his phone. Bob unlocks his device and goes on about his day. Meanwhile, Alice has already prepared a script that dumps information from the phone remotely after the device has been unlocked. Mission complete! All of this was demonstrated in a pre-filmed video with actual acting. I love the effort that was put into the talk.</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-400-f2706e863.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-600-f2706e863.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-800-f2706e863.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-1000-f2706e863.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-400-cee4cebc6.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-600-cee4cebc6.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-800-cee4cebc6.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-1000-cee4cebc6.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/F0109DA1C2BDC700BC650AFB0400AA145A39E164AA7B5C075FBCB80E6CC5D853-800-cee4cebc6.jpg" width="4032" height="2268" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-400-7e0f29d2c.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-600-7e0f29d2c.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-800-7e0f29d2c.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-1000-7e0f29d2c.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-400-b3df0f089.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-600-b3df0f089.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-800-b3df0f089.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-1000-b3df0f089.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/A8B3CC0D9E0DADCABBF5A406951B455EC7222DF76FFBA8AB955FD92601771FD1-800-b3df0f089.jpg" width="4032" height="2268" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-400-140424428.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-600-140424428.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-800-140424428.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-1000-140424428.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-400-cff173141.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-600-cff173141.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-800-cff173141.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-1000-cff173141.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/CBEBB2D290774C42D74D64CB9E858E7E102720EF198DF27F7159DAD9358BFA7D-800-cff173141.jpg" width="4032" height="2268" />
+  </picture>
+</a>
+
+  <figcaption>Agenda &amp; demo of the attack</figcaption>
+</figure>
+
+<p>After the demo, Jeffxx did a quick explanation on the boot process of a modern Samsung device. Like any other modern secure device, there is a chain of trust involved. If the onboard Secure Boot passes the necessary security check, the bootloader then passes this signal to the kernel, then DM-verity takes care of the system integrity check, and if the integrity check passes, Android boots.</p>
+
+<p class="notice--info"><strong>ℹ Information</strong> For a more detailed explanation on how Android performs its boot verification checks using dm-verity, see <a href="https://source.android.com/security/verifiedboot/dm-verity">Implementing dm-verity</a> and <a href="https://source.android.com/security/verifiedboot/verified-boot">Verifying Boot</a> on the official Android SDK docs. Note that the booting process explained in the documentation does <strong>not</strong> relate to Samsung’s KNOX and TrustZone implementation. The Samsung implementation occurs before the dm-verity stage.</p>
+
+<figure class="half">
+  <a href="/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-400-ce3d61b4c.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-600-ce3d61b4c.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-800-ce3d61b4c.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-1000-ce3d61b4c.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-400-0cb2e056b.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-600-0cb2e056b.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-800-0cb2e056b.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-1000-0cb2e056b.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/083BEAB0B96E0A92A2C601AA4DDC1068D047F08E6E7683A61350E14876F0BF19-800-0cb2e056b.png" width="2400" height="1350" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-400-187ab47b9.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-600-187ab47b9.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-800-187ab47b9.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-1000-187ab47b9.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-400-a27ae23eb.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-600-a27ae23eb.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-800-a27ae23eb.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-1000-a27ae23eb.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/14BF02CABB7F59481050D1F89FEBB6A3C9F047BB9587DE20E22D4AE56431357D-800-a27ae23eb.png" width="2667" height="1500" />
+  </picture>
+</a>
+
+  <figcaption>Samsung device chain of trust illustrated</figcaption>
+</figure>
+
+<p>As explained in Samsung’s various documentations (see <a href="https://nl.insight.com/content/dam/insight-web/nl_NL/learn/techbooks/security/Samsung_KNOX_platform_overzicht.pdf">An Overview of the Samsung KNOX Platform (2016)</a> whitepaper, <a href="https://docs.samsungknox.com/admin/whitepaper/kpe/sensitive-data-protection.htm">Sensitive Data Protection (SDP)</a>, <a href="https://docs.samsungknox.com/admin/knox-platform-for-enterprise/kbas/kba-360039577713.htm">File-based encryption (FBE) and full-disk encryption (FDE)</a>), newer Galaxy devices store the (partial? unsure) KNOX encryption/decryption key within the hardware. Once the user enters their credentials via the Android keyguard, storage spaces that have been encrypted using FBE (File-based Encryption) are then decrypted via the hardware-backed credential storage. The said key is purged from RAM when the device is locked.</p>
+
+<p class="notice--danger">While it is not documented in the official documentation (at least I couldn’t find it), it seems that the keys are reset once the KNOX has been tripped. Therefore, data encrypted using FBE (e.g., Secure Folder) may not be retrieved after tripping KNOX.</p>
+
+<p>In laymen’s term, sensitive data may not be retrieved if the following occurs:</p>
+
+<ul>
+  <li>KNOX e-fuse has been blown
+    <ul>
+      <li>Encryption/decryption keys reset</li>
+    </ul>
+  </li>
+  <li>Device not yet unlocked by the user
+    <ul>
+      <li>Android-space, refers to Android keyguard status</li>
+    </ul>
+  </li>
+</ul>
+
+<figure class="third">
+<a href="/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-400-482b2e36e.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-600-482b2e36e.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-800-482b2e36e.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-845-482b2e36e.webp 845w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-400-a934b598e.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-600-a934b598e.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-800-a934b598e.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-845-a934b598e.png 845w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/ED6EBD16F0B87C2F71E32960E79D651ACA3EE77236C2785B0B59659CE8656F9B-800-a934b598e.png" width="845" height="475" />
+  </picture>
+</a>
+
+<a href="/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-400-e98a8f731.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-600-e98a8f731.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-800-e98a8f731.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-953-e98a8f731.webp 953w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-400-941d03850.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-600-941d03850.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-800-941d03850.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-953-941d03850.png 953w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/2FE0F9F2EBB51683F37AE46362A7F9109FB2EC084BFD29AF07F70854C24792C3-800-941d03850.png" width="953" height="536" />
+  </picture>
+</a>
+
+<a href="/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-400-97241d973.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-600-97241d973.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-800-97241d973.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-1000-97241d973.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-400-7ae4bb1f1.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-600-7ae4bb1f1.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-800-7ae4bb1f1.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-1000-7ae4bb1f1.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/F6810A8B10D197498598158C3FB8B7CAB8FF340901919355090C59466D1DDC26-800-7ae4bb1f1.png" width="2667" height="1500" />
+  </picture>
+</a>
+
+<figcaption>KNOX security overview</figcaption>
+</figure>
+
+<p>So, the challenge here is to a) obtain root without alerting KNOX b) plant files under decrypted storage space. The attacker has to achieve the above in order to access sensitive information stored on the device <strong>before TrustZone initialization</strong>.</p>
+
+<p>There are very few attack surfaces in a pre-boot environment. Jeffxx decided to tackle this attack from the ODIN download mode.</p>
+
+<p class="notice--info"><strong>ℹ Information</strong> Samsung’s ODIN mode is used to flash stock firmware signed by Samsung - and as noted by the official whitepaper, a rollback prevention e-fuse is in place, so version rollback is not possible.</p>
+
+<figure class="half">
+<a href="/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-400-ad00fd1a3.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-600-ad00fd1a3.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-800-ad00fd1a3.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-1000-ad00fd1a3.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-400-18eafcf2a.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-600-18eafcf2a.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-800-18eafcf2a.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-1000-18eafcf2a.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/3FAE138CBE70AAB02F728D323C5724584767D26C4B35A685F583FABF39C237D8-800-18eafcf2a.png" width="1280" height="720" />
+  </picture>
+</a>
+
+<a href="/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-400-1e4120e15.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-600-1e4120e15.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-800-1e4120e15.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-1000-1e4120e15.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-400-0c70d12d0.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-600-0c70d12d0.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-800-0c70d12d0.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-1000-0c70d12d0.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/07ECEC32818C670A131815C9A09530577748F4C41D1AB6575B864E970BACA9DE-800-0c70d12d0.png" width="7200" height="4050" />
+  </picture>
+</a>
+
+<figcaption>ODIN as an attack vector</figcaption>
+</figure>
+
+<p class="notice--info"><strong>ℹ Information</strong> I won’t dive too deep into the details in the following sections, as it is totally above my pay grade. A more detailed explanation can be found in Jeffxx’s <a href="https://i.blackhat.com/USA-20/Wednesday/us-20-Chao-Breaking-Samsungs-Root-Of-Trust-Exploiting-Samsung-Secure-Boot.pdf">full slide released at Blackhat 2020</a>.</p>
+
+<p>Through multiple weak ODIN image checks, improper vulnerability patches, and physical hardware glitches (nothing fancy, literally just disconnecting the USB cable at the right time), it is possible to perform arbitrary code execution through overflows. With this in mind, all that’s left is for the user to unlock the device to access the key stored in the credential guard. It’s even possible to chain the vulnerability with known vulns if the user refuses to update. Unfortunately, Samsung still didn’t quite get the bug fixed. It took almost a year for the bugs to be properly patched (see <code class="language-plaintext highlighter-rouge">SVE-2019-15872</code>, <code class="language-plaintext highlighter-rouge">SVE-2020-16712</code>).</p>
+
+<figure class="third">
+  <a href="/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-400-efcaa0b20.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-600-efcaa0b20.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-800-efcaa0b20.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-1000-efcaa0b20.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-400-c910f24a5.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-600-c910f24a5.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-800-c910f24a5.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-1000-c910f24a5.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/3fcc39d43ad553bab53fd5a4a30d8eba33007ed165d4ab672ae1862283c65e76-800-c910f24a5.png" width="2112" height="1188" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-400-610715c1b.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-600-610715c1b.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-800-610715c1b.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-1000-610715c1b.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-400-fe9ff81f8.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-600-fe9ff81f8.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-800-fe9ff81f8.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-1000-fe9ff81f8.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/8f9cd63f0e5e39d5d16facb3d263e916c9c97f780b874ff04b0eeb4a6c6c1b32-800-fe9ff81f8.png" width="2112" height="1188" />
+  </picture>
+</a>
+
+  <a href="/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4.png">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-400-73be33370.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-600-73be33370.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-800-73be33370.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-1000-73be33370.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-400-7b66ad53f.png 400w, /generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-600-7b66ad53f.png 600w, /generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-800-7b66ad53f.png 800w, /generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-1000-7b66ad53f.png 1000w" type="image/png" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/4abf5a3602c6532e568fc5a62e4d1d7e790f40358e0684dd13eab4c0ee0441e4-800-7b66ad53f.png" width="2112" height="1188" />
+  </picture>
+</a>
+
+</figure>
+
+<p>Despite all this though, Jeff made it very clear that the attack surface is so complex that it is not particularly trivial to access the secured data. A lot of techniques (like getting physical access to the device in the first place) are required to pull this attack off. As usual with theoretical or complex attacks like this though, the moral of the story is don’t leave your device unattended.</p>
+
+<p><a href="/assets/images/posts/hitcon-cmt-2020/495a42ed04df1e288e118dcc17357a1cc0988354c363e345e6e52515fe788285.png"><img class="lazy align-center" src="/generated/assets/images/posts/hitcon-cmt-2020/495a42ed04df1e288e118dcc17357a1cc0988354c363e345e6e52515fe788285-600-aef765172.png" srcset="/generated/assets/images/posts/hitcon-cmt-2020/495a42ed04df1e288e118dcc17357a1cc0988354c363e345e6e52515fe788285-600-aef765172.png 1.0x, /generated/assets/images/posts/hitcon-cmt-2020/495a42ed04df1e288e118dcc17357a1cc0988354c363e345e6e52515fe788285-900.0-aef765172.png 1.5x, /generated/assets/images/posts/hitcon-cmt-2020/495a42ed04df1e288e118dcc17357a1cc0988354c363e345e6e52515fe788285-1200-aef765172.png 2.0x"></a></p>
+
+<p>Despite not having the skill to find vulnerabilities within early low-level bootloader stage, this talk still taught me a lot regarding the bootloader mechanism featured on Samsung devices. With that being said though, I still do not see the point of KNOX, as previously mentioned in my rant above.</p>
+
+<p>Certainly Samsung has put in a lot of extra protections to ensure that the user data is secure in the event that TrustZone is defeated, but I still do not believe the whole write-once e-fuse thing is necessary for consumer devices. It’s certainly fascinating to study the security measures implemented at hardware-level, though.</p>
+
+<h3 id="lnk-to-rce-bugs-in-windows-shell-link-parser-windows-lnk-cves">LNK to RCE: Bugs in Windows Shell Link Parser (Windows <code class="language-plaintext highlighter-rouge">*.lnk</code> CVEs)</h3>
+
+<p>When I first saw the title of the talk, I didn’t know what to expect. It didn’t dawn on me what <code class="language-plaintext highlighter-rouge">LNK</code> meant until the talk had started. Yes, it’s exactly what you think it is - the shortcut file extension, <code class="language-plaintext highlighter-rouge">.lnk</code>.</p>
+
+<p><a href="/assets/images/posts/hitcon-cmt-2020/b6ccc81f1bd1391e19d4993ae7272eb0c9cbc3840af59086cf8e9abbf6af94cb.jpg"><img class="lazy align-center" src="/generated/assets/images/posts/hitcon-cmt-2020/b6ccc81f1bd1391e19d4993ae7272eb0c9cbc3840af59086cf8e9abbf6af94cb-600-e75654617.jpg" srcset="/generated/assets/images/posts/hitcon-cmt-2020/b6ccc81f1bd1391e19d4993ae7272eb0c9cbc3840af59086cf8e9abbf6af94cb-600-e75654617.jpg 1.0x, /generated/assets/images/posts/hitcon-cmt-2020/b6ccc81f1bd1391e19d4993ae7272eb0c9cbc3840af59086cf8e9abbf6af94cb-900.0-e75654617.jpg 1.5x, /generated/assets/images/posts/hitcon-cmt-2020/b6ccc81f1bd1391e19d4993ae7272eb0c9cbc3840af59086cf8e9abbf6af94cb-1200-e75654617.jpg 2.0x"></a></p>
+
+<p>The presenter was Lays (yes, <em>that</em> Lays), who had previously been named a Microsoft MVP researcher in both 2019 and 2020 - and they co-founded Pwnable.tw, which is arguably one of the largest Pwn-focused CTF platform out there.</p>
+
+<p><a href="/assets/images/posts/hitcon-cmt-2020/577ffb3afaeba7a483cbf374c2068f241d3a3210098d05dacf624bd8223071eb.jpg"><img class="lazy align-center" src="/generated/assets/images/posts/hitcon-cmt-2020/577ffb3afaeba7a483cbf374c2068f241d3a3210098d05dacf624bd8223071eb-600-aefc693af.jpg" srcset="/generated/assets/images/posts/hitcon-cmt-2020/577ffb3afaeba7a483cbf374c2068f241d3a3210098d05dacf624bd8223071eb-600-aefc693af.jpg 1.0x, /generated/assets/images/posts/hitcon-cmt-2020/577ffb3afaeba7a483cbf374c2068f241d3a3210098d05dacf624bd8223071eb-900.0-aefc693af.jpg 1.5x, /generated/assets/images/posts/hitcon-cmt-2020/577ffb3afaeba7a483cbf374c2068f241d3a3210098d05dacf624bd8223071eb-1200-aefc693af.jpg 2.0x"></a></p>
+
+<p>Anyhow, the motivation for the research was simply to make a good use of the fuzzer project they made when they were finishing their master degree. While looking for potential targets, they found out that the LNK file format seemed to be the best one. Due to the nature of a shortcut file in Windows, link files are always parsed by Windows Explorer <em>before</em> the icon is ever presented to the user. This behavior makes it a perfect target for RCE, as it is almost impossible to tell Windows not to load the file in memory.</p>
+
+<figure class="half">
+<a href="/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-400-225c1d4a0.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-600-225c1d4a0.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-800-225c1d4a0.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-1000-225c1d4a0.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-400-a29e99f9c.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-600-a29e99f9c.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-800-a29e99f9c.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-1000-a29e99f9c.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/3776d1ae5ef155375af5de21a431d8efb41503eaab290961dbcfaab83c73ef4d-800-a29e99f9c.jpg" width="4032" height="2688" />
+  </picture>
+</a>
+  
+<a href="/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6.jpg">
+  <picture>
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-400-257043486.webp 400w, /generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-600-257043486.webp 600w, /generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-800-257043486.webp 800w, /generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-1000-257043486.webp 1000w" type="image/webp" />
+    <source srcset="/generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-400-500b2d542.jpg 400w, /generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-600-500b2d542.jpg 600w, /generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-800-500b2d542.jpg 800w, /generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-1000-500b2d542.jpg 1000w" type="image/jpeg" />
+    <img class="lazy" src="/generated/assets/images/posts/hitcon-cmt-2020/4ca344cb7dc574a1869a94d47fd831db7d9e40ac18cbb1bfee813308c60d82e6-800-500b2d542.jpg" width="4032" height="2688" />
+  </picture>
+</a>
+  
+</figure>
+
+<hr />
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#en-us" class="page__taxonomy-item" rel="tag">en-us</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#infosec" class="page__taxonomy-item" rel="tag">infosec</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-09-28T14:32:17+08:00">September 28, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=StillAzureH&text=The+HITCON+2020+Experience%20https%3A%2F%2Fstillu.cc%2Finfosec%2F2020%2F09%2F28%2Fhitcon-2020%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstillu.cc%2Finfosec%2F2020%2F09%2F28%2Fhitcon-2020%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fstillu.cc%2Finfosec%2F2020%2F09%2F28%2Fhitcon-2020%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/threat-spotlight/2020/09/16/dll-hijacking/" class="pagination--pager" title="Threat Spotlight - DLL Hijacking (and .NET)
+">Previous</a>
+    
+    
+      <a href="/personal/2020/10/11/hated-by-life-itself/" class="pagination--pager" title=""Hated by Life Itself (命に嫌われている)"
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ida-tips/2022/01/22/saved-desktops-across-32bit-64bit/" rel="permalink">IDA Trickeries #1: Using Saved Desktop Across IDAs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-22T00:00:00+08:00">January 22, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">So like… who at Hex-rays implemented this?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/threat-spotlight/2021/11/13/domain-fronting-fastly/" rel="permalink">Threat Spotlight - Domain Fronting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-13T00:00:00+08:00">November 13, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Fast(ly) but deadly.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/10/29/barinsta-and-facebook/" rel="permalink">Facebook, Monopoly, and Barinsta
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+08:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Facebook and its anti-competitive strategy.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/07/12/lockdown-taiwan-2021/" rel="permalink">Lockdown, Taiwan, 2021
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-07-12T00:00:00+08:00">July 12, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Impact of lockdown in Taiwan and my personal life.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Still Hsu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N6FGTZBMTZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N6FGTZBMTZ', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'Still34/landing');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>

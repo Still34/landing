@@ -1,0 +1,1690 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>rgbCTF 2020 Writeup - Part 1 - Just Still</title>
+<meta name="description" content="Everything in 2020’s gotta have RGB, even CTFs!">
+
+
+  <meta name="author" content="Still Hsu">
+  
+  <meta property="article:author" content="Still Hsu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Just Still">
+<meta property="og:title" content="rgbCTF 2020 Writeup - Part 1">
+<meta property="og:url" content="https://stillu.cc/writeup/rgbctf-2020-part-1">
+
+
+  <meta property="og:description" content="Everything in 2020’s gotta have RGB, even CTFs!">
+
+
+
+  <meta property="og:image" content="https://stillu.cc/assets/images/posts/rgbctf-2020-07-14/pt1/d3174f495bb9d3d5fbb39d6828adde84647973b2484bbf992b834311d9836477.webp">
+
+
+
+  <meta name="twitter:site" content="@StillAzureH">
+  <meta name="twitter:title" content="rgbCTF 2020 Writeup - Part 1">
+  <meta name="twitter:description" content="Everything in 2020’s gotta have RGB, even CTFs!">
+  <meta name="twitter:url" content="https://stillu.cc/writeup/rgbctf-2020-part-1">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://stillu.cc/assets/images/posts/rgbctf-2020-07-14/pt1/d3174f495bb9d3d5fbb39d6828adde84647973b2484bbf992b834311d9836477.webp">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-07-14T00:00:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://stillu.cc/writeup/rgbctf-2020-part-1">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Still Hsu",
+      "url": "https://stillu.cc/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Just Still Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/manifest.json">
+<meta name="msapplication-TileColor" content="#F21368">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#F21368">
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/avatar-512.png" alt="Just Still"></a>
+        
+        <a class="site-title" href="/">
+          Just Still
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories">Posts</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/assets/images/posts/rgbctf-2020-07-14/pt1/d3174f495bb9d3d5fbb39d6828adde84647973b2484bbf992b834311d9836477.webp');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          rgbCTF 2020 Writeup - Part 1
+
+        
+      </h1>
+      
+        <p class="page__lead">Everything in 2020’s gotta have RGB, even CTFs!
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-07-14T00:00:00+08:00">July 14, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          24 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+        <p>
+        
+          <a href="/writeup/rgbctf-2020-part-2" class="btn btn--light-outline btn--large">Part 2</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="https://stillu.cc/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/categories/#writeup" itemprop="item"><span itemprop="name">Writeup</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">rgbCTF 2020 Writeup - Part 1</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar-512.png" alt="Still Hsu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Still Hsu</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Developer, photographer, infosec researcher.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Taiwan</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://twitter.com/StillAzureH" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/Still34" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/.well-known/pubkey.asc" rel="nofollow noopener noreferrer"><i class="fas fa-user-lock" aria-hidden="true"></i><span class="label">GPG (Email)</span></a></li>
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:business@stillu.cc">
+            <meta itemprop="email" content="business@stillu.cc" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="rgbCTF 2020 Writeup - Part 1">
+    <meta itemprop="description" content="Everything in 2020’s gotta have RGB, even CTFs!">
+    <meta itemprop="datePublished" content="2020-07-14T00:00:00+08:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#prologue">Prologue</a></li><li><a href="#beginner">Beginner</a><ul><li><a href="#joke-check-50-pts">Joke Check! (50 pts)</a></li><li><a href="#shoob-50-pts">Shoob (50 pts)</a></li><li><a href="#a-fine-day-50-pts">A Fine Day (50 pts)</a></li><li><a href="#simple-rsa-50-pts">Simple RSA (50 pts)</a></li><li><a href="#quirky-resolution-50-pts">Quirky Resolution (50 pts)</a></li></ul></li><li><a href="#cryptography">Cryptography</a><ul><li><a href="#i-love-rainbows-50-pts">I Love Rainbows (50 pts)</a></li></ul></li><li><a href="#forensicsosint">Forensics/OSINT</a><ul><li><a href="#alien-transmission-1-219-pts">Alien Transmission 1 (219 pts)</a></li><li><a href="#robins-reddit-password-490-pts">Robin’s Reddit Password (490 pts)</a></li></ul></li><li><a href="#misc">Misc</a><ul><li><a href="#hallo-50-pts">Hallo? (50 pts)</a></li><li><a href="#penguins-295-pts">Penguins (295 pts)</a></li></ul></li><li><a href="#pwnreverse">Pwn/Reverse</a><ul><li><a href="#too-slow-50-pts">Too Slow (50 pts)</a></li><li><a href="#object-oriented-programming-413-pts">Object Oriented Programming (413 pts)</a></li><li><a href="#five-fives-476-pts">Five Fives (476 pts)</a></li></ul></li><li><a href="#ztc">ZTC</a><ul><li><a href="#ralphie-50-pts">Ralphie! (50 pts)</a></li><li><a href="#vaporwave-1-190-pts">Vaporwave 1 (190 pts)</a></li><li><a href="#peepdis-263-pts">peepdis (263 pts)</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="prologue">Prologue</h2>
+
+<p>I was not planning on participating any CTF this week, but I figured I’d check the CTFTime schedule few days ago. That was when I saw a CTF named “rgbCTF” was coming up within a few days. I was like “screw it, let’s go, why not?” My interest peaked when I saw that the first team gets free Chroma keyboards - even though I knew full well that I wasn’t going to get top 5, and of course we didn’t.</p>
+
+<p>This time around I figured I’d hit up Emzi, a friend of mine on Discord - the same person that challenged me to <a href="/writeup/2020/06/23/capture-the-nitro/">Capture the Nitro</a>. This is his first CTF, and he solved quite a few challenges, which was amazing. He will be writing the Part 2 of the writeup. If some challenges seem to be missing in this post, please refer to Part 2 instead!</p>
+
+<p>Interestingly, the rgbSec team seems to be using something called <a href="https://github.com/Nakiami/mellivora">mellivora</a> instead of the usual CTFd, which appears to be much more stable and looks far more stylish. This might be an alternative solution to consider in the future when hosting a jeopardy-styled CTF.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/6e44fb45319f4e7de8989870e3b08a96179852a54d215fe45b1a7f6e442ef5dd.webp" alt="picture 11" /></p>
+
+<p>There were 7 major categories for this CTF, with the <code class="language-plaintext highlighter-rouge">ZTC</code> one being basically the <code class="language-plaintext highlighter-rouge">Misc</code> category made by the sponsors of this competition.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/f1c86d6bff1bd6359a4ce0f75cd1956820ee8bb19ca07557a5b8c52df1353466.webp" alt="picture 7" /></p>
+
+<p>Out of all of the challenges, I <em>loved</em> the PI series under the <code class="language-plaintext highlighter-rouge">Forensics</code> category. A lot of work was definitely put into making the challenge. Kudos to the author(s)! When I was solving PI1, a challenge involving reading the btsnoop log, it took me few hours to figure out the HID keycodes, and when I thought I had it with the number <code class="language-plaintext highlighter-rouge">0736727859</code>, I found out that that still wasn’t the flag! Emzi solved it for me in Part 2 of the series - it turns out that I was so focused on the numbers, I didn’t read any of the other text sent by the keyboard. I still learned a lot from this challenge though!</p>
+
+<p>Towards the end we were able to secure 53rd place out of the 1345 teams - that’s the top 4% of the scoreboard! While I wish that we could have climbed our way to top 50, we were just <em>close enough</em> to the target. Oh well, we’ll get em’ next time!</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/d3174f495bb9d3d5fbb39d6828adde84647973b2484bbf992b834311d9836477.webp" alt="picture 6" /></p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/f35c08a7b4141d233b3c1c5c12a6155dcdd6512c143bf2598864fc91517e8a9d.webp" alt="picture 10" /></p>
+
+<h2 id="beginner">Beginner</h2>
+
+<h3 id="joke-check-50-pts">Joke Check! (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p><code class="language-plaintext highlighter-rouge">What do you call a chicken staring at lettuce?</code></p>
+</blockquote>
+
+<p>The provided string was <code class="language-plaintext highlighter-rouge">crmNEQ{l_nstnvpy_nlpdlc_dlwlo}</code>, which was obviously an ROT13 string. Just plop it into Cyberchef and rotate it a few times and bang.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/0bf583e7ca23aff579cc85e17be7831c6b407835cba9261fe7481940647858ff.webp" alt="I hate this joke thanks" /></p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{a_chicken_caesar_salad}</code></p>
+
+<h3 id="shoob-50-pts">Shoob (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p><code class="language-plaintext highlighter-rouge">s h o o b</code></p>
+</blockquote>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/6e66ceec62e0cedb82df6c5aec3cf5cbb60196939a0678ddd17759d4977eb326.webp" alt="Shoob doggo" /></p>
+
+<p>At first I couldn’t tell what was going on with this image. It’s just a doggo with no helpful EXIF data according to <code class="language-plaintext highlighter-rouge">exiftool</code> and no embedded data according to <code class="language-plaintext highlighter-rouge">binwalk</code>. It wasn’t until another while that I figured out that the image has a <em>very</em> faint string on the doggo.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/5283972c951b04f4c61cadf6b4d0a5eb0f3dce28432ffcfc9215a9a5fd3a140a.webp" alt="picture 14" /></p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{3zier_4haN_s4n1ty}</code></p>
+
+<h3 id="a-fine-day-50-pts">A Fine Day (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>It's a fine day to break some ciphers!
+Sujd jd bgxopksbm ljsu tg tqqjgb xjkubo. Tqqjgb xjkubod tob t qvor vq dhidsjshsjvg xjkubo. Jsd nbp xvgdjdsd vq slv ghribod, t tgm i. Sv bgxopks t cbssbo, rhcsjkcp jsd kctxb jg sub tckutibs (dv t=0, i=1, bsx.) ip t, tgm subg tmm i. Qjgtccp stnb suts rvm 26 tgm xvgwbos js itxn jgsv t xutotxsbo.
+Sub tqqjgb xjkubo jdg's obtccp suts dsovgf. Djgxb js'd rvm 26, subob tob vgcp t qbl uhgmobm mjqqbobgs nbpd, lujxu xtg ib btdjcp iohsb qvoxbm. Tgpltp, ubob'd pvho qctf: ofiXSQ{t_qjgb_tqqjgb_xjkubo}
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Seems like a substitution cipher! Let’s plop this into <a href="https://www.boxentriq.com/code-breaking/cryptogram">Substitution Cipher Solver Tool</a> and let the tool do the job.</p>
+
+<p>The top result was the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>this is encrypted with an affine cipher affine ciphers are a form of substitution cipher its key consists of two numbers a and b to encrypt a letter multiply its place in the alphabet so a b etc by a and then add b finally take that mod and convert it back into a character the affine cipher isn t really that strong since it s mod there are only a few hundred different keys which can be easily brute forced anyway here s your flag rgbctf a fine affine cipher
+</code></pre></div></div>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{a_fine_affine_cipher}</code></p>
+
+<h3 id="simple-rsa-50-pts">Simple RSA (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p>Can you find a way to attack this RSA implementation?</p>
+
+  <p>📎 Attachments: <code class="language-plaintext highlighter-rouge">simple_rsa.txt</code>, <code class="language-plaintext highlighter-rouge">simple_rsa.py</code></p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❯</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="o">.</span><span class="nx">\simple_rsa.txt</span><span class="w">
+</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5620911691885906751399467870749963159674169260381</span><span class="w">
+</span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65537</span><span class="w">
+</span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1415060907955076984980255543080831671725408472748</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Why yes! This is simple RSA! In fact, it was so simple that I all had to do was to fire up the infamous <a href="https://github.com/Ganapati/RsaCtfTool">RsaCtfTool</a> to solve it.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❯</span><span class="w"> </span><span class="o">.</span><span class="n">/RsaCtfTool.py</span><span class="w"> </span><span class="nt">-n</span><span class="w"> </span><span class="nx">5620911691885906751399467870749963159674169260381</span><span class="w"> </span><span class="nt">-e</span><span class="w"> </span><span class="nx">65537</span><span class="w"> </span><span class="nt">--uncipher</span><span class="w"> </span><span class="nx">1415060907955076984980255543080831671725408472748</span><span class="w">
+</span><span class="kr">private</span><span class="w"> </span><span class="n">argument</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">set</span><span class="p">,</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">private</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">displayed</span><span class="p">,</span><span class="w"> </span><span class="nx">even</span><span class="w"> </span><span class="nx">if</span><span class="w"> </span><span class="nx">recovered.</span><span class="w">
+
+</span><span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="n">Testing</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="nx">/tmp/tmpqjqs9llh.</span><span class="w">
+</span><span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="n">Performing</span><span class="w"> </span><span class="nx">londahl</span><span class="w"> </span><span class="nx">attack</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">/tmp/tmpqjqs9llh.</span><span class="w">
+</span><span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="n">Performing</span><span class="w"> </span><span class="nx">pollard_p_1</span><span class="w"> </span><span class="nx">attack</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">/tmp/tmpqjqs9llh.</span><span class="w">
+</span><span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="n">Performing</span><span class="w"> </span><span class="nx">fermat</span><span class="w"> </span><span class="nx">attack</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">/tmp/tmpqjqs9llh.</span><span class="w">
+</span><span class="p">[</span><span class="o">*</span><span class="p">]</span><span class="w"> </span><span class="n">Performing</span><span class="w"> </span><span class="nx">factordb</span><span class="w"> </span><span class="nx">attack</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">/tmp/tmpqjqs9llh.</span><span class="w">
+
+</span><span class="n">Results</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">/tmp/tmpqjqs9llh:</span><span class="w">
+
+</span><span class="n">Unciphered</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="p">:</span><span class="w">
+</span><span class="n">HEX</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">0x00007d33637230665f33747572627b465443626772</span><span class="w">
+</span><span class="n">INT</span><span class="w"> </span><span class="p">(</span><span class="n">big</span><span class="w"> </span><span class="nx">endian</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2792069716136470955248443562608151407320262514</span><span class="w">
+</span><span class="n">INT</span><span class="w"> </span><span class="p">(</span><span class="n">little</span><span class="w"> </span><span class="nx">endian</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">167201404043347807005542357307720988742653755326464</span><span class="w">
+</span><span class="n">STR</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">b</span><span class="s1">'\x00\x00}3cr0f_3turb{FTCbgr'</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You might notice that the string seems a little weird; that’s because as stated by the source, the string was encrypted with little-endian in mind.</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{brut3_f0rc3}</code></p>
+
+<h3 id="quirky-resolution-50-pts">Quirky Resolution (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge Description</p>
+
+  <p><code class="language-plaintext highlighter-rouge">":joy:"</code></p>
+</blockquote>
+
+<p>Once again, I couldn’t tell what was wrong at first until I started messing with the image in an image editor.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/31a00e4ccf8635675b2d65bde3dd51951e1764487eaef85636c97afae5b7cb2c.webp" alt="picture 15" /></p>
+
+<p>Hey, look, it’s a QR code!</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/6294d1d44516586a936ecd3f7ee82d15abb16aede4d39054d6c515e8777083f6.webp" alt="picture 43" /></p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VfuflVAouacXoIOHsrNP
+xgSDHLQSDBIO7fZ1w8zV
+SUdwzyRJLKEHkqP2i0NK
+h5fYSD1b3rymDWKkx9uw
+fZELgZV2l0xllyyMADkw
+voRu9GvHFy3qI7BK3yAL
+EIUOvFKPbxcci6ExsXFv
+G5YlE7Id9NELQ3NL5Kex
+gaf6UQ77Q8aQkmjY6vzq
+IF45ubpqdAZertRvfnER
+XIj9b7ZGaep7Aspqvzhu
+P6IhEFnLdlx0w5BSjo0A
+L9ifDGyICNqaxNywIeAg
+mxWg0h8XpHRN3Ai6P3aU
+rgbCTF{th3_qu1rk!er_th3_b3tt3r}
+VXPphIDrM0WagtZJYecY
+PjXSHuJTAcLK9uUnGrCB
+PW2MjAPE6KGe1iB8Hmqg
+3WfKjbXOXXNVMj79F2UI
+gzFHSU1HN9KAKhwPElOf
+x9lL2wLHtee0KG90DFW9
+OoO0YnJDU8Kfm7sFADjQ
+XJ7FnxIARmTZ0WgGKeyS
+AQEgDg8Sx1XBicDHfZ2i
+OxvFwnTl9FKQTm1UikjK
+aifFg3hc1gKLJWAjC5b4
+q2SoVWnm95W2DNVGFtzf
+cxaLH9lpesGwhehpv8YU
+zO9W4DZM6uIlhCAyM1Hj
+</code></pre></div></div>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{th3_qu1rk!er_th3_b3tt3r}</code></p>
+
+<h2 id="cryptography">Cryptography</h2>
+
+<h3 id="i-love-rainbows-50-pts">I Love Rainbows (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p><code class="language-plaintext highlighter-rouge">Can you figure out why?</code></p>
+</blockquote>
+
+<p>Yes, I can. The challenge provided us with a list of hash intended for us to “crack,” and judging by the title, it probably wanted us to use a rainbow table.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4b43b0aee35624cd95b910189b3dc231
+cd0aa9856147b6c5b4ff2b7dfee5da20aa38253099ef1b4a64aced233c9afe29
+3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d
+0d61f8370cad1d412f80b84d143e1257
+63ee3b90f0bc64026eafa8cde95c5f410c847be841536b7240d778688cfed72a
+6874f52cfc77bd71e9394fa143bedd8f30811e91b8e64ff8818323df42d4af31
+cbd27e9b76c7ad85ae3f36cbe78e546d45327ed1a50787d9c3b989af27e62bf0
+44ba660a6bd8ff6b11b3423f9f3bf0dff4550cc6eb7b2e8a09ed3d4694faeb83
+5e07d6fdc602b0f9b99f6ea24c39e65835992faac400264c52449bc409cf4efa
+7b774effe4a349c6dd82ad4f4f21d34c
+c0828e0381730befd1f7a025057c74fb
+c195aeabeeee007891190b9ff8a32c70
+a87ff679a2f3e71d9181a67b7542122c
+67d4143062b55c25f383c9fabbbf1422fad06a2fe0644b43da67c17886dd4bd4
+b14a7b8059d9c055954c92674ce60032
+50e721e49c013f00c62cf59f2163542a9d8df02464efeb615d31051b0fddc326
+97fb5f8538b89f6c1accfd19836b65a73b61fbc2e0cbf84bb858a0fffa3f1592
+1b16b1df538ba12dc3f97edbb85caa7050d46c148134290feba80f8236c83db9
+24cafc74b88dfafb0524ecc85a76f8bd
+3fffd018d2223020be85670d93f565b63df54a9ce3ed2cdf6347a61df016938c
+2510c39011c5be704182423e3a695e91
+582967534d0f909d196b97f9e6921342777aea87b46fa52df165389db1fb8ccf
+cd0aa9856147b6c5b4ff2b7dfee5da20aa38253099ef1b4a64aced233c9afe29
+d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2
+</code></pre></div></div>
+
+<p>For those uninitiated, a hash is a one-way process. Hashing takes a stream of data, performs a series of calculations to obtain a unique stream of data that is <em>most of the time</em> unique to this object. It is important to distinguish the difference between hashing and encryption; hashing is <em>not</em> a form of encryption, and therefore cannot be “decrypted.” However, one could in theory keep track of a string that may produce the same hash and keep a database of this key value pair - and that is the gist of a rainbow table. <a href="https://crackstation.net/">CrackStation</a> is one of such site that keeps track of frequently seen strings and their respective hashes. Let’s submit our hashes and see if there are matching results!</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/8c84b5247a12e74efe18a5400334354a1e1b03f5a519d55cae9a0f5fa2eeea75.webp" alt="picture 16" /></p>
+
+<p>Annnd this looks promising! Let’s submit all the hashes and get the flag.</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{4lw4ys_us3_s4lt_wh3n_h4shing}</code></p>
+
+<h2 id="forensicsosint">Forensics/OSINT</h2>
+
+<h3 id="alien-transmission-1-219-pts">Alien Transmission 1 (219 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p><code class="language-plaintext highlighter-rouge">I was listening to my radio the other day and received this strange message... I think it came from an alien?</code></p>
+</blockquote>
+
+<audio controls="" src="https://www.dropbox.com/s/qgsrr0rqcineslu/squeakymusic.wav?dl=1"></audio>
+
+<p>I thought this was some sort of weird signal that I had to decipher, but this seemed… awfully familiar. I had heard something similar before… Where?</p>
+
+<!-- Courtesy of embedresponsively.com //-->
+
+<div class="responsive-video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/91LB9ssE__k" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+  </div>
+
+<p>…It’s an SSTV signal isn’t it? I thought this seemed familiar because I was around when Valve added their <a href="https://half-life.fandom.com/wiki/Portal_ARG">Transmission Received ARG</a> back when Portal 2 was imminent. As described by Wikipedia,</p>
+
+<blockquote>
+  <p>Slow Scan television (SSTV) is a picture transmission method used mainly by amateur radio operators, to transmit and receive static pictures via radio in monochrome or color.</p>
+</blockquote>
+
+<p>The fact that this signal was used in space by NASA matches the challenge description as well,</p>
+
+<blockquote>
+  <p>SSTV was used to transmit images of the far side of the Moon from Luna 3.</p>
+</blockquote>
+
+<p>So let’s try feeding this to an <a href="https://play.google.com/store/apps/details?id=xdsopl.robot36">SSTV decoder</a>.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/c79244034a6e1709da1c475cd13b34b8be97b4bb4c79114ba8d860b1c1cba1ba.webp" alt="picture 17" /></p>
+
+<p>And that was indeed it!</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbctf{s10w_2c4n_1s_7h3_W4V3}</code></p>
+
+<h3 id="robins-reddit-password-490-pts">Robin’s Reddit Password (490 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I'm Batman!
+Lately Robin's been acting suspicious... I need to see what he's been up to. Can you get me his reddit password? Just don't try to break into reddit's server...
+
+Tip : Wrap the Password in flag format
+</code></pre></div>  </div>
+</blockquote>
+
+<p>This one took me soooooo long, and it wasn’t even rewarding to get the answer. Therefore, this was my <em>least</em> favorite challenge out of the entire CTF. I spent hours trying to figure out what the heck this means.</p>
+
+<p>After searching for various combinations of <code class="language-plaintext highlighter-rouge">reddit</code>, <code class="language-plaintext highlighter-rouge">password</code>, <code class="language-plaintext highlighter-rouge">robin</code> for what felt like an eternity, I found <a href="https://news.ycombinator.com/item?id=15596253">this</a>.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/1bee4afdd88562f1668bb97dac7c94f2fedc08b7fd3e13943c3657910a57bb81.webp" alt="picture 18" /></p>
+
+<p>Apparently, there’s an obscure Easter egg on reddit’s site for the infamous <code class="language-plaintext highlighter-rouge">/etc/passwd</code> file. If you go to www.reddit.com<code class="language-plaintext highlighter-rouge">/etc/passwd</code>, you’d see a fake <code class="language-plaintext highlighter-rouge">/etc/passwd</code> containing a list of users and their hashes. Thankfully, someone did the work for us and decoded the passwords for us as shown in the screenshot.</p>
+
+<p>The main reason why I hated this challenge so much was a) this doesn’t necessarily encourage or teach the audience what an forensics or OSINT user might do b) without any hints, this challenge became a huge guessing game, which makes the challenge <em>very</em> unenjoyable to solve. c) the fact that we were told to “find someone’s password,” most of us would instinctively think that we’re supposed to look through places like password dumps. If you are a CTF challenge planner, please never do something like this.</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{bird}</code></p>
+
+<h2 id="misc">Misc</h2>
+
+<h3 id="hallo-50-pts">Hallo? (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The flag is exactly as decoded. No curly brackets.
+NOTE: keep the pound symbols as pound symbols!
+</code></pre></div>  </div>
+</blockquote>
+
+<audio controls="" src="https://www.dropbox.com/s/gfmpdu4vb3vzo0e/hmm.mp3?dl=1"></audio>
+
+<p>For those of you who have recently called someone or texted someone (you have in the last few months, right?), this tone should be familiar.</p>
+
+<p>Yup, it’s a series of DTMF (Dual-Tone Multi-Frequency signaling) tones. A DTMF tone is most frequently heard over a landline telephone or dumb phone in the early 2000s. Whenever you dial someone, a combination of tones are generated to let the phone and the operator know what numbers were being punched.</p>
+
+<blockquote>
+  <p>Dual-tone multi-frequency signaling (DTMF) is a telecommunication signaling system using the voice-frequency band over telephone lines between telephone equipment and other communications devices and switching centers. DTMF was first developed in the Bell System in the United States, and became known under the trademark Touch-Tone for use in push-button telephones supplied to telephone customers, starting in 1963. DTMF is standardized as ITU-T Recommendation Q.23. It is also known in the UK as MF4.</p>
+
+  <p>- <a href="https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling">Wikipedia</a></p>
+</blockquote>
+
+<p>After knowing that it’s a DTMF tone, we can plop the results into a <a href="https://play.google.com/store/apps/details?id=com.audiocommunication">DTMF decoder</a> and see what we get.</p>
+
+<p>The decoded result was <code class="language-plaintext highlighter-rouge">7774222228333#99933338#386333#866666337777#</code>, annnnd sent!</p>
+
+<p>…wait, what do you mean this wasn’t the flag? It turns out there <em>was</em> a reason that silences were included in the mp3 file.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/577f6df57830a60b29d056ec812283e90bbd8bc28824c04a09016a966d68d295.webp" alt="picture 29" /></p>
+
+<p>To those of us cool kids (not really) in the 2000s, T9 texting was the only reliable and most common texting input we had. What was T9 texting? Since there are more than a dozen characters in the English alphabet, the only way people could cram all those characters onto a T9 keypad was to assign multiple characters to a single key. Essentially, to enter a single character on a limited T9-style keypad, you had to press a key for multiple times to select the character you wanted to input. It was an <em>awful</em> time. I’m glad those days were over.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/142bad672ba295a1193f98e9b19135a7c1b2539822b3abc11ea37180836129ea.webp" alt="picture 30" /></p>
+
+<p>So after analyzing the text, we were able to get <code class="language-plaintext highlighter-rouge">rgbctf#yeet#dtmf#tones#</code>, and that was indeed the flag!</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbctf#yeet#dtmf#tones#</code></p>
+
+<h3 id="penguins-295-pts">Penguins (295 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p><em>waddle waddle</em></p>
+</blockquote>
+
+<p>The attached file was called <code class="language-plaintext highlighter-rouge">2020-06-29-173949.zip</code>. Upon extracting the archive, it becomes obvious that the archive is just a zipped git repo.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❯</span><span class="w"> </span><span class="n">ls</span><span class="w">
+
+
+    </span><span class="n">Directory:</span><span class="w"> </span><span class="nx">C:\Users\Still\AppData\Local\Temp\git</span><span class="w">
+
+</span><span class="n">Mode</span><span class="w">                 </span><span class="nx">LastWriteTime</span><span class="w">         </span><span class="nx">Length</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span><span class="o">----</span><span class="w">                 </span><span class="o">-------------</span><span class="w">         </span><span class="o">------</span><span class="w"> </span><span class="o">----</span><span class="w">
+</span><span class="n">d----</span><span class="w">           </span><span class="nx">7/15/2020</span><span class="w">  </span><span class="nx">8:18</span><span class="w"> </span><span class="nx">PM</span><span class="w">                </span><span class="o">.</span><span class="nf">git</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="nx">7/15/2020</span><span class="w">  </span><span class="nx">8:18</span><span class="w"> </span><span class="nx">PM</span><span class="w">             </span><span class="nx">93</span><span class="w"> </span><span class="nx">1yeet</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="mi">7</span><span class="n">/15/2020</span><span class="w">  </span><span class="nx">8:18</span><span class="w"> </span><span class="nx">PM</span><span class="w">             </span><span class="nx">34</span><span class="w"> </span><span class="nx">2yeet</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="mi">7</span><span class="n">/15/2020</span><span class="w">  </span><span class="nx">8:18</span><span class="w"> </span><span class="nx">PM</span><span class="w">             </span><span class="nx">88</span><span class="w"> </span><span class="nx">3penguin</span><span class="w">
+</span><span class="o">-----</span><span class="w">           </span><span class="mi">6</span><span class="n">/30/2020</span><span class="w">  </span><span class="nx">5:13</span><span class="w"> </span><span class="nx">AM</span><span class="w">             </span><span class="nx">60</span><span class="w"> </span><span class="nx">flag</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Obviously, <code class="language-plaintext highlighter-rouge">flag</code> does not contain anything useful. Let’s dive deeper into the directory.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❯</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="nx">flag</span><span class="w">
+</span><span class="n">cmon</span><span class="w"> </span><span class="nx">now</span><span class="w">
+</span><span class="n">u</span><span class="w"> </span><span class="nx">didnt</span><span class="w"> </span><span class="nx">think</span><span class="w"> </span><span class="nx">ACTUALLY</span><span class="w"> </span><span class="nx">think</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">easy</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❯</span><span class="w"> </span><span class="n">ls</span><span class="w"> </span><span class="nt">-File</span><span class="w"> </span><span class="nt">-Recurse</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="bp">$_</span><span class="p">;</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="bp">$_</span><span class="p">}</span><span class="w">
+</span><span class="o">...</span><span class="w">
+    </span><span class="n">Directory:</span><span class="w"> </span><span class="nx">C:\Users\Still\AppData\Local\Temp\git\.git\logs</span><span class="w">
+
+</span><span class="n">Mode</span><span class="w">                 </span><span class="nx">LastWriteTime</span><span class="w">         </span><span class="nx">Length</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span><span class="o">----</span><span class="w">                 </span><span class="o">-------------</span><span class="w">         </span><span class="o">------</span><span class="w"> </span><span class="o">----</span><span class="w">
+</span><span class="o">-----</span><span class="w">           </span><span class="mi">6</span><span class="n">/30/2020</span><span class="w">  </span><span class="nx">5:39</span><span class="w"> </span><span class="nx">AM</span><span class="w">           </span><span class="nx">2999</span><span class="w"> </span><span class="nx">HEAD</span><span class="w">
+</span><span class="mi">0000000000000000000000000000000000000000</span><span class="w"> </span><span class="mi">9</span><span class="n">dcf170a0fb6ae21b5299669b4336a6324c0c316</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593464930</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit</span><span class="w"> </span><span class="p">(</span><span class="n">initial</span><span class="p">):</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="nx">commit</span><span class="w">
+</span><span class="mi">9</span><span class="n">dcf170a0fb6ae21b5299669b4336a6324c0c316</span><span class="w"> </span><span class="nx">1117a337faf1ac693cf26bb3bcccb3caa0381d6d</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593464967</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">birds</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">cool</span><span class="w">
+</span><span class="mi">1117</span><span class="n">a337faf1ac693cf26bb3bcccb3caa0381d6d</span><span class="w"> </span><span class="nx">1117a337faf1ac693cf26bb3bcccb3caa0381d6d</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593464995</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">checkout:</span><span class="w"> </span><span class="nx">moving</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">master</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">feature1</span><span class="w">
+</span><span class="mi">1117</span><span class="n">a337faf1ac693cf26bb3bcccb3caa0381d6d</span><span class="w"> </span><span class="nx">955eeb70bcb49d8de331b61f38219bccb7e8f933</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465063</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">content</span><span class="w">
+</span><span class="mi">955</span><span class="n">eeb70bcb49d8de331b61f38219bccb7e8f933</span><span class="w"> </span><span class="nx">7d6997a74cfa2b5e266355d33fd73c76c9fe9b75</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465146</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">cooler</span><span class="w"> </span><span class="nx">bird</span><span class="w">
+</span><span class="mi">7</span><span class="n">d6997a74cfa2b5e266355d33fd73c76c9fe9b75</span><span class="w"> </span><span class="nx">1117a337faf1ac693cf26bb3bcccb3caa0381d6d</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465153</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">checkout:</span><span class="w"> </span><span class="nx">moving</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">feature1</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">master</span><span class="w">
+</span><span class="mi">1117</span><span class="n">a337faf1ac693cf26bb3bcccb3caa0381d6d</span><span class="w"> </span><span class="nx">8ee62379b45217202e75011966b813512cafcbb0</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465185</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">added</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">interesting</span><span class="w"> </span><span class="nx">file</span><span class="w">
+</span><span class="mi">8</span><span class="n">ee62379b45217202e75011966b813512cafcbb0</span><span class="w"> </span><span class="nx">b474ae165218fec38ac9fb8d64f452c1270e68ea</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465223</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">some</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">info</span><span class="w">
+</span><span class="n">b474ae165218fec38ac9fb8d64f452c1270e68ea</span><span class="w"> </span><span class="nx">102b03d19f932fc5e76d460604804dd522d6850d</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465324</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">some</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">changes</span><span class="w">
+</span><span class="mi">102</span><span class="n">b03d19f932fc5e76d460604804dd522d6850d</span><span class="w"> </span><span class="nx">27440c52e8a7a3d2e50f8fcdee0a88b0f937598d</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465369</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit</span><span class="w"> </span><span class="p">(</span><span class="n">merge</span><span class="p">):</span><span class="w"> </span><span class="n">Merge</span><span class="w"> </span><span class="nx">branch</span><span class="w"> </span><span class="s1">'feature1'</span><span class="w">
+</span><span class="mi">27440</span><span class="n">c52e8a7a3d2e50f8fcdee0a88b0f937598d</span><span class="w"> </span><span class="nx">b474ae165218fec38ac9fb8d64f452c1270e68ea</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465694</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">checkout:</span><span class="w"> </span><span class="nx">moving</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">master</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">b474ae1</span><span class="w">
+</span><span class="n">b474ae165218fec38ac9fb8d64f452c1270e68ea</span><span class="w"> </span><span class="nx">b474ae165218fec38ac9fb8d64f452c1270e68ea</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465718</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">checkout:</span><span class="w"> </span><span class="nx">moving</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">b474ae165218fec38ac9fb8d64f452c1270e68ea</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">fascinating</span><span class="w">
+</span><span class="n">b474ae165218fec38ac9fb8d64f452c1270e68ea</span><span class="w"> </span><span class="nx">d14fcbfd3c916a512ad1b956cd19fb7be16c20c6</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465745</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">irrelevant</span><span class="w"> </span><span class="nx">file</span><span class="w">
+</span><span class="n">d14fcbfd3c916a512ad1b956cd19fb7be16c20c6</span><span class="w"> </span><span class="nx">cfd97cd36fe6c5e450d5057bf25aa1d7ddeca9ef</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465781</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">content</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">irrelevant</span><span class="w"> </span><span class="nx">file</span><span class="w">
+</span><span class="n">cfd97cd36fe6c5e450d5057bf25aa1d7ddeca9ef</span><span class="w"> </span><span class="nx">5dcac0eddbcb4bffdec552a1172f84762a0b4174</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465822</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">another</span><span class="w"> </span><span class="nx">perhaps</span><span class="w"> </span><span class="nx">relevant</span><span class="w"> </span><span class="nx">file</span><span class="w">
+</span><span class="mi">5</span><span class="n">dcac0eddbcb4bffdec552a1172f84762a0b4174</span><span class="w"> </span><span class="nx">fb70ca39a7437eaba2850703018e1cf9073789e6</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593465988</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">probably</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">relevant</span><span class="w">
+</span><span class="n">fb70ca39a7437eaba2850703018e1cf9073789e6</span><span class="w"> </span><span class="nx">57adae71c223a465b6db3a710aab825883286214</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593466025</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">relevant</span><span class="w"> </span><span class="nx">file</span><span class="w">
+</span><span class="p">[</span><span class="n">ommitted</span><span class="p">]</span><span class="w">
+</span><span class="mi">57</span><span class="n">adae71c223a465b6db3a710aab825883286214</span><span class="w"> </span><span class="nx">800bcb90123137a6ee981c93c140bd04c75f507f</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593466646</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">commit:</span><span class="w"> </span><span class="nx">some</span><span class="w"> </span><span class="nx">things</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">needed</span><span class="w">
+</span><span class="mi">800</span><span class="n">bcb90123137a6ee981c93c140bd04c75f507f</span><span class="w"> </span><span class="nx">27440c52e8a7a3d2e50f8fcdee0a88b0f937598d</span><span class="w"> </span><span class="nx">John</span><span class="w"> </span><span class="nx">Doe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">John</span><span class="err">@</span><span class="nx">doe.com</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">1593466672</span><span class="w"> </span><span class="o">+</span><span class="nx">0000</span><span class="w">      </span><span class="nx">checkout:</span><span class="w"> </span><span class="nx">moving</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">fascinating</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">master</span><span class="w">
+</span><span class="o">...</span><span class="w">
+</span></code></pre></div></div>
+
+<p>By reading all the files in the directory, we quickly found out HEAD contains some useful git log. Let’s try checking out to these commits.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❯</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="nx">checkout</span><span class="w"> </span><span class="nx">fb70ca39a7437eaba2850703018e1cf9073789e6</span><span class="w">
+</span><span class="n">Note:</span><span class="w"> </span><span class="nx">switching</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="s1">'fb70ca39a7437eaba2850703018e1cf9073789e6'</span><span class="o">.</span><span class="w">
+
+</span><span class="n">You</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="s1">'detached HEAD'</span><span class="w"> </span><span class="nx">state.</span><span class="w"> </span><span class="nx">You</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">look</span><span class="w"> </span><span class="nx">around</span><span class="p">,</span><span class="w"> </span><span class="nx">make</span><span class="w"> </span><span class="nx">experimental</span><span class="w">
+</span><span class="n">changes</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">commit</span><span class="w"> </span><span class="nx">them</span><span class="p">,</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">discard</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">commits</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">make</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">this</span><span class="w">
+</span><span class="n">state</span><span class="w"> </span><span class="nx">without</span><span class="w"> </span><span class="nx">impacting</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">branches</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">switching</span><span class="w"> </span><span class="nx">back</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">branch.</span><span class="w">
+
+</span><span class="kr">If</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">branch</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">retain</span><span class="w"> </span><span class="nx">commits</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">create</span><span class="p">,</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">may</span><span class="w">
+</span><span class="kr">do</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">later</span><span class="p">)</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">switch</span><span class="w"> </span><span class="nx">command.</span><span class="w"> </span><span class="nx">Example:</span><span class="w">
+
+  </span><span class="n">git</span><span class="w"> </span><span class="nx">switch</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">new-branch-name</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="n">Or</span><span class="w"> </span><span class="nx">undo</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">operation</span><span class="w"> </span><span class="nx">with:</span><span class="w">
+
+  </span><span class="n">git</span><span class="w"> </span><span class="nx">switch</span><span class="w"> </span><span class="o">-</span><span class="w">
+
+</span><span class="n">Turn</span><span class="w"> </span><span class="nx">off</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">advice</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">setting</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">variable</span><span class="w"> </span><span class="nx">advice.detachedHead</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">false</span><span class="w">
+
+</span><span class="n">HEAD</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">now</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="nx">fb70ca3</span><span class="w"> </span><span class="nx">probably</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">relevant</span><span class="w">
+</span><span class="err">❯</span><span class="w"> </span><span class="n">ls</span><span class="w">
+
+
+    </span><span class="n">Directory:</span><span class="w"> </span><span class="nx">C:\Users\Still\AppData\Local\Temp\git</span><span class="w">
+
+</span><span class="n">Mode</span><span class="w">                 </span><span class="nx">LastWriteTime</span><span class="w">         </span><span class="nx">Length</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span><span class="o">----</span><span class="w">                 </span><span class="o">-------------</span><span class="w">         </span><span class="o">------</span><span class="w"> </span><span class="o">----</span><span class="w">
+</span><span class="n">d----</span><span class="w">           </span><span class="nx">7/15/2020</span><span class="w">  </span><span class="nx">8:15</span><span class="w"> </span><span class="nx">PM</span><span class="w">                </span><span class="o">.</span><span class="nf">git</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="nx">7/15/2020</span><span class="w">  </span><span class="nx">8:15</span><span class="w"> </span><span class="nx">PM</span><span class="w">              </span><span class="nx">0</span><span class="w"> </span><span class="nx">1yeet</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="mi">7</span><span class="n">/15/2020</span><span class="w">  </span><span class="nx">8:15</span><span class="w"> </span><span class="nx">PM</span><span class="w">              </span><span class="nx">0</span><span class="w"> </span><span class="nx">2yeet</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="mi">7</span><span class="n">/15/2020</span><span class="w">  </span><span class="nx">8:15</span><span class="w"> </span><span class="nx">PM</span><span class="w">              </span><span class="nx">0</span><span class="w"> </span><span class="nx">3parakeet</span><span class="w">
+</span><span class="o">-----</span><span class="w">           </span><span class="mi">6</span><span class="n">/30/2020</span><span class="w">  </span><span class="nx">5:13</span><span class="w"> </span><span class="nx">AM</span><span class="w">             </span><span class="nx">60</span><span class="w"> </span><span class="nx">flag</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="mi">7</span><span class="n">/15/2020</span><span class="w">  </span><span class="nx">8:15</span><span class="w"> </span><span class="nx">PM</span><span class="w">             </span><span class="nx">37</span><span class="w"> </span><span class="nx">irrelevant_file</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="mi">7</span><span class="n">/15/2020</span><span class="w">  </span><span class="nx">8:15</span><span class="w"> </span><span class="nx">PM</span><span class="w">             </span><span class="nx">40</span><span class="w"> </span><span class="nx">perhaps_relevant</span><span class="w">
+</span><span class="nt">-a</span><span class="o">---</span><span class="w">           </span><span class="mi">7</span><span class="n">/15/2020</span><span class="w">  </span><span class="nx">8:15</span><span class="w"> </span><span class="nx">PM</span><span class="w">            </span><span class="nx">150</span><span class="w"> </span><span class="nx">perhaps_relevant_v2</span><span class="w">
+
+</span><span class="err">❯</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="o">.</span><span class="nx">\perhaps_relevant_v2</span><span class="w">
+</span><span class="n">YXMgeW9kYSBvbmNlIHRvbGQgbWUgInJld2FyZCB5b3UgaSBtdXN0IgphbmQgdGhlbiBoZSBnYXZlIG1lIHRoaXMgLS0tLQpyZ2JjdGZ7ZDRuZ2wxbmdfYzBtbTE3c180cjNfdU5mMHI3dW40NzN9</span><span class="w">
+
+</span><span class="err">❯</span><span class="w"> </span><span class="n">ConvertFrom-Base64</span><span class="w"> </span><span class="nx">YXMgeW9kYSBvbmNlIHRvbGQgbWUgInJld2FyZCB5b3UgaSBtdXN0IgphbmQgdGhlbiBoZSBnYXZlIG1lIHRoaXMgLS0tLQpyZ2JjdGZ7ZDRuZ2wxbmdfYzBtbTE3c180cjNfdU5mMHI3dW40NzN9</span><span class="w">
+</span><span class="n">as</span><span class="w"> </span><span class="nx">yoda</span><span class="w"> </span><span class="nx">once</span><span class="w"> </span><span class="nx">told</span><span class="w"> </span><span class="nx">me</span><span class="w"> </span><span class="s2">"reward you i must"</span><span class="w">
+</span><span class="n">and</span><span class="w"> </span><span class="nx">then</span><span class="w"> </span><span class="nx">he</span><span class="w"> </span><span class="nx">gave</span><span class="w"> </span><span class="nx">me</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="o">----</span><span class="w">
+</span><span class="n">rgbctf</span><span class="p">{</span><span class="n">d4ngl1ng_c0mm17s_4r3_uNf0r7un473</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>And there’s the file we’re looking for!</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbctf{d4ngl1ng_c0mm17s_4r3_uNf0r7un473}</code></p>
+
+<h2 id="pwnreverse">Pwn/Reverse</h2>
+
+<h3 id="too-slow-50-pts">Too Slow (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p><code class="language-plaintext highlighter-rouge">I've made this flag decryptor! It's super secure, but it runs a little slow.</code></p>
+
+  <p>📎 Attachment: <code class="language-plaintext highlighter-rouge">a.out</code></p>
+</blockquote>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ file a.out
+a.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=462dfe207acdfe1da2133cac6b69b45de5169ee2, for GNU/Linux 3.2.0, not stripped
+</code></pre></div></div>
+
+<p>So it looks like a standard Linux ELF executable. What happens if I run it?</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❯</span><span class="w"> </span><span class="o">.</span><span class="n">/a.out</span><span class="w">
+</span><span class="nx">Flag</span><span class="w"> </span><span class="nx">Decryptor</span><span class="w"> </span><span class="nx">v1.0</span><span class="w">
+</span><span class="n">Generating</span><span class="w"> </span><span class="nx">key...</span><span class="w">
+</span></code></pre></div></div>
+
+<p>…and it hangs indefinitely. Yup, talk about slow. Looks like it’s time to investigate using <a href="https://ghidra-sre.org/">Ghidra</a>! Upon examining the <code class="language-plaintext highlighter-rouge">main</code> method’s pseudo-code output, we see the following,</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">uint</span> <span class="n">uVar1</span><span class="p">;</span>
+  <span class="n">puts</span><span class="p">(</span><span class="s">"Flag Decryptor v1.0"</span><span class="p">);</span>
+  <span class="n">puts</span><span class="p">(</span><span class="s">"Generating key..."</span><span class="p">);</span>
+  <span class="n">uVar1</span> <span class="o">=</span> <span class="n">getKey</span><span class="p">();</span>
+  <span class="n">win</span><span class="p">((</span><span class="n">ulong</span><span class="p">)</span><span class="n">uVar1</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ulong</span> <span class="nf">getKey</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">uint</span> <span class="n">local_10</span><span class="p">;</span>
+  <span class="n">uint</span> <span class="n">local_c</span><span class="p">;</span>
+  
+  <span class="n">local_10</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">local_10</span> <span class="o">&lt;</span> <span class="mh">0x265d1d23</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">local_c</span> <span class="o">=</span> <span class="n">local_10</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">local_c</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">((</span><span class="n">local_c</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">local_c</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">local_c</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="n">local_c</span> <span class="o">=</span> <span class="n">local_c</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">local_10</span> <span class="o">=</span> <span class="n">local_10</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">ulong</span><span class="p">)</span><span class="n">local_10</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you take a closer look at <code class="language-plaintext highlighter-rouge">getKey</code>, you’ll realize that it’s doing some meaningless calculation inside a <code class="language-plaintext highlighter-rouge">for</code> loop until it loops <code class="language-plaintext highlighter-rouge">0x265d1d22</code> times, which is 643,636,515 times in decimal!</p>
+
+<p><img src="https://cdn.discordapp.com/emojis/394885502895128576.gif?v=1" alt="ameowglare" /></p>
+
+<p>Since all we care about is for <code class="language-plaintext highlighter-rouge">local_10</code> (or <code class="language-plaintext highlighter-rouge">i</code>) to reach the expected value, which is <code class="language-plaintext highlighter-rouge">0x265d1d22</code>, we can just patch the binary to make it start with that value. To do this in Ghidra, we’ll select the instruction we want to patch and hit <code class="language-plaintext highlighter-rouge">CTRL</code>+<code class="language-plaintext highlighter-rouge">SHIFT</code>+<code class="language-plaintext highlighter-rouge">G</code> and modify the instruction accordingly.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/544d7ede2543c4322bae0af1cce6ba7c5bf3a758fb1e39c25c3c7a72c16d337f.webp" alt="picture 37" /></p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/8cde0b2446add385a770c5c4a5e39bbded5c0c37b42195805d9f1c7a653a4861.webp" alt="picture 38" /></p>
+
+<p>Unfortunately, Ghidra’s binary patching is a little bit broken for the moment. While a <a href="https://github.com/NationalSecurityAgency/ghidra/pull/1505">PR (#1505)</a> is on its way to fix the behavior of <code class="language-plaintext highlighter-rouge">Export Program</code> (File &gt; <code class="language-plaintext highlighter-rouge">Export Program</code>), you will have to wait another while for that PR to get merged. In the meantime though, an alternative method is to import the binary as a raw binary when adding the program in the current Ghidra Project, patch the instruction, and export the program that way.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/e79f6eb8c3c37a4726d6af336bbefd100cfa3af3c6baf0c53bf41b0f7ba8fcb5.webp" alt="picture 39" /></p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/47fa6712b11488f883c67e1a795ac30a0f37619339cb0055897aa464478fd4be.webp" alt="picture 40" /></p>
+
+<p>And with that, we were able to successfully get the flag in less than a second!</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">❯</span><span class="w"> </span><span class="o">.</span><span class="n">/a.out.bin</span><span class="w">
+</span><span class="nx">Flag</span><span class="w"> </span><span class="nx">Decryptor</span><span class="w"> </span><span class="nx">v1.0</span><span class="w">
+</span><span class="n">Generating</span><span class="w"> </span><span class="nx">key...</span><span class="w">
+</span><span class="n">Your</span><span class="w"> </span><span class="nx">flag:</span><span class="w"> </span><span class="nx">rgbCTF</span><span class="p">{</span><span class="n">pr3d1ct4bl3_k3y_n33d5_no_w41t_cab79d</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{pr3d1ct4bl3_k3y_n33d5_no_w41t_cab79d}</code></p>
+
+<h3 id="object-oriented-programming-413-pts">Object Oriented Programming (413 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p><code class="language-plaintext highlighter-rouge">There's this small up and coming language called java I want to tell you about</code></p>
+</blockquote>
+
+<p class="notice--success">This problem was solved by our Java guru, <a href="https://github.com/k-boyle">Kieran</a>. Go give them a follow!</p>
+
+<p>The moment I saw the <code class="language-plaintext highlighter-rouge">Main.java</code> file I burst out in tears. Just… <a href="https://gist.github.com/Still34/cc33aa76c6649761f95769dfc9e0094f">take a look</a>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">import</span> <span class="nn">java.lang.reflect.*</span><span class="o">;</span><span class="c1">//think of this as #include &lt;stdio.h&gt;, basically every program needs it for IO</span>
+    <span class="c1">//...</span>
+    <span class="c1">//it's always good practice to declare constants for unclear magic values</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ZERO</span> <span class="o">=</span> <span class="nc">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">intValue</span><span class="o">();</span> <span class="c1">//BigInteger for precision</span>
+    <span class="c1">//...</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span> <span class="c1">//running Java is dangerous, that's why everything throws an Exception</span>
+      <span class="nc">InputStream</span> <span class="n">standardInputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StandardInputStreamInstantiator</span><span class="o">().</span><span class="na">getStandardInputStreamFactory</span><span class="o">().</span><span class="na">getStandardInputStream</span><span class="o">();</span>
+      <span class="c1">//i'm going to take a shortcut here, behold the power of java libraries - so many lines saved!</span>
+      <span class="nc">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="nc">Scanner</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getConstructor</span><span class="o">(</span><span class="n">standardInputStream</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getSuperclass</span><span class="o">().</span><span class="na">getSuperclass</span><span class="o">()).</span><span class="na">newInstance</span><span class="o">(</span><span class="n">standardInputStream</span><span class="o">);</span>
+      <span class="c1">//...</span>
+    <span class="o">}</span>
+    <span class="c1">//...</span>
+    <span class="kd">protected</span> <span class="kd">static</span> <span class="kt">char</span> <span class="n">secureEncryptionKey</span><span class="o">;</span> <span class="c1">//it's protected, how you gonna crack it now?</span>
+</code></pre></div></div>
+
+<p>Even if you’ve <em>never ever</em> touched Java before, as long as you had dabbled with OOP, you should notice the absurdity the author is trying to convey here.</p>
+
+<p>Anyways… It looks like the majority of the code is security by obscurity - the code tries to hide what it’s doing by giving the reverse engineer a harder time decoding the meaning of the code. With a debugger though, it’s slightly easier to understand what it’s trying to do. Let’s break this down by following the execution of each line in <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nc">String</span> <span class="n">userInput</span> <span class="o">=</span> <span class="n">getUserInputMethodFromScannerAndInvokeAndReturnOutput</span><span class="o">(</span><span class="n">scanner</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">userInput</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">!=</span> <span class="no">SIXTEEN</span><span class="o">)</span>
+   <span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>It should be safe to assume that these lines want to ensure that the length to be 16.</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/1cc4bd531008e90169714ea2a69f871efee3047546a63c86a4c67ec5bc0891b8.webp" alt="picture 41" /></p>
+
+<p>When you step through the <code class="language-plaintext highlighter-rouge">executeCodeThatDoesSomethingThatYouProbablyNeedToFigureOut</code> method, you will notice that the string is getting “encrypted,” as the variable states. The string is also getting split into chunks, per 4 characters. It is also at this time that I should note that there were other classes included with the <code class="language-plaintext highlighter-rouge">Main.java</code> file as illustrated below.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/7b3fae5ba2cf806851c597f83aa513fd6841f13b97d7709699ccd3b5afd9d036.webp" alt="picture 42" /></p>
+
+<p>After stepping through multiple times, it becomes apparent that every 4 characters are broken down into 2 groups of characters. For example, <code class="language-plaintext highlighter-rouge">asdf</code> -&gt; <code class="language-plaintext highlighter-rouge">cqfd</code> -&gt; <code class="language-plaintext highlighter-rouge">['cq', 'fd']</code>. Notice what happens if I let the execution continue:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">"main"</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ClassNotFoundException</span><span class="o">:</span> <span class="n">cq</span>
+ <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">jdk</span><span class="o">.</span><span class="na">internal</span><span class="o">.</span><span class="na">loader</span><span class="o">.</span><span class="na">BuiltinClassLoader</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="nc">BuiltinClassLoader</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">581</span><span class="o">)</span>
+ <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">jdk</span><span class="o">.</span><span class="na">internal</span><span class="o">.</span><span class="na">loader</span><span class="o">.</span><span class="na">ClassLoaders</span><span class="n">$AppClassLoader</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="nc">ClassLoaders</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">178</span><span class="o">)</span>
+ <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ClassLoader</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="nc">ClassLoader</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">522</span><span class="o">)</span>
+ <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Class</span><span class="o">.</span><span class="na">forName0</span><span class="o">(</span><span class="nc">Native</span> <span class="nc">Method</span><span class="o">)</span>
+ <span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="nc">Class</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">315</span><span class="o">)</span>
+ <span class="n">at</span> <span class="nc">Main</span><span class="o">.</span><span class="na">executeCodeThatDoesSomethingThatYouProbablyNeedToFigureOut</span><span class="o">(</span><span class="nc">Main</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">48</span><span class="o">)</span>
+ <span class="n">at</span> <span class="nc">Main</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="nc">Main</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">33</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>A stack trace is thrown telling me it can’t find the class <code class="language-plaintext highlighter-rouge">cq</code>. What is happening here is that it is taking the first 2 characters and then using reflection to find the class and using the latter 2 characters as the method name to call. If we take a look at the other classes included,</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">qa</span> <span class="o">{</span>
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">go</span><span class="o">()</span> <span class="o">{</span>
+ <span class="k">return</span> <span class="s">"kz"</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">bl</span><span class="o">()</span> <span class="o">{</span>
+ <span class="k">return</span> <span class="s">"pu"</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="c1">//...</span>
+</code></pre></div></div>
+
+<p>…you’ll see that if I were to find a set of characters that can translate to <code class="language-plaintext highlighter-rouge">qago</code>, then it would call the <code class="language-plaintext highlighter-rouge">qa</code> class and execute the method <code class="language-plaintext highlighter-rouge">go</code>, and then returning the characters <code class="language-plaintext highlighter-rouge">kz</code>. Additionally, the <code class="language-plaintext highlighter-rouge">if (executeCodeThatDoesSomethingThatYouProbablyNeedToFigureOut(userInput).equals(scanner.getClass().getPackageName().replace(".", "")))</code> check essentially wants the translated to string to match the word <code class="language-plaintext highlighter-rouge">javautil</code>. So, all that’s left is to figure out what character sets would give us the output we want!</p>
+
+<p>After a bit of trial and error, I was able to figure out that the input should be <code class="language-plaintext highlighter-rouge">enterprisecodeee</code>, and that was indeed the flag!</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">enterprisecodeee</span><span class="w">
+</span><span class="nx">Nice.</span><span class="w"> </span><span class="nx">Flag:</span><span class="w"> </span><span class="nx">rgbCTF</span><span class="p">{</span><span class="n">enterprisecodeee</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{enterprisecodeee}</code></p>
+
+<h3 id="five-fives-476-pts">Five Fives (476 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p><code class="language-plaintext highlighter-rouge">java SecureRandom is supposed to be, well, secure, right? nc challenge.rgbsec.xyz 7425</code></p>
+</blockquote>
+
+<p>The included source code was as follows,</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.ByteBuffer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ThreadLocalRandom</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Welcome to the Five Fives Lotto!"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Generating seed..."</span><span class="o">);</span>
+
+        <span class="c1">//You'll never find my seed now!</span>
+        <span class="kt">int</span> <span class="n">sleep</span> <span class="o">=</span> <span class="nc">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">10000</span><span class="o">);</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">sleep</span><span class="o">);</span>
+        <span class="kt">long</span> <span class="n">seed</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+        <span class="nc">ByteBuffer</span> <span class="n">bb</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="nc">Long</span><span class="o">.</span><span class="na">BYTES</span><span class="o">);</span>
+        <span class="n">bb</span><span class="o">.</span><span class="na">putLong</span><span class="o">(</span><span class="n">seed</span><span class="o">);</span>
+        <span class="nc">SecureRandom</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecureRandom</span><span class="o">(</span><span class="n">bb</span><span class="o">.</span><span class="na">array</span><span class="o">());</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">10000</span> <span class="o">-</span> <span class="n">sleep</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Yesterday's numbers were: "</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"You have $20, and each ticket is $1. How many tickets would you like to buy? "</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">numTries</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">numTries</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Sorry, you don't have enough money to buy all of those. :("</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">a</span> <span class="o">!=</span> <span class="mi">5</span><span class="o">;</span> <span class="n">a</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">numTries</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Ticket number "</span> <span class="o">+</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="s">"! Enter five numbers, separated by spaces:"</span><span class="o">);</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">ticket</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">().</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">);</span>
+
+            <span class="kt">boolean</span> <span class="n">winner</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">b</span> <span class="o">!=</span> <span class="mi">5</span><span class="o">;</span> <span class="n">b</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">b</span><span class="o">]</span> <span class="o">!=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">ticket</span><span class="o">[</span><span class="n">b</span><span class="o">]))</span> <span class="o">{</span>
+                    <span class="n">winner</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(!</span><span class="n">winner</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Your ticket did not win. Try again."</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Congratulations, you win the flag lottery!"</span><span class="o">);</span>
+                <span class="n">outputFlag</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">outputFlag</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileReader</span><span class="o">(</span><span class="s">"flag.txt"</span><span class="o">));</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Error reading flag. Please contact admins."</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Upon first glace, it really doesn’t seem like there’s much we can do here. It’s PRNG, but the use of <code class="language-plaintext highlighter-rouge">SecureRandom</code> takes the P (pseudo) out of the PRNG. As stated by the Oracle Java documentation,</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This class provides a cryptographically strong random number generator (RNG).
+A cryptographically strong random number minimally complies with the statistical random number generator tests specified in FIPS 140-2, Security Requirements for Cryptographic Modules, section 4.9.1. Additionally, SecureRandom must produce non-deterministic output. Therefore any seed material passed to a SecureRandom object must be unpredictable, and all SecureRandom output sequences must be cryptographically strong, as described in RFC 1750: Randomness Recommendations for Security.
+
+A caller obtains a SecureRandom instance via the no-argument constructor or one of the getInstance methods:<span class="sb">
+
+      SecureRandom random = new SecureRandom();
+
+</span>Many SecureRandom implementations are in the form of a pseudo-random number generator (PRNG), which means they use a deterministic algorithm to produce a pseudo-random sequence from a true random seed. Other implementations may produce true random numbers, and yet others may use a combination of both techniques.
+
+Typical callers of SecureRandom invoke the following methods to retrieve random bytes:<span class="sb">
+
+      SecureRandom random = new SecureRandom();
+      byte bytes[] = new byte[20];
+      random.nextBytes(bytes);
+
+</span>Callers may also invoke the generateSeed method to generate a given number of seed bytes (to seed other random number generators, for example):<span class="sb">
+
+      byte seed[] = random.generateSeed(20);
+
+</span>Note: Depending on the implementation, the generateSeed and nextBytes methods may block as entropy is being gathered, for example, if they need to read from /dev/random on various Unix-like operating systems.
+</code></pre></div></div>
+
+<p>So that means we should potentially seek for other attack vectors instead of focusing on the “cryptographically-secure RNG.” Let’s try connecting to the remote server first then plot our attack later.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ nc challenge.rgbsec.xyz 7425
+Welcome to the Five Fives Lotto!
+Generating seed...
+Yesterday's numbers were:
+2 3 1 3 1
+You have $20, and each ticket is $1. How many tickets would you like to buy?
+1
+Ticket number 1! Enter five numbers, separated by spaces:
+1 1 1 1 1
+Your ticket did not win. Try again.
+</code></pre></div></div>
+
+<p>After connecting to the server once and trying out the challenge hands-on, I was able to plot out the following flowchart.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/lotto-flowchart.svg" alt="Lotto flowchart" /></p>
+
+<p class="notice--success">This solve was made possible by, <a href="https://github.com/k-boyle">Kieran</a>, who pointed out that the bounds check was exploitable. Go give them a follow!</p>
+
+<p>Let’s take a step back to see if we can find any other potential attack vectors in the code. If we take a look at how the program determines the number of tickets can be bought, we quickly find a loophole that we can exploit.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">numTries</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+<span class="c1">// no lower bound!</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">numTries</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Sorry, you don't have enough money to buy all of those. :("</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="c1">// ...</span>
+<span class="c1">// loop until i matches numTries</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">numTries</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Yup, because the program did not account for the lower-bound of the <code class="language-plaintext highlighter-rouge">parseInt</code> or explicitly use <code class="language-plaintext highlighter-rouge">parseUnsignedInt</code>, the user can enter a negative integer and it would happily take the input and loop infinitely for us until something breaks out of the loop. With that in mind, we can write a script that brute-forces the challenge for us.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pwn</span>
+<span class="n">pwn</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">pwn</span><span class="p">.</span><span class="n">remote</span><span class="p">(</span><span class="s">"167.172.123.213"</span><span class="p">,</span> <span class="mi">7425</span><span class="p">)</span>
+<span class="c1"># while loop due to the quirkiness of pwntool's recv when dealing with tubes that delay for an abnormal amount of time
+</span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">'buy?'</span> <span class="ow">in</span> <span class="n">l</span><span class="p">.</span><span class="n">decode</span><span class="p">():</span>
+        <span class="k">break</span>
+<span class="n">r</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'-1'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+<span class="c1"># attempts is an array of all combinations of 1 ~ 5
+</span><span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="n">attempts</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+        <span class="n">r</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">attempt</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">attempt</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">recvline_contains</span><span class="p">(</span><span class="s">'Congratulations'</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'rgbCTF'</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">pwn</span><span class="p">.</span><span class="n">Timeout</span><span class="p">.</span><span class="n">maximum</span><span class="p">))</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<p>In a nutshell, the Python script will continue to try for all the possible combinations until the flag was sent by the server. After a short while, I was able to get the following:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sa">b</span><span class="s">'Your ticket did not win. Try again.</span><span class="se">\n</span><span class="s">'</span>
+<span class="mi">1</span> <span class="mi">4</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">3</span>
+<span class="sa">b</span><span class="s">'Congratulations, you win the flag lottery!'</span>
+<span class="sa">b</span><span class="s">'rgbCTF{s0m3t1m3s_4ll_y0u_n33d_1s_f0rc3}</span><span class="se">\n</span><span class="s">'</span>
+</code></pre></div></div>
+
+<p>Awesome, and it looks like the author did intend us to brute-force according to the flag.</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{s0m3t1m3s_4ll_y0u_n33d_1s_f0rc3}</code></p>
+
+<h2 id="ztc">ZTC</h2>
+
+<h3 id="ralphie-50-pts">Ralphie! (50 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p>Ralphie, on the double! Little Orphan Annie sent you this decoder ring, decode the secret message!</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/5483a9c5b58d3d6a3fc9add0612bad4c69da886d189594d65551dfb94dbb9d4b.webp" alt="picture 19" /></p>
+
+<p>Well at least this QR code is painfully obvious. Let’s just fiddle around with the brightness and crop the QR code.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/2ff639d2e20cfae4c448ed5cf6c983f0342492aded22f7920a6975873144658c.webp" alt="picture 20" /></p>
+
+<p>Wait, what?</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/e2fdde278de101da448c695536f1017f679cd26f6f26024e2f7d04075b580268.webp" alt="picture 21" /></p>
+
+<p>Uhhh, I bet it must be the color that’s screwing with the code. Let’s slap a B&amp;W filter over the image.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/f40b2e2b91f038ca4024fbd01814727a90a108fefa021812293df64360d0adc1.webp" alt="picture 23" /></p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/6a309ca6214a59305fe2e6cb32667b90aa2ef9c85cc75a41e50df87f1230f1b0.webp" alt="picture 22" /></p>
+
+<p>It was! But why? Color screws with QR code output? Apparently, yes! One can store more than one layer of data in QR code based on the use of color and can lead to different output, as pointed out in the <a href="https://arxiv.org/abs/1803.02280">ART-UP: A Novel Method for Generating Scanning-robust Aesthetic QR codes</a> paper.</p>
+
+<blockquote>
+  <p>The use of colors in QR codes enhances its functionality now. The data rate which is high among the 2D barcodes can be further enhanced with the use of colors.</p>
+</blockquote>
+
+<p>Huh, TIL!</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{BESURETODRINKYOUROVALTINE}</code></p>
+
+<h3 id="vaporwave-1-190-pts">Vaporwave 1 (190 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p>Do you believe in synesthesia?
+📎 Attachment: <code class="language-plaintext highlighter-rouge">vaporwave1.mp3</code></p>
+</blockquote>
+
+<p>As someone who had previously worked in the audio SFX and mastering industry, I happened to have learned a lot during that journey. One of the most common thing that a audio mastering engineer or producer would have to do is check for frequency collisions and other anomalies that may appear in the raw audio. This typically involves two things: a spectrum analyzer and an EQ visualizer.</p>
+
+<p>In laymen’s term, a spectrum analyzer plots out a graph that helps a mixing engineer see the fidelity of the audio as well as identify what portion of the track use up what section of the frequency and how loud it is (<em>keep in mind I’m drastically simplifying things here</em>).</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/aeb749ddd511bc0329591afd7458d263ad3639849b55e8c0b5b3135c2e5d07c9.webp" alt="picture 32" /></p>
+
+<p>Sometimes an artist may also plant an easter egg within the spectrogram of the track. For example, the following screenshot features John Romero’s sprite from DOOM 2 in Mick Gordon’s DOOM 2016 soundtrack, SkullHacker.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/b00142b45640a6817f3b63dfde111dee279c79bde660eea5c6d3643cd859e400.webp" alt="picture 33" /></p>
+
+<p>My knowledge happens to acquainted me with one of the most common steganography techniques used among beginner audio steganography challenges: hiding textual or visual information within these spectrums. That’s why my first instinct was to open up the file in a spectrogram viewer - in this case, <a href="http://spek.cc/">spek</a>.</p>
+
+<p>I happened to have solved the track without trying! Awesome!</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/1bb1cfa169c5f8fcb333a8835c954d639b275fac2849ca44f668a232fb829bc6.webp" alt="picture 34" /></p>
+
+<p>Funnily enough, last year I made a similar challenge for our CTF club, Pingtung Hacker, though the flag was <em>far more</em> subtle. The base track was SeamlessR’s Bass Antics; I just slapped an image containing the flag into Harmor and played it along with the base track.</p>
+
+<audio controls="" src="https://www.dropbox.com/s/55xc7o8sqihj1j6/bass-antics.wav?dl=1"></audio>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/204c763a75d5fc3ffa2365f97963fa283abb79be865f9de682e3a049ded418e9.webp" alt="picture 36" /></p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{s331ng_s0undz}</code></p>
+
+<h3 id="peepdis-263-pts">peepdis (263 pts)</h3>
+
+<blockquote>
+  <p>Challenge description</p>
+
+  <p>Do you peep what I peep?</p>
+</blockquote>
+
+<p>The included file was called <code class="language-plaintext highlighter-rouge">peepdis.dae</code>. Opening the file reveals that it’s an XML-like file.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ cat .\peepdis.dae | head
+<span class="cp">&lt;?xml version="1.0" encoding="UTF-8" standalone="no" ?&gt;</span>
+<span class="nt">&lt;COLLADA</span> <span class="na">xmlns=</span><span class="s">"http://www.collada.org/2005/11/COLLADASchema"</span> <span class="na">version=</span><span class="s">"1.4.1"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;asset&gt;</span>
+    <span class="nt">&lt;contributor&gt;</span>
+      <span class="nt">&lt;author&gt;</span>Assimp<span class="nt">&lt;/author&gt;</span>
+      <span class="nt">&lt;authoring_tool&gt;</span>Assimp Exporter<span class="nt">&lt;/authoring_tool&gt;</span>
+    <span class="nt">&lt;/contributor&gt;</span>
+    <span class="nt">&lt;created&gt;</span>2020-06-24T20:07:24<span class="nt">&lt;/created&gt;</span>
+    <span class="nt">&lt;modified&gt;</span>2020-06-24T20:07:24<span class="nt">&lt;/modified&gt;</span>
+    <span class="nt">&lt;unit</span> <span class="na">name=</span><span class="s">"meter"</span> <span class="na">meter=</span><span class="s">"1"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>The XML version header claims that it’s using the COLLADA Schema. Huh. I can’t say I’ve ever heard of this schema before. Let’s look up what this is.</p>
+
+<blockquote>
+  <p>COLLADA is an interchange file format for interactive 3D applications. It is managed by the nonprofit technology consortium, the Khronos Group, and has been adopted by ISO as a publicly available specification, ISO/PAS 17506.</p>
+</blockquote>
+
+<p>Huh, does that mean it’s a 3D model of some sorts? Let’s see if I can open it with a <a href="https://www.creators3d.com/online-viewer">3D viewer online</a>.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/9040a13a679ddaa67678abda71f7c25908dcea392047c02631fa3474b9a5cc69.webp" alt="picture 25" /></p>
+
+<p>Okay…? It’s a square?</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/d85328768a56102996c255d50fb634057b050b5c3d7cbb188412e632ffe9ad7d.webp" alt="picture 26" /></p>
+
+<p>Wait… No, that’s a QR code? Let’s play around with the lighting a bit and see if we can get the QR code part to show up a bit more.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/94a8065b821712af094daf5ea550bfa205e5ff01e318e41cdf6b4381b0f21da7.webp" alt="picture 27" /></p>
+
+<p>Annnd let’s plop this into an image editor.</p>
+
+<p><img src="/assets/images/posts/rgbctf-2020-07-14/pt1/1738abd86491f26e0b98fa959d3c0777bef94bdc38aaac6e41a8dc41cdae8426.webp" alt="picture 28" /></p>
+
+<p>And with that we were able to obtain the flag! I have to say though, while this was creative, this <em>really</em> doesn’t have much to do with steganography techniques but a novelty. I wouldn’t say this was the best challenge.</p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">rgbCTF{3d-1337!}</code></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#en-us" class="page__taxonomy-item" rel="tag">en-us</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#writeup" class="page__taxonomy-item" rel="tag">writeup</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-07-14T00:00:00+08:00">July 14, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=StillAzureH&text=rgbCTF+2020+Writeup+-+Part+1%20https%3A%2F%2Fstillu.cc%2Fwriteup%2Frgbctf-2020-part-1" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstillu.cc%2Fwriteup%2Frgbctf-2020-part-1" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fstillu.cc%2Fwriteup%2Frgbctf-2020-part-1" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/rambling/2020/07/10/struggling-with-gender-dysphoria/" class="pagination--pager" title="Struggling with Gender Dysphoria
+">Previous</a>
+    
+    
+      <a href="/writeup/rgbctf-2020-part-2" class="pagination--pager" title="rgbCTF 2020 Writeup - Part 2
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ida-tips/2022/01/22/saved-desktops-across-32bit-64bit/" rel="permalink">IDA Trickeries #1: Using Saved Desktop Across IDAs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-22T00:00:00+08:00">January 22, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">So like… who at Hex-rays implemented this?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/threat-spotlight/2021/11/13/domain-fronting-fastly/" rel="permalink">Threat Spotlight - Domain Fronting
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-13T00:00:00+08:00">November 13, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Fast(ly) but deadly.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/10/29/barinsta-and-facebook/" rel="permalink">Facebook, Monopoly, and Barinsta
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+08:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Facebook and its anti-competitive strategy.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/personal/2021/07/12/lockdown-taiwan-2021/" rel="permalink">Lockdown, Taiwan, 2021
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-07-12T00:00:00+08:00">July 12, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Impact of lockdown in Taiwan and my personal life.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Still Hsu. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N6FGTZBMTZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N6FGTZBMTZ', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'Still34/landing');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-dark');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+  </body>
+</html>
