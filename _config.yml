@@ -112,8 +112,9 @@ include:
   - .htaccess
   - _pages
   - .well-known/security.txt
-  - .well-known/pubkey.asc
   - .well-known/security.txt.sig
+  - .well-known/pubkey.asc
+  - .well-known/pubkey.gpg
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
