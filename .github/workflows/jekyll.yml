@@ -33,11 +33,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Cache APT Packages
-        uses: awalsh128/cache-apt-pkgs-action@v1.3.0
-        with:
-          packages: libvips libvips-tools
-          version: 1.0
+      - name: Install libvips
+        run: sudo apt update; sudo apt install -y libvips
       - name: Setup Ruby
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
