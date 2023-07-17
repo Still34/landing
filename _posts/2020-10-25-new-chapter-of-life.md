@@ -9,13 +9,13 @@ toc: true
 
 In search for a new job for my future _(and for my wallet)_, I applied for a little company in Taiwan called TeamT5 back in late September. TeamT5 provides threat analysis and incident response services for enterprises, which happens to align with my interest of information security.
 
-{% picture figure /assets/images/posts/new-chapter-work/843d58e332871a279ebca7edfe6c54fac66c802e700e40ce0d0c66baa4030b8e.png %}  
+![Image](/assets/images/posts/new-chapter-work/843d58e332871a279ebca7edfe6c54fac66c802e700e40ce0d0c66baa4030b8e.png)  
 
 I applied for the Vulnerability Researcher position, which I thought was fitting at the time - even though I haven't really found anything of my own as of yet. I won't delve too much into the actual interview itself, as part of the interview process is under a non-disclosure agreement (NDA). But suffice to say, I passed the interview and their test with flying color (though I was certainly quite anxious before and during the interview process). However, instead of offering me the Vulnerability Researcher position I initially applied for, we've come to the agreement that I'm much more suited for the Malware Research division. In retrospect, malware research makes far more sense given my interest in malware and APT attacks around the globe.
 
 <figure class="half">
-{% picture nomarkdown /assets/images/posts/new-chapter-work/f04d461c0282674b327c3bfa26c43a65a1cdbb036fe60a04869f1710b1e9c6a5.jpg %}  
-{% picture nomarkdown /assets/images/posts/new-chapter-work/7fcf29560e4be11e0d43ac9a958887d06d77d4838b7c5ef539e91738178539c0.jpg %}  
+![Image](/assets/images/posts/new-chapter-work/f04d461c0282674b327c3bfa26c43a65a1cdbb036fe60a04869f1710b1e9c6a5.jpg)  
+![Image](/assets/images/posts/new-chapter-work/7fcf29560e4be11e0d43ac9a958887d06d77d4838b7c5ef539e91738178539c0.jpg)  
     <figcaption>On my way to the bustling city of Taipei.</figcaption>
 </figure>
 
@@ -32,8 +32,8 @@ My dad and my step-mom were honestly the heroes doing the work helping me move. 
 After I arrived, I was greeted with a spacious room for me to live in. Seriously, I did not expect was how nice the room and the area is (after some cleaning).
 
 <figure class="half">
-    {% picture nomarkdown /assets/images/posts/new-chapter-work/f81c2e1082da1265a0a6f9f5e8e2f276b8e3d26fc41afcc8eb7f068acecb6b02.jpg %}
-    {% picture nomarkdown /assets/images/posts/new-chapter-work/5038b3f28dd731fe7cf29ec39f28122113eb134331f8d797e72a6551e364fa57.jpg %}
+    ![Image](/assets/images/posts/new-chapter-work/f81c2e1082da1265a0a6f9f5e8e2f276b8e3d26fc41afcc8eb7f068acecb6b02.jpg)
+    ![Image](/assets/images/posts/new-chapter-work/5038b3f28dd731fe7cf29ec39f28122113eb134331f8d797e72a6551e364fa57.jpg)
     <figcaption>It's everything I could have only dreamed of!</figcaption>
 </figure>
 
@@ -44,9 +44,9 @@ It took me an entire day to sort things out and buy the essential stuff all over
 Shortly after moving in, I was called to the job. First day at the work was... confusing and anxiety-inducing to say the least - especially how I had to also deal with working out the perfect commute to the workplace. I cannot go into too much detail of the job just in case I accidentally spill any insider info. What I can say is it's not too different with what a malware researcher might do at home, but a lot more streamlined and enterprise-y. Basically, dynamic and/or static test the sample, write a report, and move on. At the time of writing this post, it's only the end of the first week of my job, so I'm still figuring things out as I go. I only just got commute figured out on Day 4 and am still not too sure how I should go about writing my reports, but I'm hanging in there.
 
 <figure class="third">
-{% picture nomarkdown /assets/images/posts/new-chapter-work/3191e2c7d3c6028a46c01491dcd16abf370122b76c91b3acabca1377add6b5c9.jpg %}  
-{% picture nomarkdown /assets/images/posts/new-chapter-work/418fc4a9a5c4ffb12bc9ff2573b86556c220822cd6be671e9ce92c2f75d4bf73.jpg %}  
-{% picture nomarkdown /assets/images/posts/new-chapter-work/cc4767bfef89babd1e5eafed163e08dfaf5c660965dc68613d8d1df32903abf1.jpg %}  
+![Image](/assets/images/posts/new-chapter-work/3191e2c7d3c6028a46c01491dcd16abf370122b76c91b3acabca1377add6b5c9.jpg)  
+![Image](/assets/images/posts/new-chapter-work/418fc4a9a5c4ffb12bc9ff2573b86556c220822cd6be671e9ce92c2f75d4bf73.jpg)  
+![Image](/assets/images/posts/new-chapter-work/cc4767bfef89babd1e5eafed163e08dfaf5c660965dc68613d8d1df32903abf1.jpg)  
 <figcaption>Oh yeah, I found this cool mart near my workplace! They've got cheese and everything! Taiwan doesn't have a whole lot of dairy products so this is awesome!</figcaption>
 </figure>
 
@@ -55,9 +55,9 @@ Now, as for the stuff I'm kind of iffy about this week: work life balance and co
 Work/life balance had always been something that only a Taiwan university student can only talk and or fantasize about when they're not working a full-time position yet. As much as some courses would want students to discuss their views on work/life balance, the views are often unrealistic in retrospect - even though it's only been about a week since I started working. My work is relatively simple compared to full-time construction workers or Taiwanese convenience store clerks (seriously, they are expected to do _everything_ around here; check out [A Country of Convenience - Taiwan Business](https://topics.amcham.com.tw/2019/08/country-of-convenience/) if you don't understand the saturated market of convenience store in Taiwan). We've got great work benefits like free snacks and beverages and flexible hours. All great on paper - until I actually started working. 8 hours a day spent at the computer *really* isn't that exciting. Besides, given the long commute hours, it means that I'm more or less not home from 7am to 8pm. The long hours mean that I'll likely be exhausted at the end of the day and have very few hours for entertainment. Indeed, I don't do a whole lot after work's started anymore. Granted, I *am* doing some of that entertainment on-the-go like when I'm on the bus, but it isn't as comfortable, y'know?
 
 <figure class="third">
-{% picture nomarkdown /assets/images/posts/new-chapter-work/e40aae8194affff4162ecb7035226163fdc7a4732026faf02b02d3c98e932997.jpg %}  
-{% picture nomarkdown /assets/images/posts/new-chapter-work/bdedbbaf1533edd714299ac6352f50c676bae05f9171fcb1fc6b4ff35c62fc7c.jpg %}  
-{% picture nomarkdown /assets/images/posts/new-chapter-work/4c4f281989b5ad04194fa44237f93e23c57c9615f5cb2658787a17a0c0e2fc6f.jpg %}  
+![Image](/assets/images/posts/new-chapter-work/e40aae8194affff4162ecb7035226163fdc7a4732026faf02b02d3c98e932997.jpg)  
+![Image](/assets/images/posts/new-chapter-work/bdedbbaf1533edd714299ac6352f50c676bae05f9171fcb1fc6b4ff35c62fc7c.jpg)  
+![Image](/assets/images/posts/new-chapter-work/4c4f281989b5ad04194fa44237f93e23c57c9615f5cb2658787a17a0c0e2fc6f.jpg)  
 <figcaption>Spending 4 hours a day commuting isn't exactly thrilling. I can't wait to start working remotely.</figcaption>
 </figure>
 

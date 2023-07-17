@@ -164,7 +164,7 @@ Interesting! Right off the bat it's already told us a lot about our malware. For
 
 Let's see if we can get more details about the malware by invoking `-vv` as the parameter.
 
-{% picture /assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084.png --link /assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084.png %}
+![Image](/assets/images/posts/capa/f8bafbb80dbef953655ae30f2933fd8cdc8efa8498efda0b8541741223c56084.png)
 
 Whoa! All of the sudden we're getting so much more information! Let's break it down by taking a look at some of the features noted by capa.
 
@@ -228,11 +228,11 @@ For example, one of the red flags I mentioned earlier was the fact that it logs 
 
 While the appearance of these functions do not necessarily mean that the host executable is malicious, it is when combined with other red flags that a bigger picture emerge. Let's take a closer look at the referenced addresses, starting with `user32.MapVirtualKey @ 0x444947`. By going to the function address in Ghidra/IDA/other disassemblers, we can indeed see a reference to the `MapVirtualKeyA` function.
 
-{% picture /assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b.png --link /assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b.png %}
+![Image](/assets/images/posts/capa/7de1b8783895d2a3cf2e968b3b3524b64d5f732b359ffa043ba7cf22c715591b.png)
 
 What stands out even more about the tool is that it even includes the corresponding [ATT&CK Matrix](https://attack.mitre.org/) for each item and example of where this type of attack method can be found in known samples.
 
-{% picture /assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b.png --link /assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b.png %}
+![Image](/assets/images/posts/capa/d39a414d10b8d867489ff458a44546945c172beb41499d79a3093c97a3c0b27b.png)
 
 ## Comparisons Against Existing Tools
 
@@ -242,17 +242,17 @@ But does this bring anything new to the table? Let's compare this to my favorite
 
 For those uninitiated, pestudio is a tool that allows malware researchers to quickly examine the PE information of an executable. It analyzes the imports, strings, resources, libraries, etc. referenced within the file and submits the file to VirusTotal (if enabled). After analyzing, everything is scored and highlights any potentially questionable references.
 
-{% picture /assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8.png --link /assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8.png %}
+![Image](/assets/images/posts/capa/3a053ff3a736488fee68df402792fc331ebf515dc516ff8833d6437cddedd1b8.png)
 
 So how does it stack up against `capa`? While pestudio also highlights most of the questionable imports or Win32 API calls, it was only able to show the relative offset of the **string** - it failed to find the call in the imports category. It also failed to highlight the corresponding ATT&CK technique - even though it did group the string into `keyboard-and-mouse`.
 
-{% picture /assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382.png --link /assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382.png %}
+![Image](/assets/images/posts/capa/330b0105aa6e3e20fa54a46c8c2505053df14bed9fdf20f136c826315c715382.png)
 
 ### CAPE Sandbox
 
 Now before you scream about how unfair this comparison may seem, I'd like to remind you that CAPE *does* offer static analysis outside of a hybrid one.
 
-{% picture /assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23.png --link /assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23.png %}
+![Image](/assets/images/posts/capa/9fddf82a3662bfbcf5c208c3858ad9c2b19a0165d90ebc03075db29dcf281b23.png)
 
 The following items were what CAPE was able to find during the static analysis,
 
@@ -279,8 +279,8 @@ While the tool is very helpful and adds additional arsenals to blue teams and ma
 
 - Show more data relevant to the detection
   - For example, in the malware analyzed above, `capa` was able to detect that the file may attempt to query registry value. If `capa` was able to show the relevant registry key or entry next to the API call that would save researchers a lot of time (assuming it's a compile-time constant or something that can be calculated or obtained during analysis-time).
-  - {% picture /assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc.png --link assets/images/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc.png %}
+  - ![Image](/assets/images/posts/capa/279171fbeeefe68bcb39182002702d7ed1a15623505b7aa48a8c10a07cd8badc.png)
 - Improve background contrast
   - When using the tool in the default PowerShell window, the foreground color of the text was barely readable.
-  - {% picture /assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439.png --link assets/images/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439.png %}
+  - ![Image](/assets/images/posts/capa/ae4ef5ebf9e603f19416f29b66ba49c91fb25ab60c678070f9dbb21ba523b439.png)
 
