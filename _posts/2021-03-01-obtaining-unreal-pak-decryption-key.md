@@ -136,10 +136,8 @@ Ah yes, debugging time! Thankfully, Unreal Engine is now open-source, meaning I 
 
 Let's first find the decryption routine in the 4.25 Unreal source code. We can do that by simply looking up the word `decrypt` in the repo.
 
-<figure class="half">
 ![Image](/assets/images/posts/unreal-pak/4c349e2126dda6a0297f0e6f11c2b72b6fb8c44f68bbdf17f558bc234d851584.png)
 ![Image](/assets/images/posts/unreal-pak/20a93629fb3afc6366a4b788cd5482b5e331ff68d853293a8e241e6c84ae782f.png)  
-</figure>
 
 That was easy enough. We can also see that the function is also referenced on L5043 - and there are strings surrounding it. Perfect, that should help us pinpoint where exactly the function is in memory. `GetPakEncryptionKey` sounds interesting. We should take a look there later. Let's fire up x64dbg. Since we already know what the surrounding strings are, we can just do a string search for literally any of them - in this case `Failed to find requested encryption key` - to quickly pinpoint the address of the function.
 
@@ -147,10 +145,8 @@ That was easy enough. We can also see that the function is also referenced on L5
 
 After we've found the address, we can set a breakpoint on its parent routine and watch it run.
 
-<figure class="half">
 ![Image](/assets/images/posts/unreal-pak/c601b4f213170252d4a2c27ebe823ac6d4646247614968a94a3082a794b8a8f0.png)  
 ![Image](/assets/images/posts/unreal-pak/07f7f2380b31dddc8672b97f1081ac7ea526139195ece9aeeac926cad964c7c0.png)  
-</figure>
 
 "Huh, that's strange. I thought the function was quite small, and if this were `GetPakEncryptionKey`, what happened to the `DecryptData` method?" you may think. What more than likely happened here was compiler optimization. Instead of having to call more than one subroutine, the compiler will often try to find and merge routines together at compile-time to optimize the number of instructions required to carry out the task. 
 
