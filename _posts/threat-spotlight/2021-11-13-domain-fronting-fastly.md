@@ -26,14 +26,14 @@ What actually happens is when you contact `python.org`, it actually gets interpr
 
 To get started, I created a new service on Fastly called `dl-python.org`, a service name (and in turn, a domain name) that appears to be similar enough to the real deal, but doesn't actually exist (and it doesn't need to be!).
 
-<figure>
+
   ![Image](/assets/images/posts/domain-fronting/2021-11-13_19-29-20.png)
   ![Image](/assets/images/posts/domain-fronting/2021-11-14_20-47-44.png)
   <figcaption>
     Create a new service that appears to be genuine enough to the target domain name. In this case, <code>dl-python.org</code>.
     Note that while <code>dl-python.org</code> appears to be actually owned by someone else, I don't actually have access to it, nor will it actually make contact with the domain (we'll get to that part later). You can name it whatever you want.
   </figcaption>
-</figure>
+
 
 Next, in the Host settings section, enter your actual C2's domain name, something you have actual control over. In this case, `my-c2domain.com`. I have the port set to `55137`, but it should be 443 ideally for HTTPS beacons. My 80/443 port was occupied by something else when I was experimenting with it.
 

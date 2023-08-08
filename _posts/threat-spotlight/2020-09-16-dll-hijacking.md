@@ -79,24 +79,24 @@ void UnknownMethod()
 
 When we run the application, it will attempt to look for `unknown.dll` in various directories based on the search order. In this instance, `unknown.dll` is planted at where the current working directory is (where `dotnet myapp.dll` is called). We can observe this behavior using [Process Monitor](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon).
 
-<figure>
-  ![Image](/assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png)
-  ![Image](/assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd.png)
+
+  ![Image](assets/images/posts/dll-hijacking/cd38de9e8b20864e3746acc9a30424b98389f3a7a0889ec02fccdfb3211a2698.png)
+  ![Image](assets/images/posts/dll-hijacking/b206464da7a1598bb0b1d0593909488192c36e57df91ec0aa0c6c09b144fbedd.png)
   <figcaption>
     The dotnet application successfully found the requested DLL at the current working directory.
     Our program executed as expected with "Hello, World!" printed.
   </figcaption>
-</figure>
+
 
 So let's say our threat actor has managed to gain access to the Windows or System directory and dropped in their malicious DLL, what would happen when we execute the application again?
 
-<figure>
-  ![Image](/assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb.png)
-  ![Image](/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png)
+
+  ![Image](assets/images/posts/dll-hijacking/9f106adc2832cff974a4bfb0b7031e8a52b7bf3048cdec08333769a4b6659bcb.png)
+  ![Image](assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png)
   <figcaption>
     Suddenly, our program stopped executing with the expected behavior!
   </figcaption>
-</figure>
+
 
 Now, this is a very unlikely scenario as the threat actor would first have to elevate their user account with one that has Administrator ACL permissions in order to perform a file write into a protected directory.
 
@@ -106,13 +106,13 @@ Here's a more likely scenario - what if we were to delete the DLL from the appli
 
 With `Invoke-DllHijackingCheck`, we are able to quickly find folders that anyone under `NT AUTHORITY\Authenticated Users` can write to. Let's try moving our malicious DLL there.
 
-<figure>
-  ![Image](/assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab.png)
-  ![Image](/assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png)
+
+  ![Image](assets/images/posts/dll-hijacking/f5c1ce936ff73e71ad2ddd9eb0f8afc8165342ae52a4d46c699fa72749ea92ab.png)
+  ![Image](assets/images/posts/dll-hijacking/fab77737c6b3ede70cf936a773a2c1a4891ee70e8891e37d327178acb2e54da4.png)
   <figcaption>
     Success! We managed to successfully hijack the unknown.dll.
   </figcaption>
-</figure>
+
 
 DLL hijacking could also be used to target Windows services - though very few of them, if at all, are still vulnerable in one way or another. With PrivescCheck, we can find potentially vulnerable services by invoking `Invoke-HijackableDllsCheck`. It will list out the services that has hijackable DLLs, what user account will the process be run as when the hijack is complete, and whether or not a reboot is required for the hijack to work. 
 
