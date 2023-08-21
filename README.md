@@ -3,8 +3,8 @@
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://twitter.com/StillAzureH" target="_blank">
-    <img alt="Twitter: StillAzureH" src="https://img.shields.io/twitter/follow/StillAzureH.svg?style=social" />
+  <a href="https://twitter.com/AzakaSekai_" target="_blank">
+    <img alt="Twitter: AzakaSekai_" src="https://img.shields.io/twitter/follow/AzakaSekai_.svg?style=social" />
   </a>
 </p>
 
@@ -17,5 +17,5 @@
 👤 **Still Hsu**
 
 * Website: https://stillu.cc
-* Twitter: [@StillAzureH](https://twitter.com/StillAzureH)
+* Twitter: [@AzakaSekai_](https://twitter.com/AzakaSekai_)
 * Github: [@Still34](https://github.com/Still34)

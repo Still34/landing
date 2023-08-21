@@ -69,7 +69,7 @@ naver_site_verification:
 
 # Social Sharing
 twitter:
-  username: "StillAzureH"
+  username: "AzakaSekai_"
 facebook:
   username:
   app_id:
@@ -99,7 +99,7 @@ author:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/StillAzureH"
+      url: "https://twitter.com/AzakaSekai_"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/Still34"
