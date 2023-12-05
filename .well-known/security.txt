@@ -1,10 +1,7 @@
-Contact: mastodon:@still@g0v.social
-Contact: mastodon:@still@infosec.exchange
-Contact: mastodon:@azakasekai@vt.social
 Contact: matrix:@azakasekai:matrix.fedibird.com
-Contact: twitter:@AzakaSekai_
 Contact: mailto:business@stillu.cc
-Expires: 2024-07-17T16:00:00.000Z
+Contact: signal:initiate-contact-via-other-means-first
+Expires: 2024-12-05T16:00:00.000Z
 Preferred-Languages: en, zh
 Encryption: https://stillu.cc/.well-known/pubkey.asc
 Canonical: https://stillu.cc/.well-known/security.txt
