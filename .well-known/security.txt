@@ -1,7 +1,7 @@
-Contact: matrix:@azakasekai:matrix.fedibird.com
-Contact: mailto:business@stillu.cc
-Contact: signal:initiate-contact-via-other-means-first
-Expires: 2025-01-17T16:00:00.000Z
+Contact: mailto:<bus>+<iness>@stillu.cc
+Contact: matrix:email-me-first
+Contact: signal:email-me-first
+Expires: 2025-03-01T00:00:00.000Z
 Preferred-Languages: en, zh
 Encryption: B588 78A0 4C1A 4548 78AE 50E6 C591 6730 985B 96DE
 Canonical: https://stillu.cc/.well-known/security.txt
