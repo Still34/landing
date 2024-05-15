@@ -112,7 +112,7 @@ include:
   - .htaccess
   - _pages
   - .well-known/security.txt
-  - .well-known/security.txt.sig
+  - .well-known/security.txt.asc
   - .well-known/pubkey.asc
   - .well-known/pubkey.gpg
 exclude:
