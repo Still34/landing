@@ -1,8 +1,8 @@
 Contact: mailto:<bus>+<iness>@stillu.cc
 Contact: matrix:email-me-first
 Contact: signal:email-me-first
-Expires: 2025-03-01T00:00:00.000Z
+Expires: 2025-05-15T00:00:00.000Z
 Preferred-Languages: en, zh
-Encryption: B588 78A0 4C1A 4548 78AE 50E6 C591 6730 985B 96DE
+Encryption: https://keys.openpgp.org/vks/v1/by-fingerprint/B58878A04C1A454878AE50E6C5916730985B96DE
 Canonical: https://stillu.cc/.well-known/security.txt
 Signature: https://stillu.cc/.well-known/security.txt.sig
