@@ -29,3 +29,5 @@ The following are the slides I've presented at various conferences or publicly h
     - Primary researcher
 - [Unmasking CamoFei: An In-depth Analysis of an Emerging APT Group Focused on Healthcare Sectors in East Asia](/assets/slides/2023-08-Unmasking%20CamoFei.pdf) @ HITCON 2023/08
     - Primary researcher
+- [Sailing the Seven SEAs: Deep Dive into Polaris' Arsenal and Intelligence Insights](/assets/slides/2024-08-Sailing%20the%20Seven%20SEAs.pdf) @ HITCON 2024/08
+    - Primary researcher
