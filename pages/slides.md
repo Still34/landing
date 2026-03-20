@@ -31,3 +31,7 @@ The following are the slides I've presented at various conferences or publicly h
     - Primary researcher
 - [Sailing the Seven SEAs: Deep Dive into Polaris' Arsenal and Intelligence Insights](/assets/slides/2024-08-Sailing%20the%20Seven%20SEAs.pdf) @ HITCON 2024/08
     - Primary researcher
+- Google Calendar as C2 infrastructure: a China-nexus campaign with stealthy tactics @ VB2025 2025/09
+    - Secondary researcher; co-speaker
+    - [Paper](/assets/slides/2025-09-VB2025-Paper.pdf)
+    - [Slides](/assets/slides/2025-09-VB2025-Slides.pdf)
