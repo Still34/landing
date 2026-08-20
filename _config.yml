@@ -168,6 +168,7 @@ kramdown:
 sass:
   sass_dir: _sass
   style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+  quiet_deps: true # silence Dart Sass deprecation warnings from the theme's bundled SCSS (jekyll-sass-converter 3.x)
 
 # Outputting
 permalink: pretty
